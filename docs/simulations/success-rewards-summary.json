@@ -1,0 +1,322 @@
+{
+  "games": 10000,
+  "seedStart": 2100000,
+  "policy": "salvage",
+  "commitmentCost": 0.5,
+  "engineSha256": "16860121a82e6cbaecd6268ac2a330578f7af16f6a1af23a9e33aa3e957a2092",
+  "studySha256": "27181e345c4f742f1b8d1fe56903e3af779fe44e9689479f747d1a944f015816",
+  "summary": [
+    {
+      "name": "current",
+      "scope": "existing",
+      "amount": null,
+      "fitness": 0.6609249252751821,
+      "turns": 22.0617,
+      "lowFitnessTurns": 7.29,
+      "winRate": 0.3366,
+      "awardsPerGame": 1.6315,
+      "tokensPerGame": 1.7094,
+      "fitnessDelta": {
+        "mean": 0,
+        "approximate95": [
+          0,
+          0
+        ]
+      },
+      "turnsDelta": {
+        "mean": 0,
+        "approximate95": [
+          0,
+          0
+        ]
+      },
+      "winsDelta": {
+        "mean": 0,
+        "approximate95": [
+          0,
+          0
+        ]
+      },
+      "lowFitnessDelta": {
+        "mean": 0,
+        "approximate95": [
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "none",
+      "scope": "existing",
+      "amount": 0,
+      "fitness": 0.6544496023146574,
+      "turns": 22.0701,
+      "lowFitnessTurns": 7.5444,
+      "winRate": 0.3386,
+      "awardsPerGame": 0,
+      "tokensPerGame": 0,
+      "fitnessDelta": {
+        "mean": -0.006475322960525554,
+        "approximate95": [
+          -0.007174765102702289,
+          -0.00577588081834882
+        ]
+      },
+      "turnsDelta": {
+        "mean": 0.0084,
+        "approximate95": [
+          -0.0243443711354246,
+          0.041144371135424594
+        ]
+      },
+      "winsDelta": {
+        "mean": 0.002,
+        "approximate95": [
+          -0.007967556098535602,
+          0.011967556098535602
+        ]
+      },
+      "lowFitnessDelta": {
+        "mean": 0.2544,
+        "approximate95": [
+          0.21511149591397244,
+          0.2936885040860276
+        ]
+      }
+    },
+    {
+      "name": "one",
+      "scope": "existing",
+      "amount": 1,
+      "fitness": 0.6606292318667606,
+      "turns": 22.0635,
+      "lowFitnessTurns": 7.306,
+      "winRate": 0.3381,
+      "awardsPerGame": 1.631,
+      "tokensPerGame": 1.631,
+      "fitnessDelta": {
+        "mean": -0.0002956934084213905,
+        "approximate95": [
+          -0.0004455907866286683,
+          -0.00014579603021411272
+        ]
+      },
+      "turnsDelta": {
+        "mean": 0.0018,
+        "approximate95": [
+          -0.004671196408693847,
+          0.008271196408693846
+        ]
+      },
+      "winsDelta": {
+        "mean": 0.0015,
+        "approximate95": [
+          -0.0011658593962605526,
+          0.004165859396260553
+        ]
+      },
+      "lowFitnessDelta": {
+        "mean": 0.016,
+        "approximate95": [
+          0.006778285677732674,
+          0.025221714322267327
+        ]
+      }
+    },
+    {
+      "name": "two",
+      "scope": "existing",
+      "amount": 2,
+      "fitness": 0.6669566127986861,
+      "turns": 22.0978,
+      "lowFitnessTurns": 7.0954,
+      "winRate": 0.3494,
+      "awardsPerGame": 1.626,
+      "tokensPerGame": 3.252,
+      "fitnessDelta": {
+        "mean": 0.006031687523505324,
+        "approximate95": [
+          0.005309587596289192,
+          0.0067537874507214565
+        ]
+      },
+      "turnsDelta": {
+        "mean": 0.0361,
+        "approximate95": [
+          0.004064557349633506,
+          0.0681354426503665
+        ]
+      },
+      "winsDelta": {
+        "mean": 0.0128,
+        "approximate95": [
+          0.00287415658685204,
+          0.022725843413147963
+        ]
+      },
+      "lowFitnessDelta": {
+        "mean": -0.1946,
+        "approximate95": [
+          -0.23538761363989205,
+          -0.15381238636010794
+        ]
+      }
+    },
+    {
+      "name": "three",
+      "scope": "existing",
+      "amount": 3,
+      "fitness": 0.6729748586620617,
+      "turns": 22.0673,
+      "lowFitnessTurns": 6.8527,
+      "winRate": 0.3495,
+      "awardsPerGame": 1.6209,
+      "tokensPerGame": 4.8627,
+      "fitnessDelta": {
+        "mean": 0.012049933386881755,
+        "approximate95": [
+          0.011285751612898454,
+          0.012814115160865055
+        ]
+      },
+      "turnsDelta": {
+        "mean": 0.0056,
+        "approximate95": [
+          -0.027961598275860047,
+          0.03916159827586005
+        ]
+      },
+      "winsDelta": {
+        "mean": 0.0129,
+        "approximate95": [
+          0.0027578689509243706,
+          0.02304213104907563
+        ]
+      },
+      "lowFitnessDelta": {
+        "mean": -0.4373,
+        "approximate95": [
+          -0.4792143423286453,
+          -0.39538565767135475
+        ]
+      }
+    },
+    {
+      "name": "four",
+      "scope": "existing",
+      "amount": 4,
+      "fitness": 0.6787633567472557,
+      "turns": 22.1034,
+      "lowFitnessTurns": 6.6124,
+      "winRate": 0.3507,
+      "awardsPerGame": 1.6376,
+      "tokensPerGame": 6.5504,
+      "fitnessDelta": {
+        "mean": 0.017838431472073247,
+        "approximate95": [
+          0.01703503267320627,
+          0.018641830270940223
+        ]
+      },
+      "turnsDelta": {
+        "mean": 0.0417,
+        "approximate95": [
+          0.008834813311541255,
+          0.07456518668845874
+        ]
+      },
+      "winsDelta": {
+        "mean": 0.0141,
+        "approximate95": [
+          0.003977442231927274,
+          0.024222557768072726
+        ]
+      },
+      "lowFitnessDelta": {
+        "mean": -0.6776,
+        "approximate95": [
+          -0.7211038365188353,
+          -0.6340961634811647
+        ]
+      }
+    },
+    {
+      "name": "every-one",
+      "scope": "all",
+      "amount": 1,
+      "fitness": 0.6910885912526382,
+      "turns": 22.1295,
+      "lowFitnessTurns": 6.2151,
+      "winRate": 0.3632,
+      "awardsPerGame": 9.6513,
+      "tokensPerGame": 9.6513,
+      "fitnessDelta": {
+        "mean": 0.030163665977453763,
+        "approximate95": [
+          0.02919150505425324,
+          0.031135826900654286
+        ]
+      },
+      "turnsDelta": {
+        "mean": 0.0678,
+        "approximate95": [
+          0.025554530255694693,
+          0.1100454697443053
+        ]
+      },
+      "winsDelta": {
+        "mean": 0.0266,
+        "approximate95": [
+          0.01496268766191053,
+          0.03823731233808947
+        ]
+      },
+      "lowFitnessDelta": {
+        "mean": -1.0749,
+        "approximate95": [
+          -1.1278976937433376,
+          -1.0219023062566623
+        ]
+      }
+    },
+    {
+      "name": "every-two",
+      "scope": "all",
+      "amount": 2,
+      "fitness": 0.7175618234454866,
+      "turns": 22.1665,
+      "lowFitnessTurns": 5.1993,
+      "winRate": 0.3751,
+      "awardsPerGame": 9.6615,
+      "tokensPerGame": 19.323,
+      "fitnessDelta": {
+        "mean": 0.05663689817030114,
+        "approximate95": [
+          0.05563839582583211,
+          0.05763540051477017
+        ]
+      },
+      "turnsDelta": {
+        "mean": 0.1048,
+        "approximate95": [
+          0.06078448605434101,
+          0.148815513945659
+        ]
+      },
+      "winsDelta": {
+        "mean": 0.0385,
+        "approximate95": [
+          0.026638285078956554,
+          0.050361714921043445
+        ]
+      },
+      "lowFitnessDelta": {
+        "mean": -2.0907,
+        "approximate95": [
+          -2.1452790460784046,
+          -2.0361209539215954
+        ]
+      }
+    }
+  ]
+}

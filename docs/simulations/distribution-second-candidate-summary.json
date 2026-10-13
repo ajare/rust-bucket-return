@@ -1,0 +1,3409 @@
+{
+  "games": 10000,
+  "seedStart": 2100000,
+  "policy": "salvage",
+  "commitmentCost": 0.5,
+  "beforeSupply": {
+    "POW": {
+      "n": {
+        "sources": [
+          {
+            "id": "reactor",
+            "output": 3
+          },
+          {
+            "id": "aux",
+            "output": 2
+          },
+          {
+            "id": "batteries",
+            "output": 2
+          },
+          {
+            "id": "fuelcells",
+            "output": 1
+          }
+        ],
+        "total": 8
+      },
+      "r": {
+        "sources": [
+          {
+            "id": "reactor",
+            "output": 7
+          },
+          {
+            "id": "aux",
+            "output": 4
+          },
+          {
+            "id": "batteries",
+            "output": 5
+          },
+          {
+            "id": "fuelcells",
+            "output": 3
+          }
+        ],
+        "total": 19
+      },
+      "s": {
+        "sources": [
+          {
+            "id": "reactor",
+            "output": 10
+          },
+          {
+            "id": "aux",
+            "output": 6
+          },
+          {
+            "id": "batteries",
+            "output": 6
+          },
+          {
+            "id": "fuelcells",
+            "output": 5
+          }
+        ],
+        "total": 27
+      }
+    },
+    "THR": {
+      "n": {
+        "sources": [
+          {
+            "id": "engine",
+            "output": 3
+          },
+          {
+            "id": "thrusters",
+            "output": 1
+          }
+        ],
+        "total": 4
+      },
+      "r": {
+        "sources": [
+          {
+            "id": "engine",
+            "output": 7
+          }
+        ],
+        "total": 7
+      },
+      "s": {
+        "sources": [
+          {
+            "id": "engine",
+            "output": 10
+          },
+          {
+            "id": "thrusters",
+            "output": 4
+          }
+        ],
+        "total": 14
+      }
+    },
+    "CON": {
+      "n": {
+        "sources": [
+          {
+            "id": "thrusters",
+            "output": 2
+          },
+          {
+            "id": "navcomp",
+            "output": 1
+          }
+        ],
+        "total": 3
+      },
+      "r": {
+        "sources": [
+          {
+            "id": "thrusters",
+            "output": 5
+          }
+        ],
+        "total": 5
+      },
+      "s": {
+        "sources": [
+          {
+            "id": "thrusters",
+            "output": 6
+          }
+        ],
+        "total": 6
+      }
+    },
+    "ENG": {
+      "n": {
+        "sources": [
+          {
+            "id": "fabricator",
+            "output": 2
+          },
+          {
+            "id": "service",
+            "output": 1
+          }
+        ],
+        "total": 3
+      },
+      "r": {
+        "sources": [
+          {
+            "id": "fabricator",
+            "output": 5
+          },
+          {
+            "id": "service",
+            "output": 4
+          }
+        ],
+        "total": 9
+      },
+      "s": {
+        "sources": [
+          {
+            "id": "fabricator",
+            "output": 5
+          }
+        ],
+        "total": 5
+      }
+    },
+    "NAV": {
+      "n": {
+        "sources": [
+          {
+            "id": "engine",
+            "output": 1
+          },
+          {
+            "id": "thrusters",
+            "output": 1
+          },
+          {
+            "id": "navcomp",
+            "output": 3
+          }
+        ],
+        "total": 5
+      },
+      "r": {
+        "sources": [
+          {
+            "id": "engine",
+            "output": 2
+          },
+          {
+            "id": "thrusters",
+            "output": 2
+          },
+          {
+            "id": "navcomp",
+            "output": 6
+          }
+        ],
+        "total": 10
+      },
+      "s": {
+        "sources": [
+          {
+            "id": "engine",
+            "output": 3
+          },
+          {
+            "id": "thrusters",
+            "output": 3
+          },
+          {
+            "id": "navcomp",
+            "output": 8
+          }
+        ],
+        "total": 14
+      }
+    },
+    "SIG": {
+      "n": {
+        "sources": [
+          {
+            "id": "comms",
+            "output": 3
+          },
+          {
+            "id": "sensors",
+            "output": 1
+          },
+          {
+            "id": "fabricator",
+            "output": 1
+          }
+        ],
+        "total": 5
+      },
+      "r": {
+        "sources": [
+          {
+            "id": "comms",
+            "output": 6
+          },
+          {
+            "id": "sensors",
+            "output": 2
+          },
+          {
+            "id": "fabricator",
+            "output": 2
+          }
+        ],
+        "total": 10
+      },
+      "s": {
+        "sources": [
+          {
+            "id": "comms",
+            "output": 8
+          },
+          {
+            "id": "sensors",
+            "output": 3
+          },
+          {
+            "id": "fabricator",
+            "output": 3
+          }
+        ],
+        "total": 14
+      }
+    },
+    "DET": {
+      "n": {
+        "sources": [
+          {
+            "id": "navcomp",
+            "output": 1
+          },
+          {
+            "id": "comms",
+            "output": 1
+          },
+          {
+            "id": "sensors",
+            "output": 3
+          }
+        ],
+        "total": 5
+      },
+      "r": {
+        "sources": [
+          {
+            "id": "navcomp",
+            "output": 2
+          },
+          {
+            "id": "comms",
+            "output": 2
+          },
+          {
+            "id": "sensors",
+            "output": 6
+          }
+        ],
+        "total": 10
+      },
+      "s": {
+        "sources": [
+          {
+            "id": "navcomp",
+            "output": 3
+          },
+          {
+            "id": "comms",
+            "output": 3
+          },
+          {
+            "id": "sensors",
+            "output": 8
+          }
+        ],
+        "total": 14
+      }
+    },
+    "LFS": {
+      "n": {
+        "sources": [
+          {
+            "id": "lifesupport",
+            "output": 3
+          },
+          {
+            "id": "service",
+            "output": 1
+          }
+        ],
+        "total": 4
+      },
+      "r": {
+        "sources": [
+          {
+            "id": "lifesupport",
+            "output": 6
+          },
+          {
+            "id": "service",
+            "output": 2
+          }
+        ],
+        "total": 8
+      },
+      "s": {
+        "sources": [
+          {
+            "id": "lifesupport",
+            "output": 8
+          }
+        ],
+        "total": 8
+      }
+    },
+    "CLG": {
+      "n": {
+        "sources": [
+          {
+            "id": "aux",
+            "output": 1
+          },
+          {
+            "id": "thermal",
+            "output": 3
+          },
+          {
+            "id": "service",
+            "output": 1
+          }
+        ],
+        "total": 5
+      },
+      "r": {
+        "sources": [
+          {
+            "id": "aux",
+            "output": 2
+          },
+          {
+            "id": "thermal",
+            "output": 6
+          },
+          {
+            "id": "service",
+            "output": 2
+          }
+        ],
+        "total": 10
+      },
+      "s": {
+        "sources": [
+          {
+            "id": "aux",
+            "output": 3
+          },
+          {
+            "id": "thermal",
+            "output": 8
+          }
+        ],
+        "total": 11
+      }
+    },
+    "PRO": {
+      "n": {
+        "sources": [
+          {
+            "id": "shielding",
+            "output": 3
+          }
+        ],
+        "total": 3
+      },
+      "r": {
+        "sources": [
+          {
+            "id": "shielding",
+            "output": 6
+          }
+        ],
+        "total": 6
+      },
+      "s": {
+        "sources": [
+          {
+            "id": "shielding",
+            "output": 8
+          }
+        ],
+        "total": 8
+      }
+    }
+  },
+  "afterSupply": {
+    "POW": {
+      "n": {
+        "sources": [
+          {
+            "id": "reactor",
+            "output": 3
+          },
+          {
+            "id": "aux",
+            "output": 2
+          },
+          {
+            "id": "batteries",
+            "output": 2
+          },
+          {
+            "id": "fuelcells",
+            "output": 1
+          }
+        ],
+        "total": 8
+      },
+      "r": {
+        "sources": [
+          {
+            "id": "reactor",
+            "output": 7
+          },
+          {
+            "id": "aux",
+            "output": 4
+          },
+          {
+            "id": "batteries",
+            "output": 5
+          },
+          {
+            "id": "fuelcells",
+            "output": 3
+          }
+        ],
+        "total": 19
+      },
+      "s": {
+        "sources": [
+          {
+            "id": "reactor",
+            "output": 10
+          },
+          {
+            "id": "aux",
+            "output": 6
+          },
+          {
+            "id": "batteries",
+            "output": 6
+          },
+          {
+            "id": "fuelcells",
+            "output": 5
+          }
+        ],
+        "total": 27
+      }
+    },
+    "THR": {
+      "n": {
+        "sources": [
+          {
+            "id": "engine",
+            "output": 3
+          },
+          {
+            "id": "thrusters",
+            "output": 1
+          }
+        ],
+        "total": 4
+      },
+      "r": {
+        "sources": [
+          {
+            "id": "engine",
+            "output": 7
+          }
+        ],
+        "total": 7
+      },
+      "s": {
+        "sources": [
+          {
+            "id": "engine",
+            "output": 10
+          },
+          {
+            "id": "thrusters",
+            "output": 4
+          }
+        ],
+        "total": 14
+      }
+    },
+    "CON": {
+      "n": {
+        "sources": [
+          {
+            "id": "batteries",
+            "output": 1
+          },
+          {
+            "id": "thrusters",
+            "output": 2
+          }
+        ],
+        "total": 3
+      },
+      "r": {
+        "sources": [
+          {
+            "id": "batteries",
+            "output": 1
+          },
+          {
+            "id": "thrusters",
+            "output": 4
+          }
+        ],
+        "total": 5
+      },
+      "s": {
+        "sources": [
+          {
+            "id": "batteries",
+            "output": 1
+          },
+          {
+            "id": "thrusters",
+            "output": 5
+          }
+        ],
+        "total": 6
+      }
+    },
+    "ENG": {
+      "n": {
+        "sources": [
+          {
+            "id": "fabricator",
+            "output": 2
+          },
+          {
+            "id": "service",
+            "output": 1
+          }
+        ],
+        "total": 3
+      },
+      "r": {
+        "sources": [
+          {
+            "id": "fabricator",
+            "output": 5
+          },
+          {
+            "id": "service",
+            "output": 4
+          }
+        ],
+        "total": 9
+      },
+      "s": {
+        "sources": [
+          {
+            "id": "fabricator",
+            "output": 4
+          },
+          {
+            "id": "service",
+            "output": 1
+          }
+        ],
+        "total": 5
+      }
+    },
+    "NAV": {
+      "n": {
+        "sources": [
+          {
+            "id": "engine",
+            "output": 1
+          },
+          {
+            "id": "thrusters",
+            "output": 1
+          },
+          {
+            "id": "navcomp",
+            "output": 3
+          }
+        ],
+        "total": 5
+      },
+      "r": {
+        "sources": [
+          {
+            "id": "engine",
+            "output": 2
+          },
+          {
+            "id": "thrusters",
+            "output": 2
+          },
+          {
+            "id": "navcomp",
+            "output": 6
+          }
+        ],
+        "total": 10
+      },
+      "s": {
+        "sources": [
+          {
+            "id": "engine",
+            "output": 3
+          },
+          {
+            "id": "thrusters",
+            "output": 3
+          },
+          {
+            "id": "navcomp",
+            "output": 8
+          }
+        ],
+        "total": 14
+      }
+    },
+    "SIG": {
+      "n": {
+        "sources": [
+          {
+            "id": "comms",
+            "output": 3
+          },
+          {
+            "id": "sensors",
+            "output": 1
+          },
+          {
+            "id": "fabricator",
+            "output": 1
+          }
+        ],
+        "total": 5
+      },
+      "r": {
+        "sources": [
+          {
+            "id": "comms",
+            "output": 6
+          },
+          {
+            "id": "sensors",
+            "output": 2
+          },
+          {
+            "id": "fabricator",
+            "output": 2
+          }
+        ],
+        "total": 10
+      },
+      "s": {
+        "sources": [
+          {
+            "id": "comms",
+            "output": 8
+          },
+          {
+            "id": "sensors",
+            "output": 3
+          },
+          {
+            "id": "fabricator",
+            "output": 3
+          }
+        ],
+        "total": 14
+      }
+    },
+    "DET": {
+      "n": {
+        "sources": [
+          {
+            "id": "navcomp",
+            "output": 1
+          },
+          {
+            "id": "comms",
+            "output": 1
+          },
+          {
+            "id": "sensors",
+            "output": 3
+          }
+        ],
+        "total": 5
+      },
+      "r": {
+        "sources": [
+          {
+            "id": "navcomp",
+            "output": 2
+          },
+          {
+            "id": "comms",
+            "output": 2
+          },
+          {
+            "id": "sensors",
+            "output": 6
+          }
+        ],
+        "total": 10
+      },
+      "s": {
+        "sources": [
+          {
+            "id": "navcomp",
+            "output": 3
+          },
+          {
+            "id": "comms",
+            "output": 3
+          },
+          {
+            "id": "sensors",
+            "output": 8
+          }
+        ],
+        "total": 14
+      }
+    },
+    "LFS": {
+      "n": {
+        "sources": [
+          {
+            "id": "lifesupport",
+            "output": 3
+          },
+          {
+            "id": "service",
+            "output": 1
+          }
+        ],
+        "total": 4
+      },
+      "r": {
+        "sources": [
+          {
+            "id": "lifesupport",
+            "output": 6
+          },
+          {
+            "id": "service",
+            "output": 2
+          }
+        ],
+        "total": 8
+      },
+      "s": {
+        "sources": [
+          {
+            "id": "lifesupport",
+            "output": 8
+          }
+        ],
+        "total": 8
+      }
+    },
+    "CLG": {
+      "n": {
+        "sources": [
+          {
+            "id": "aux",
+            "output": 1
+          },
+          {
+            "id": "thermal",
+            "output": 3
+          },
+          {
+            "id": "service",
+            "output": 1
+          }
+        ],
+        "total": 5
+      },
+      "r": {
+        "sources": [
+          {
+            "id": "aux",
+            "output": 2
+          },
+          {
+            "id": "thermal",
+            "output": 6
+          },
+          {
+            "id": "service",
+            "output": 2
+          }
+        ],
+        "total": 10
+      },
+      "s": {
+        "sources": [
+          {
+            "id": "aux",
+            "output": 3
+          },
+          {
+            "id": "thermal",
+            "output": 8
+          }
+        ],
+        "total": 11
+      }
+    },
+    "PRO": {
+      "n": {
+        "sources": [
+          {
+            "id": "shielding",
+            "output": 2
+          },
+          {
+            "id": "habitat",
+            "output": 1
+          }
+        ],
+        "total": 3
+      },
+      "r": {
+        "sources": [
+          {
+            "id": "shielding",
+            "output": 4
+          },
+          {
+            "id": "habitat",
+            "output": 2
+          }
+        ],
+        "total": 6
+      },
+      "s": {
+        "sources": [
+          {
+            "id": "shielding",
+            "output": 6
+          },
+          {
+            "id": "habitat",
+            "output": 2
+          }
+        ],
+        "total": 8
+      }
+    }
+  },
+  "pairing": "Same seed indices and identical opening crew/deck/draw selection. Decisions and later RNG paths can diverge.",
+  "caveat": "One heuristic policy, no fabrication planning. Equal fleet output totals do not guarantee equal difficulty.",
+  "difficulties": {
+    "easy": {
+      "before": {
+        "winRate": 0.6033,
+        "winConfidence95": [
+          0.593673520877589,
+          0.6128471421445043
+        ],
+        "ordinaryTurns": 22.7102,
+        "responses": 24.6577,
+        "ordinaryFailures": {
+          "seen": 220269,
+          "failed": 95582,
+          "rate": 0.43393305458325954
+        },
+        "losses": {
+          "CONTACT LOST — CREW LOST": 2915,
+          "CONTACT LOST — TRAJECTORY MISSED": 1033,
+          "SHIP REDUCED TO A HULK": 19
+        },
+        "suffocationLosses": 1753,
+        "lossPhases": {
+          "2": 525,
+          "3": 3442
+        },
+        "failedByStage5": 0,
+        "winningScore": 32.18481684070943,
+        "fitness": 0.6835972951661635,
+        "lowFitnessTurns": 6.1117
+      },
+      "after": {
+        "winRate": 0.5913,
+        "winConfidence95": [
+          0.5816314906575295,
+          0.6008983886640304
+        ],
+        "ordinaryTurns": 22.7028,
+        "responses": 24.6498,
+        "ordinaryFailures": {
+          "seen": 220256,
+          "failed": 95718,
+          "rate": 0.43457612959465347
+        },
+        "losses": {
+          "CONTACT LOST — CREW LOST": 2976,
+          "CONTACT LOST — TRAJECTORY MISSED": 1078,
+          "SHIP REDUCED TO A HULK": 33
+        },
+        "suffocationLosses": 1750,
+        "lossPhases": {
+          "2": 530,
+          "3": 3557
+        },
+        "failedByStage5": 0,
+        "winningScore": 31.89125655335701,
+        "fitness": 0.6819569475616719,
+        "lowFitnessTurns": 6.207
+      },
+      "delta": {
+        "wins": {
+          "mean": -0.012,
+          "approximate95": [
+            -0.01784937385345151,
+            -0.0061506261465484905
+          ]
+        },
+        "ordinaryTurns": {
+          "mean": -0.0074,
+          "approximate95": [
+            -0.023058045626376637,
+            0.008258045626376637
+          ]
+        }
+      },
+      "crisisChanges": [
+        {
+          "title": "WHEEL SPEED FAULT",
+          "beforeSeen": 1431,
+          "afterSeen": 1431,
+          "beforeFailed": 386,
+          "afterFailed": 209,
+          "beforeRate": 0.2697414395527603,
+          "afterRate": 0.14605171208944795,
+          "rateDelta": -0.12368972746331236
+        },
+        {
+          "title": "VALVE CHATTER",
+          "beforeSeen": 1408,
+          "afterSeen": 1408,
+          "beforeFailed": 358,
+          "afterFailed": 208,
+          "beforeRate": 0.25426136363636365,
+          "afterRate": 0.14772727272727273,
+          "rateDelta": -0.10653409090909091
+        },
+        {
+          "title": "SOLAR WEATHER WATCH",
+          "beforeSeen": 1310,
+          "afterSeen": 1310,
+          "beforeFailed": 223,
+          "afterFailed": 163,
+          "beforeRate": 0.17022900763358778,
+          "afterRate": 0.12442748091603054,
+          "rateDelta": -0.045801526717557245
+        },
+        {
+          "title": "FLARE WARNING",
+          "beforeSeen": 1410,
+          "afterSeen": 1410,
+          "beforeFailed": 204,
+          "afterFailed": 151,
+          "beforeRate": 0.14468085106382977,
+          "afterRate": 0.10709219858156029,
+          "rateDelta": -0.03758865248226949
+        },
+        {
+          "title": "THERMAL OVERLOAD",
+          "beforeSeen": 1374,
+          "afterSeen": 1363,
+          "beforeFailed": 623,
+          "afterFailed": 580,
+          "beforeRate": 0.4534206695778748,
+          "afterRate": 0.425531914893617,
+          "rateDelta": -0.027888754684257777
+        },
+        {
+          "title": "FINAL POWER SHUNT",
+          "beforeSeen": 1325,
+          "afterSeen": 1322,
+          "beforeFailed": 607,
+          "afterFailed": 574,
+          "beforeRate": 0.45811320754716983,
+          "afterRate": 0.4341906202723147,
+          "rateDelta": -0.023922587274855134
+        },
+        {
+          "title": "SHIELD HOTSPOT",
+          "beforeSeen": 8120,
+          "afterSeen": 8127,
+          "beforeFailed": 2412,
+          "afterFailed": 2287,
+          "beforeRate": 0.2970443349753695,
+          "afterRate": 0.28140765350067676,
+          "rateDelta": -0.015636681474692715
+        },
+        {
+          "title": "EPHEMERIS UPDATE",
+          "beforeSeen": 1356,
+          "afterSeen": 1356,
+          "beforeFailed": 338,
+          "afterFailed": 321,
+          "beforeRate": 0.24926253687315633,
+          "afterRate": 0.23672566371681417,
+          "rateDelta": -0.012536873156342165
+        },
+        {
+          "title": "CREW FATIGUE",
+          "beforeSeen": 1390,
+          "afterSeen": 1389,
+          "beforeFailed": 945,
+          "afterFailed": 929,
+          "beforeRate": 0.6798561151079137,
+          "afterRate": 0.6688264938804895,
+          "rateDelta": -0.011029621227424125
+        },
+        {
+          "title": "GYROSCOPE FAULT",
+          "beforeSeen": 1438,
+          "afterSeen": 1438,
+          "beforeFailed": 865,
+          "afterFailed": 857,
+          "beforeRate": 0.6015299026425591,
+          "afterRate": 0.5959666203059806,
+          "rateDelta": -0.0055632823365785455
+        },
+        {
+          "title": "COMMUNICATIONS ACQUISITION",
+          "beforeSeen": 1340,
+          "afterSeen": 1349,
+          "beforeFailed": 841,
+          "afterFailed": 840,
+          "beforeRate": 0.6276119402985074,
+          "afterRate": 0.6226834692364714,
+          "rateDelta": -0.004928471062035977
+        },
+        {
+          "title": "SIGNAL INTERFERENCE",
+          "beforeSeen": 8100,
+          "afterSeen": 8093,
+          "beforeFailed": 4421,
+          "afterFailed": 4382,
+          "beforeRate": 0.5458024691358024,
+          "afterRate": 0.5414555788953417,
+          "rateDelta": -0.0043468902404607546
+        },
+        {
+          "title": "ZERO-G ADAPTATION SICKNESS",
+          "beforeSeen": 8123,
+          "afterSeen": 8129,
+          "beforeFailed": 3879,
+          "afterFailed": 3847,
+          "beforeRate": 0.47753293118306045,
+          "afterRate": 0.47324394144421206,
+          "rateDelta": -0.004288989738848392
+        },
+        {
+          "title": "HULL MICROPUNCTURE",
+          "beforeSeen": 8048,
+          "afterSeen": 8050,
+          "beforeFailed": 4854,
+          "afterFailed": 4830,
+          "beforeRate": 0.6031312127236581,
+          "afterRate": 0.6,
+          "rateDelta": -0.0031312127236581278
+        },
+        {
+          "title": "INNER SYSTEM SLINGSHOT",
+          "beforeSeen": 10000,
+          "afterSeen": 10000,
+          "beforeFailed": 6518,
+          "afterFailed": 6497,
+          "beforeRate": 0.6518,
+          "afterRate": 0.6497,
+          "rateDelta": -0.0020999999999999908
+        },
+        {
+          "title": "SENSOR GLINT",
+          "beforeSeen": 1324,
+          "afterSeen": 1324,
+          "beforeFailed": 192,
+          "afterFailed": 190,
+          "beforeRate": 0.14501510574018128,
+          "afterRate": 0.14350453172205438,
+          "rateDelta": -0.0015105740181269034
+        },
+        {
+          "title": "STATIC STORM",
+          "beforeSeen": 1344,
+          "afterSeen": 1344,
+          "beforeFailed": 217,
+          "afterFailed": 215,
+          "beforeRate": 0.16145833333333334,
+          "afterRate": 0.15997023809523808,
+          "rateDelta": -0.0014880952380952606
+        },
+        {
+          "title": "BEACON SELF-TEST",
+          "beforeSeen": 1386,
+          "afterSeen": 1386,
+          "beforeFailed": 223,
+          "afterFailed": 221,
+          "beforeRate": 0.1608946608946609,
+          "afterRate": 0.15945165945165946,
+          "rateDelta": -0.0014430014430014404
+        },
+        {
+          "title": "SCRUBBER RATTLE",
+          "beforeSeen": 1389,
+          "afterSeen": 1389,
+          "beforeFailed": 225,
+          "afterFailed": 223,
+          "beforeRate": 0.16198704103671707,
+          "afterRate": 0.1605471562275018,
+          "rateDelta": -0.0014398848092152805
+        },
+        {
+          "title": "DOOR SEAL HISS",
+          "beforeSeen": 1390,
+          "afterSeen": 1390,
+          "beforeFailed": 220,
+          "afterFailed": 218,
+          "beforeRate": 0.15827338129496402,
+          "afterRate": 0.15683453237410072,
+          "rateDelta": -0.0014388489208632949
+        },
+        {
+          "title": "FUEL LINE BLOCKAGE",
+          "beforeSeen": 1402,
+          "afterSeen": 1402,
+          "beforeFailed": 139,
+          "afterFailed": 137,
+          "beforeRate": 0.09914407988587731,
+          "afterRate": 0.09771754636233952,
+          "rateDelta": -0.0014265335235377902
+        },
+        {
+          "title": "FIRE IN THE AVIONICS BAY",
+          "beforeSeen": 1404,
+          "afterSeen": 1404,
+          "beforeFailed": 625,
+          "afterFailed": 623,
+          "beforeRate": 0.44515669515669515,
+          "afterRate": 0.44373219373219375,
+          "rateDelta": -0.001424501424501401
+        },
+        {
+          "title": "CELL IMBALANCE",
+          "beforeSeen": 1436,
+          "afterSeen": 1436,
+          "beforeFailed": 64,
+          "afterFailed": 62,
+          "beforeRate": 0.04456824512534819,
+          "afterRate": 0.04317548746518106,
+          "rateDelta": -0.0013927576601671307
+        },
+        {
+          "title": "COMPUTER REBOOT LOOP",
+          "beforeSeen": 8028,
+          "afterSeen": 8029,
+          "beforeFailed": 4325,
+          "afterFailed": 4317,
+          "beforeRate": 0.5387394120577977,
+          "afterRate": 0.537675924772699,
+          "rateDelta": -0.001063487285098752
+        },
+        {
+          "title": "OXYGEN SCRUBBER FAILURE",
+          "beforeSeen": 8200,
+          "afterSeen": 8205,
+          "beforeFailed": 4924,
+          "afterFailed": 4919,
+          "beforeRate": 0.6004878048780488,
+          "afterRate": 0.5995124923826934,
+          "rateDelta": -0.0009753124953553183
+        },
+        {
+          "title": "SENSOR FAULT ALARM",
+          "beforeSeen": 8059,
+          "afterSeen": 8059,
+          "beforeFailed": 2845,
+          "afterFailed": 2838,
+          "beforeRate": 0.3530214666832113,
+          "afterRate": 0.35215287256483435,
+          "rateDelta": -0.0008685941183769752
+        },
+        {
+          "title": "PATCHED FIRMWARE",
+          "beforeSeen": 1343,
+          "afterSeen": 1343,
+          "beforeFailed": 200,
+          "afterFailed": 199,
+          "beforeRate": 0.14892032762472077,
+          "afterRate": 0.14817572598659717,
+          "rateDelta": -0.0007446016381235931
+        },
+        {
+          "title": "SPARSE DEBRIS",
+          "beforeSeen": 1384,
+          "afterSeen": 1384,
+          "beforeFailed": 109,
+          "afterFailed": 108,
+          "beforeRate": 0.078757225433526,
+          "afterRate": 0.07803468208092486,
+          "rateDelta": -0.0007225433526011488
+        },
+        {
+          "title": "BATTERY SURGE",
+          "beforeSeen": 1407,
+          "afterSeen": 1407,
+          "beforeFailed": 208,
+          "afterFailed": 207,
+          "beforeRate": 0.1478322672352523,
+          "afterRate": 0.14712153518123666,
+          "rateDelta": -0.0007107320540156448
+        },
+        {
+          "title": "CHARGE CONTROLLER FAULT",
+          "beforeSeen": 1409,
+          "afterSeen": 1409,
+          "beforeFailed": 151,
+          "afterFailed": 150,
+          "beforeRate": 0.10716820440028389,
+          "afterRate": 0.10645848119233499,
+          "rateDelta": -0.0007097232079489035
+        },
+        {
+          "title": "COOLANT SEEP",
+          "beforeSeen": 1414,
+          "afterSeen": 1414,
+          "beforeFailed": 226,
+          "afterFailed": 225,
+          "beforeRate": 0.15983026874115983,
+          "afterRate": 0.15912305516265912,
+          "rateDelta": -0.0007072135785007039
+        },
+        {
+          "title": "STAR SIGHTING",
+          "beforeSeen": 1442,
+          "afterSeen": 1442,
+          "beforeFailed": 75,
+          "afterFailed": 75,
+          "beforeRate": 0.052011095700416086,
+          "afterRate": 0.052011095700416086,
+          "rateDelta": 0
+        },
+        {
+          "title": "FEED SPOOL SNAG",
+          "beforeSeen": 1439,
+          "afterSeen": 1439,
+          "beforeFailed": 130,
+          "afterFailed": 130,
+          "beforeRate": 0.09034051424600417,
+          "afterRate": 0.09034051424600417,
+          "rateDelta": 0
+        },
+        {
+          "title": "SCRUBBER OVERDRIVE",
+          "beforeSeen": 1427,
+          "afterSeen": 1427,
+          "beforeFailed": 1,
+          "afterFailed": 1,
+          "beforeRate": 0.000700770847932726,
+          "afterRate": 0.000700770847932726,
+          "rateDelta": 0
+        },
+        {
+          "title": "WARM BUS",
+          "beforeSeen": 1403,
+          "afterSeen": 1403,
+          "beforeFailed": 53,
+          "afterFailed": 53,
+          "beforeRate": 0.037776193870277974,
+          "afterRate": 0.037776193870277974,
+          "rateDelta": 0
+        },
+        {
+          "title": "FLICKERING BUS",
+          "beforeSeen": 1399,
+          "afterSeen": 1399,
+          "beforeFailed": 29,
+          "afterFailed": 29,
+          "beforeRate": 0.020729092208720514,
+          "afterRate": 0.020729092208720514,
+          "rateDelta": 0
+        },
+        {
+          "title": "BUS BROWNOUT",
+          "beforeSeen": 1383,
+          "afterSeen": 1383,
+          "beforeFailed": 26,
+          "afterFailed": 26,
+          "beforeRate": 0.018799710773680405,
+          "afterRate": 0.018799710773680405,
+          "rateDelta": 0
+        },
+        {
+          "title": "SMOKE IN THE WIRING LOOM",
+          "beforeSeen": 1381,
+          "afterSeen": 1381,
+          "beforeFailed": 213,
+          "afterFailed": 213,
+          "beforeRate": 0.15423606082548877,
+          "afterRate": 0.15423606082548877,
+          "rateDelta": 0
+        },
+        {
+          "title": "RECYCLER TASTE",
+          "beforeSeen": 1378,
+          "afterSeen": 1378,
+          "beforeFailed": 0,
+          "afterFailed": 0,
+          "beforeRate": 0,
+          "afterRate": 0,
+          "rateDelta": 0
+        },
+        {
+          "title": "SCRUBBER SATURATION",
+          "beforeSeen": 1378,
+          "afterSeen": 1378,
+          "beforeFailed": 1,
+          "afterFailed": 1,
+          "beforeRate": 0.000725689404934688,
+          "afterRate": 0.000725689404934688,
+          "rateDelta": 0
+        },
+        {
+          "title": "SPACE ADAPTATION",
+          "beforeSeen": 1377,
+          "afterSeen": 1377,
+          "beforeFailed": 0,
+          "afterFailed": 0,
+          "beforeRate": 0,
+          "afterRate": 0,
+          "rateDelta": 0
+        },
+        {
+          "title": "SLEEP DEFICIT",
+          "beforeSeen": 1373,
+          "afterSeen": 1373,
+          "beforeFailed": 1,
+          "afterFailed": 1,
+          "beforeRate": 0.0007283321194464676,
+          "afterRate": 0.0007283321194464676,
+          "rateDelta": 0
+        },
+        {
+          "title": "SHIPBOARD COLD",
+          "beforeSeen": 1358,
+          "afterSeen": 1358,
+          "beforeFailed": 1,
+          "afterFailed": 1,
+          "beforeRate": 0.0007363770250368188,
+          "afterRate": 0.0007363770250368188,
+          "rateDelta": 0
+        },
+        {
+          "title": "DUST STRIKES",
+          "beforeSeen": 1354,
+          "afterSeen": 1354,
+          "beforeFailed": 123,
+          "afterFailed": 123,
+          "beforeRate": 0.09084194977843427,
+          "afterRate": 0.09084194977843427,
+          "rateDelta": 0
+        },
+        {
+          "title": "DISTANT HAIL",
+          "beforeSeen": 1349,
+          "afterSeen": 1349,
+          "beforeFailed": 204,
+          "afterFailed": 204,
+          "beforeRate": 0.15122312824314307,
+          "afterRate": 0.15122312824314307,
+          "rateDelta": 0
+        },
+        {
+          "title": "FUEL FILTER CLOG",
+          "beforeSeen": 1349,
+          "afterSeen": 1349,
+          "beforeFailed": 330,
+          "afterFailed": 330,
+          "beforeRate": 0.2446256486286138,
+          "afterRate": 0.2446256486286138,
+          "rateDelta": 0
+        },
+        {
+          "title": "FABRICATOR JAM",
+          "beforeSeen": 8053,
+          "afterSeen": 8051,
+          "beforeFailed": 5055,
+          "afterFailed": 5054,
+          "beforeRate": 0.6277163789891965,
+          "afterRate": 0.6277481058253633,
+          "rateDelta": 0.000031726836166812156
+        },
+        {
+          "title": "CREW ILLNESS",
+          "beforeSeen": 8027,
+          "afterSeen": 8030,
+          "beforeFailed": 4211,
+          "afterFailed": 4215,
+          "beforeRate": 0.5246044599476766,
+          "afterRate": 0.524906600249066,
+          "rateDelta": 0.0003021403013894197
+        },
+        {
+          "title": "SEAL DEGRADATION",
+          "beforeSeen": 1427,
+          "afterSeen": 1427,
+          "beforeFailed": 241,
+          "afterFailed": 242,
+          "beforeRate": 0.16888577435178698,
+          "afterRate": 0.1695865451997197,
+          "rateDelta": 0.0007007708479327135
+        },
+        {
+          "title": "REACTOR TRIP",
+          "beforeSeen": 8059,
+          "afterSeen": 8059,
+          "beforeFailed": 1379,
+          "afterFailed": 1389,
+          "beforeRate": 0.17111304132026306,
+          "afterRate": 0.1723538900608016,
+          "rateDelta": 0.001240848740538536
+        },
+        {
+          "title": "BUS LOAD SHED",
+          "beforeSeen": 8069,
+          "afterSeen": 8061,
+          "beforeFailed": 391,
+          "afterFailed": 401,
+          "beforeRate": 0.048457057875821045,
+          "afterRate": 0.04974568912045652,
+          "rateDelta": 0.001288631244635477
+        },
+        {
+          "title": "SOLAR FLARE",
+          "beforeSeen": 8095,
+          "afterSeen": 8098,
+          "beforeFailed": 5915,
+          "afterFailed": 5928,
+          "beforeRate": 0.730697961704756,
+          "afterRate": 0.7320326006421338,
+          "rateDelta": 0.0013346389373778411
+        },
+        {
+          "title": "CO₂ BUILDUP",
+          "beforeSeen": 1398,
+          "afterSeen": 1398,
+          "beforeFailed": 367,
+          "afterFailed": 370,
+          "beforeRate": 0.2625178826895565,
+          "afterRate": 0.2646638054363376,
+          "rateDelta": 0.0021459227467811037
+        },
+        {
+          "title": "ELECTRICAL SHORT",
+          "beforeSeen": 8057,
+          "afterSeen": 8055,
+          "beforeFailed": 3516,
+          "afterFailed": 3542,
+          "beforeRate": 0.4363907161474494,
+          "afterRate": 0.4397268777157045,
+          "rateDelta": 0.003336161568255114
+        },
+        {
+          "title": "PRECISION NAVIGATION",
+          "beforeSeen": 1361,
+          "afterSeen": 1369,
+          "beforeFailed": 798,
+          "afterFailed": 808,
+          "beforeRate": 0.5863335782512858,
+          "afterRate": 0.5902118334550767,
+          "rateDelta": 0.0038782552037908147
+        },
+        {
+          "title": "DIRECT RETURN",
+          "beforeSeen": 9475,
+          "afterSeen": 9470,
+          "beforeFailed": 8330,
+          "afterFailed": 8363,
+          "beforeRate": 0.879155672823219,
+          "afterRate": 0.883104540654699,
+          "rateDelta": 0.003948867831479963
+        },
+        {
+          "title": "COOLANT LOOP RUPTURE",
+          "beforeSeen": 8067,
+          "afterSeen": 8067,
+          "beforeFailed": 5721,
+          "afterFailed": 5755,
+          "beforeRate": 0.70918557084418,
+          "afterRate": 0.7134002727160035,
+          "rateDelta": 0.00421470187182349
+        },
+        {
+          "title": "LIFE SUPPORT CONTAMINATION",
+          "beforeSeen": 1360,
+          "afterSeen": 1359,
+          "beforeFailed": 1240,
+          "afterFailed": 1245,
+          "beforeRate": 0.9117647058823529,
+          "afterRate": 0.9161147902869757,
+          "rateDelta": 0.0043500844046228115
+        },
+        {
+          "title": "BATTERY DEGRADATION",
+          "beforeSeen": 8040,
+          "afterSeen": 8039,
+          "beforeFailed": 3434,
+          "afterFailed": 3474,
+          "beforeRate": 0.42711442786069653,
+          "afterRate": 0.4321433014056475,
+          "rateDelta": 0.0050288735449509625
+        },
+        {
+          "title": "CABIN PRESSURE DROP",
+          "beforeSeen": 8142,
+          "afterSeen": 8138,
+          "beforeFailed": 4993,
+          "afterFailed": 5034,
+          "beforeRate": 0.6132399901744043,
+          "afterRate": 0.6185795035635291,
+          "rateDelta": 0.00533951338912475
+        },
+        {
+          "title": "CO₂ ACCUMULATION",
+          "beforeSeen": 1403,
+          "afterSeen": 1397,
+          "beforeFailed": 659,
+          "afterFailed": 666,
+          "beforeRate": 0.46970776906628653,
+          "afterRate": 0.4767358625626342,
+          "rateDelta": 0.007028093496347698
+        },
+        {
+          "title": "NAVIGATION DRIFT",
+          "beforeSeen": 1402,
+          "afterSeen": 1399,
+          "beforeFailed": 1121,
+          "afterFailed": 1129,
+          "beforeRate": 0.7995720399429387,
+          "afterRate": 0.8070050035739814,
+          "rateDelta": 0.007432963631042733
+        },
+        {
+          "title": "COARSE TRIM BURN",
+          "beforeSeen": 1412,
+          "afterSeen": 1421,
+          "beforeFailed": 424,
+          "afterFailed": 441,
+          "beforeRate": 0.3002832861189802,
+          "afterRate": 0.3103448275862069,
+          "rateDelta": 0.010061541467226709
+        },
+        {
+          "title": "GNC FINAL ALIGNMENT",
+          "beforeSeen": 1473,
+          "afterSeen": 1471,
+          "beforeFailed": 1358,
+          "afterFailed": 1374,
+          "beforeRate": 0.921928038017651,
+          "afterRate": 0.9340584636301835,
+          "rateDelta": 0.012130425612532525
+        },
+        {
+          "title": "THRUSTER MISFIRE",
+          "beforeSeen": 8110,
+          "afterSeen": 8107,
+          "beforeFailed": 4974,
+          "afterFailed": 5079,
+          "beforeRate": 0.6133168927250309,
+          "afterRate": 0.6264956210682127,
+          "rateDelta": 0.01317872834318179
+        },
+        {
+          "title": "DEBRIS FIELD",
+          "beforeSeen": 1386,
+          "afterSeen": 1392,
+          "beforeFailed": 1163,
+          "afterFailed": 1187,
+          "beforeRate": 0.8391053391053391,
+          "afterRate": 0.8527298850574713,
+          "rateDelta": 0.013624545952132139
+        },
+        {
+          "title": "RECOVERY BEACON",
+          "beforeSeen": 1367,
+          "afterSeen": 1364,
+          "beforeFailed": 730,
+          "afterFailed": 749,
+          "beforeRate": 0.5340160936356986,
+          "afterRate": 0.5491202346041055,
+          "rateDelta": 0.015104140968406954
+        },
+        {
+          "title": "HEAT SHIELD STRESS",
+          "beforeSeen": 1367,
+          "afterSeen": 1368,
+          "beforeFailed": 1044,
+          "afterFailed": 1069,
+          "beforeRate": 0.7637161667885881,
+          "afterRate": 0.7814327485380117,
+          "rateDelta": 0.017716581749423588
+        },
+        {
+          "title": "RE-ENTRY",
+          "beforeSeen": 6833,
+          "afterSeen": 6772,
+          "beforeFailed": 6532,
+          "afterFailed": 6627,
+          "beforeRate": 0.9559490706863749,
+          "afterRate": 0.9785883047844064,
+          "rateDelta": 0.02263923409803148
+        },
+        {
+          "title": "ATMOSPHERIC INTERFACE",
+          "beforeSeen": 1414,
+          "afterSeen": 1402,
+          "beforeFailed": 1084,
+          "afterFailed": 1107,
+          "beforeRate": 0.7666195190947667,
+          "afterRate": 0.7895863052781741,
+          "rateDelta": 0.022966786183407417
+        },
+        {
+          "title": "FIRST TURBULENCE",
+          "beforeSeen": 1368,
+          "afterSeen": 1363,
+          "beforeFailed": 481,
+          "afterFailed": 511,
+          "beforeRate": 0.3516081871345029,
+          "afterRate": 0.3749082905355833,
+          "rateDelta": 0.023300103401080352
+        },
+        {
+          "title": "RADIATION STORM",
+          "beforeSeen": 1353,
+          "afterSeen": 1347,
+          "beforeFailed": 771,
+          "afterFailed": 802,
+          "beforeRate": 0.5698447893569845,
+          "afterRate": 0.5953971789161099,
+          "rateDelta": 0.02555238955912542
+        },
+        {
+          "title": "CHUTE & RECOVERY DEPLOY",
+          "beforeSeen": 1326,
+          "afterSeen": 1317,
+          "beforeFailed": 1152,
+          "afterFailed": 1180,
+          "beforeRate": 0.8687782805429864,
+          "afterRate": 0.8959757023538345,
+          "rateDelta": 0.027197421810848055
+        },
+        {
+          "title": "MICROMETEOROID IMPACT",
+          "beforeSeen": 8115,
+          "afterSeen": 8117,
+          "beforeFailed": 5309,
+          "afterFailed": 5616,
+          "beforeRate": 0.6542205791743685,
+          "afterRate": 0.6918812369101885,
+          "rateDelta": 0.03766065773582006
+        },
+        {
+          "title": "RE-ENTRY VECTOR TRIM",
+          "beforeSeen": 1336,
+          "afterSeen": 1350,
+          "beforeFailed": 1015,
+          "afterFailed": 1134,
+          "beforeRate": 0.7597305389221557,
+          "afterRate": 0.84,
+          "rateDelta": 0.08026946107784427
+        }
+      ]
+    },
+    "normal": {
+      "before": {
+        "winRate": 0.5156,
+        "winConfidence95": [
+          0.505800659516148,
+          0.5253873592945456
+        ],
+        "ordinaryTurns": 22.5102,
+        "responses": 24.453,
+        "ordinaryFailures": {
+          "seen": 219125,
+          "failed": 94991,
+          "rate": 0.43350142612664005
+        },
+        "losses": {
+          "CONTACT LOST — CREW LOST": 3850,
+          "CONTACT LOST — TRAJECTORY MISSED": 978,
+          "SHIP REDUCED TO A HULK": 16
+        },
+        "suffocationLosses": 1930,
+        "lossPhases": {
+          "2": 572,
+          "3": 4272
+        },
+        "failedByStage5": 0,
+        "winningScore": 31.73622963537626,
+        "fitness": 0.6833635659724149,
+        "lowFitnessTurns": 6.0336
+      },
+      "after": {
+        "winRate": 0.5054,
+        "winConfidence95": [
+          0.49560037939790824,
+          0.5151954732673318
+        ],
+        "ordinaryTurns": 22.4992,
+        "responses": 24.441,
+        "ordinaryFailures": {
+          "seen": 219092,
+          "failed": 95053,
+          "rate": 0.43384970697241343
+        },
+        "losses": {
+          "CONTACT LOST — CREW LOST": 3914,
+          "CONTACT LOST — TRAJECTORY MISSED": 1009,
+          "SHIP REDUCED TO A HULK": 23
+        },
+        "suffocationLosses": 1925,
+        "lossPhases": {
+          "2": 582,
+          "3": 4364
+        },
+        "failedByStage5": 0,
+        "winningScore": 31.41986545310645,
+        "fitness": 0.6819084665271712,
+        "lowFitnessTurns": 6.1113
+      },
+      "delta": {
+        "wins": {
+          "mean": -0.0102,
+          "approximate95": [
+            -0.016432247434465933,
+            -0.003967752565534069
+          ]
+        },
+        "ordinaryTurns": {
+          "mean": -0.011,
+          "approximate95": [
+            -0.026755079526714565,
+            0.004755079526714567
+          ]
+        }
+      },
+      "crisisChanges": [
+        {
+          "title": "WHEEL SPEED FAULT",
+          "beforeSeen": 1431,
+          "afterSeen": 1431,
+          "beforeFailed": 384,
+          "afterFailed": 210,
+          "beforeRate": 0.26834381551362685,
+          "afterRate": 0.14675052410901468,
+          "rateDelta": -0.12159329140461217
+        },
+        {
+          "title": "VALVE CHATTER",
+          "beforeSeen": 1408,
+          "afterSeen": 1408,
+          "beforeFailed": 352,
+          "afterFailed": 206,
+          "beforeRate": 0.25,
+          "afterRate": 0.14630681818181818,
+          "rateDelta": -0.10369318181818182
+        },
+        {
+          "title": "SOLAR WEATHER WATCH",
+          "beforeSeen": 1310,
+          "afterSeen": 1310,
+          "beforeFailed": 214,
+          "afterFailed": 158,
+          "beforeRate": 0.1633587786259542,
+          "afterRate": 0.12061068702290076,
+          "rateDelta": -0.04274809160305343
+        },
+        {
+          "title": "FLARE WARNING",
+          "beforeSeen": 1410,
+          "afterSeen": 1410,
+          "beforeFailed": 206,
+          "afterFailed": 154,
+          "beforeRate": 0.14609929078014183,
+          "afterRate": 0.10921985815602837,
+          "rateDelta": -0.03687943262411346
+        },
+        {
+          "title": "COMMUNICATIONS ACQUISITION",
+          "beforeSeen": 1292,
+          "afterSeen": 1284,
+          "beforeFailed": 815,
+          "afterFailed": 783,
+          "beforeRate": 0.6308049535603715,
+          "afterRate": 0.6098130841121495,
+          "rateDelta": -0.020991869448221956
+        },
+        {
+          "title": "SHIELD HOTSPOT",
+          "beforeSeen": 8108,
+          "afterSeen": 8115,
+          "beforeFailed": 2408,
+          "afterFailed": 2289,
+          "beforeRate": 0.29699062654168723,
+          "afterRate": 0.2820702402957486,
+          "rateDelta": -0.01492038624593861
+        },
+        {
+          "title": "FINAL POWER SHUNT",
+          "beforeSeen": 1267,
+          "afterSeen": 1268,
+          "beforeFailed": 588,
+          "afterFailed": 571,
+          "beforeRate": 0.46408839779005523,
+          "afterRate": 0.4503154574132492,
+          "rateDelta": -0.013772940376806042
+        },
+        {
+          "title": "EPHEMERIS UPDATE",
+          "beforeSeen": 1356,
+          "afterSeen": 1356,
+          "beforeFailed": 343,
+          "afterFailed": 325,
+          "beforeRate": 0.2529498525073746,
+          "afterRate": 0.23967551622418878,
+          "rateDelta": -0.013274336283185834
+        },
+        {
+          "title": "CREW FATIGUE",
+          "beforeSeen": 1336,
+          "afterSeen": 1341,
+          "beforeFailed": 898,
+          "afterFailed": 890,
+          "beforeRate": 0.6721556886227545,
+          "afterRate": 0.6636838180462341,
+          "rateDelta": -0.008471870576520435
+        },
+        {
+          "title": "CO₂ ACCUMULATION",
+          "beforeSeen": 1337,
+          "afterSeen": 1327,
+          "beforeFailed": 662,
+          "afterFailed": 648,
+          "beforeRate": 0.4951383694839192,
+          "afterRate": 0.4883195177091183,
+          "rateDelta": -0.006818851774800905
+        },
+        {
+          "title": "THERMAL OVERLOAD",
+          "beforeSeen": 1326,
+          "afterSeen": 1322,
+          "beforeFailed": 583,
+          "afterFailed": 574,
+          "beforeRate": 0.4396681749622926,
+          "afterRate": 0.4341906202723147,
+          "rateDelta": -0.005477554689977904
+        },
+        {
+          "title": "GYROSCOPE FAULT",
+          "beforeSeen": 1438,
+          "afterSeen": 1438,
+          "beforeFailed": 863,
+          "afterFailed": 856,
+          "beforeRate": 0.6001390820584145,
+          "afterRate": 0.5952712100139083,
+          "rateDelta": -0.004867872044506227
+        },
+        {
+          "title": "PRECISION NAVIGATION",
+          "beforeSeen": 1311,
+          "afterSeen": 1326,
+          "beforeFailed": 764,
+          "afterFailed": 767,
+          "beforeRate": 0.5827612509534706,
+          "afterRate": 0.5784313725490197,
+          "rateDelta": -0.004329878404450982
+        },
+        {
+          "title": "COMPUTER REBOOT LOOP",
+          "beforeSeen": 8017,
+          "afterSeen": 8017,
+          "beforeFailed": 4340,
+          "afterFailed": 4314,
+          "beforeRate": 0.5413496320319321,
+          "afterRate": 0.5381065236372709,
+          "rateDelta": -0.0032431083946612427
+        },
+        {
+          "title": "ZERO-G ADAPTATION SICKNESS",
+          "beforeSeen": 8119,
+          "afterSeen": 8121,
+          "beforeFailed": 3879,
+          "afterFailed": 3857,
+          "beforeRate": 0.47776819805394755,
+          "afterRate": 0.4749415096662973,
+          "rateDelta": -0.002826688387650267
+        },
+        {
+          "title": "SIGNAL INTERFERENCE",
+          "beforeSeen": 8090,
+          "afterSeen": 8084,
+          "beforeFailed": 4412,
+          "afterFailed": 4390,
+          "beforeRate": 0.5453646477132262,
+          "afterRate": 0.5430479960415636,
+          "rateDelta": -0.0023166516716626173
+        },
+        {
+          "title": "SENSOR GLINT",
+          "beforeSeen": 1324,
+          "afterSeen": 1324,
+          "beforeFailed": 190,
+          "afterFailed": 187,
+          "beforeRate": 0.14350453172205438,
+          "afterRate": 0.14123867069486404,
+          "rateDelta": -0.002265861027190341
+        },
+        {
+          "title": "DOOR SEAL HISS",
+          "beforeSeen": 1390,
+          "afterSeen": 1390,
+          "beforeFailed": 220,
+          "afterFailed": 217,
+          "beforeRate": 0.15827338129496402,
+          "afterRate": 0.15611510791366906,
+          "rateDelta": -0.002158273381294956
+        },
+        {
+          "title": "CHARGE CONTROLLER FAULT",
+          "beforeSeen": 1409,
+          "afterSeen": 1409,
+          "beforeFailed": 153,
+          "afterFailed": 150,
+          "beforeRate": 0.10858765081618169,
+          "afterRate": 0.10645848119233499,
+          "rateDelta": -0.0021291696238466967
+        },
+        {
+          "title": "INNER SYSTEM SLINGSHOT",
+          "beforeSeen": 10000,
+          "afterSeen": 10000,
+          "beforeFailed": 6522,
+          "afterFailed": 6504,
+          "beforeRate": 0.6522,
+          "afterRate": 0.6504,
+          "rateDelta": -0.0018000000000000238
+        },
+        {
+          "title": "HULL MICROPUNCTURE",
+          "beforeSeen": 8040,
+          "afterSeen": 8040,
+          "beforeFailed": 4835,
+          "afterFailed": 4823,
+          "beforeRate": 0.6013681592039801,
+          "afterRate": 0.5998756218905472,
+          "rateDelta": -0.0014925373134329067
+        },
+        {
+          "title": "PATCHED FIRMWARE",
+          "beforeSeen": 1343,
+          "afterSeen": 1343,
+          "beforeFailed": 199,
+          "afterFailed": 197,
+          "beforeRate": 0.14817572598659717,
+          "afterRate": 0.14668652271034996,
+          "rateDelta": -0.001489203276247214
+        },
+        {
+          "title": "OXYGEN SCRUBBER FAILURE",
+          "beforeSeen": 8199,
+          "afterSeen": 8201,
+          "beforeFailed": 4947,
+          "afterFailed": 4936,
+          "beforeRate": 0.6033662641785583,
+          "afterRate": 0.6018778197780759,
+          "rateDelta": -0.0014884444004824582
+        },
+        {
+          "title": "SHIPBOARD COLD",
+          "beforeSeen": 1358,
+          "afterSeen": 1358,
+          "beforeFailed": 6,
+          "afterFailed": 4,
+          "beforeRate": 0.004418262150220913,
+          "afterRate": 0.0029455081001472753,
+          "rateDelta": -0.0014727540500736377
+        },
+        {
+          "title": "SMOKE IN THE WIRING LOOM",
+          "beforeSeen": 1381,
+          "afterSeen": 1381,
+          "beforeFailed": 219,
+          "afterFailed": 217,
+          "beforeRate": 0.15858073859522084,
+          "afterRate": 0.15713251267197684,
+          "rateDelta": -0.0014482259232440065
+        },
+        {
+          "title": "FUEL LINE BLOCKAGE",
+          "beforeSeen": 1402,
+          "afterSeen": 1402,
+          "beforeFailed": 138,
+          "afterFailed": 136,
+          "beforeRate": 0.09843081312410841,
+          "afterRate": 0.09700427960057062,
+          "rateDelta": -0.0014265335235377902
+        },
+        {
+          "title": "FIRE IN THE AVIONICS BAY",
+          "beforeSeen": 1404,
+          "afterSeen": 1404,
+          "beforeFailed": 622,
+          "afterFailed": 620,
+          "beforeRate": 0.443019943019943,
+          "afterRate": 0.4415954415954416,
+          "rateDelta": -0.001424501424501401
+        },
+        {
+          "title": "CELL IMBALANCE",
+          "beforeSeen": 1436,
+          "afterSeen": 1436,
+          "beforeFailed": 63,
+          "afterFailed": 61,
+          "beforeRate": 0.04387186629526462,
+          "afterRate": 0.04247910863509749,
+          "rateDelta": -0.0013927576601671307
+        },
+        {
+          "title": "CREW ILLNESS",
+          "beforeSeen": 8029,
+          "afterSeen": 8032,
+          "beforeFailed": 4192,
+          "afterFailed": 4184,
+          "beforeRate": 0.5221073608170382,
+          "afterRate": 0.5209163346613546,
+          "rateDelta": -0.001191026155683672
+        },
+        {
+          "title": "REACTOR TRIP",
+          "beforeSeen": 8050,
+          "afterSeen": 8050,
+          "beforeFailed": 1403,
+          "afterFailed": 1397,
+          "beforeRate": 0.1742857142857143,
+          "afterRate": 0.17354037267080746,
+          "rateDelta": -0.0007453416149068304
+        },
+        {
+          "title": "STATIC STORM",
+          "beforeSeen": 1344,
+          "afterSeen": 1344,
+          "beforeFailed": 213,
+          "afterFailed": 212,
+          "beforeRate": 0.15848214285714285,
+          "afterRate": 0.15773809523809523,
+          "rateDelta": -0.0007440476190476164
+        },
+        {
+          "title": "SLEEP DEFICIT",
+          "beforeSeen": 1373,
+          "afterSeen": 1373,
+          "beforeFailed": 2,
+          "afterFailed": 1,
+          "beforeRate": 0.0014566642388929353,
+          "afterRate": 0.0007283321194464676,
+          "rateDelta": -0.0007283321194464676
+        },
+        {
+          "title": "SPARSE DEBRIS",
+          "beforeSeen": 1384,
+          "afterSeen": 1384,
+          "beforeFailed": 108,
+          "afterFailed": 107,
+          "beforeRate": 0.07803468208092486,
+          "afterRate": 0.0773121387283237,
+          "rateDelta": -0.0007225433526011626
+        },
+        {
+          "title": "SCRUBBER RATTLE",
+          "beforeSeen": 1389,
+          "afterSeen": 1389,
+          "beforeFailed": 226,
+          "afterFailed": 225,
+          "beforeRate": 0.1627069834413247,
+          "afterRate": 0.16198704103671707,
+          "rateDelta": -0.0007199424046076264
+        },
+        {
+          "title": "BATTERY SURGE",
+          "beforeSeen": 1407,
+          "afterSeen": 1407,
+          "beforeFailed": 205,
+          "afterFailed": 204,
+          "beforeRate": 0.1457000710732054,
+          "afterRate": 0.14498933901918976,
+          "rateDelta": -0.0007107320540156448
+        },
+        {
+          "title": "COOLANT SEEP",
+          "beforeSeen": 1414,
+          "afterSeen": 1414,
+          "beforeFailed": 223,
+          "afterFailed": 222,
+          "beforeRate": 0.15770862800565771,
+          "afterRate": 0.157001414427157,
+          "rateDelta": -0.0007072135785007039
+        },
+        {
+          "title": "RECOVERY BEACON",
+          "beforeSeen": 1325,
+          "afterSeen": 1310,
+          "beforeFailed": 729,
+          "afterFailed": 720,
+          "beforeRate": 0.550188679245283,
+          "afterRate": 0.549618320610687,
+          "rateDelta": -0.0005703586345959799
+        },
+        {
+          "title": "SOLAR FLARE",
+          "beforeSeen": 8095,
+          "afterSeen": 8098,
+          "beforeFailed": 5875,
+          "afterFailed": 5877,
+          "beforeRate": 0.7257566399011736,
+          "afterRate": 0.7257347493208199,
+          "rateDelta": -0.0000218905803536229
+        },
+        {
+          "title": "STAR SIGHTING",
+          "beforeSeen": 1442,
+          "afterSeen": 1442,
+          "beforeFailed": 76,
+          "afterFailed": 76,
+          "beforeRate": 0.052704576976421634,
+          "afterRate": 0.052704576976421634,
+          "rateDelta": 0
+        },
+        {
+          "title": "FEED SPOOL SNAG",
+          "beforeSeen": 1439,
+          "afterSeen": 1439,
+          "beforeFailed": 132,
+          "afterFailed": 132,
+          "beforeRate": 0.0917303683113273,
+          "afterRate": 0.0917303683113273,
+          "rateDelta": 0
+        },
+        {
+          "title": "SCRUBBER OVERDRIVE",
+          "beforeSeen": 1427,
+          "afterSeen": 1427,
+          "beforeFailed": 2,
+          "afterFailed": 2,
+          "beforeRate": 0.001401541695865452,
+          "afterRate": 0.001401541695865452,
+          "rateDelta": 0
+        },
+        {
+          "title": "WARM BUS",
+          "beforeSeen": 1403,
+          "afterSeen": 1403,
+          "beforeFailed": 54,
+          "afterFailed": 54,
+          "beforeRate": 0.03848895224518888,
+          "afterRate": 0.03848895224518888,
+          "rateDelta": 0
+        },
+        {
+          "title": "FLICKERING BUS",
+          "beforeSeen": 1399,
+          "afterSeen": 1399,
+          "beforeFailed": 30,
+          "afterFailed": 30,
+          "beforeRate": 0.021443888491779844,
+          "afterRate": 0.021443888491779844,
+          "rateDelta": 0
+        },
+        {
+          "title": "BEACON SELF-TEST",
+          "beforeSeen": 1386,
+          "afterSeen": 1386,
+          "beforeFailed": 224,
+          "afterFailed": 224,
+          "beforeRate": 0.16161616161616163,
+          "afterRate": 0.16161616161616163,
+          "rateDelta": 0
+        },
+        {
+          "title": "BUS BROWNOUT",
+          "beforeSeen": 1383,
+          "afterSeen": 1383,
+          "beforeFailed": 25,
+          "afterFailed": 25,
+          "beforeRate": 0.018076644974692697,
+          "afterRate": 0.018076644974692697,
+          "rateDelta": 0
+        },
+        {
+          "title": "RECYCLER TASTE",
+          "beforeSeen": 1378,
+          "afterSeen": 1378,
+          "beforeFailed": 0,
+          "afterFailed": 0,
+          "beforeRate": 0,
+          "afterRate": 0,
+          "rateDelta": 0
+        },
+        {
+          "title": "SCRUBBER SATURATION",
+          "beforeSeen": 1378,
+          "afterSeen": 1378,
+          "beforeFailed": 2,
+          "afterFailed": 2,
+          "beforeRate": 0.001451378809869376,
+          "afterRate": 0.001451378809869376,
+          "rateDelta": 0
+        },
+        {
+          "title": "SPACE ADAPTATION",
+          "beforeSeen": 1377,
+          "afterSeen": 1377,
+          "beforeFailed": 1,
+          "afterFailed": 1,
+          "beforeRate": 0.0007262164124909223,
+          "afterRate": 0.0007262164124909223,
+          "rateDelta": 0
+        },
+        {
+          "title": "DUST STRIKES",
+          "beforeSeen": 1354,
+          "afterSeen": 1354,
+          "beforeFailed": 121,
+          "afterFailed": 121,
+          "beforeRate": 0.08936484490398819,
+          "afterRate": 0.08936484490398819,
+          "rateDelta": 0
+        },
+        {
+          "title": "DISTANT HAIL",
+          "beforeSeen": 1349,
+          "afterSeen": 1349,
+          "beforeFailed": 204,
+          "afterFailed": 204,
+          "beforeRate": 0.15122312824314307,
+          "afterRate": 0.15122312824314307,
+          "rateDelta": 0
+        },
+        {
+          "title": "LIFE SUPPORT CONTAMINATION",
+          "beforeSeen": 1313,
+          "afterSeen": 1313,
+          "beforeFailed": 1204,
+          "afterFailed": 1204,
+          "beforeRate": 0.916984006092917,
+          "afterRate": 0.916984006092917,
+          "rateDelta": 0
+        },
+        {
+          "title": "SEAL DEGRADATION",
+          "beforeSeen": 1427,
+          "afterSeen": 1427,
+          "beforeFailed": 239,
+          "afterFailed": 240,
+          "beforeRate": 0.16748423265592152,
+          "afterRate": 0.16818500350385424,
+          "rateDelta": 0.0007007708479327135
+        },
+        {
+          "title": "CO₂ BUILDUP",
+          "beforeSeen": 1398,
+          "afterSeen": 1398,
+          "beforeFailed": 367,
+          "afterFailed": 368,
+          "beforeRate": 0.2625178826895565,
+          "afterRate": 0.2632331902718169,
+          "rateDelta": 0.0007153075822604049
+        },
+        {
+          "title": "FUEL FILTER CLOG",
+          "beforeSeen": 1349,
+          "afterSeen": 1349,
+          "beforeFailed": 329,
+          "afterFailed": 330,
+          "beforeRate": 0.24388435878428466,
+          "afterRate": 0.2446256486286138,
+          "rateDelta": 0.0007412898443291405
+        },
+        {
+          "title": "SENSOR FAULT ALARM",
+          "beforeSeen": 8051,
+          "afterSeen": 8048,
+          "beforeFailed": 2836,
+          "afterFailed": 2845,
+          "beforeRate": 0.35225437833809464,
+          "afterRate": 0.35350397614314116,
+          "rateDelta": 0.0012495978050465206
+        },
+        {
+          "title": "BUS LOAD SHED",
+          "beforeSeen": 8054,
+          "afterSeen": 8046,
+          "beforeFailed": 388,
+          "afterFailed": 399,
+          "beforeRate": 0.048174819965234664,
+          "afterRate": 0.04958985831469053,
+          "rateDelta": 0.0014150383494558674
+        },
+        {
+          "title": "FABRICATOR JAM",
+          "beforeSeen": 8053,
+          "afterSeen": 8050,
+          "beforeFailed": 5020,
+          "afterFailed": 5032,
+          "beforeRate": 0.6233701726064821,
+          "afterRate": 0.6250931677018634,
+          "rateDelta": 0.001722995095381319
+        },
+        {
+          "title": "CABIN PRESSURE DROP",
+          "beforeSeen": 8136,
+          "afterSeen": 8133,
+          "beforeFailed": 5011,
+          "afterFailed": 5026,
+          "beforeRate": 0.6159046214355949,
+          "afterRate": 0.6179761465633837,
+          "rateDelta": 0.0020715251277888536
+        },
+        {
+          "title": "DEBRIS FIELD",
+          "beforeSeen": 1327,
+          "afterSeen": 1340,
+          "beforeFailed": 1118,
+          "afterFailed": 1134,
+          "beforeRate": 0.8425018839487566,
+          "afterRate": 0.8462686567164179,
+          "rateDelta": 0.0037667727676613527
+        },
+        {
+          "title": "ELECTRICAL SHORT",
+          "beforeSeen": 8049,
+          "afterSeen": 8049,
+          "beforeFailed": 3535,
+          "afterFailed": 3566,
+          "beforeRate": 0.43918499192446264,
+          "afterRate": 0.4430364020375202,
+          "rateDelta": 0.003851410113057563
+        },
+        {
+          "title": "COOLANT LOOP RUPTURE",
+          "beforeSeen": 8057,
+          "afterSeen": 8056,
+          "beforeFailed": 5754,
+          "afterFailed": 5787,
+          "beforeRate": 0.7141615986099045,
+          "afterRate": 0.7183465739821251,
+          "rateDelta": 0.004184975372220623
+        },
+        {
+          "title": "DIRECT RETURN",
+          "beforeSeen": 9428,
+          "afterSeen": 9418,
+          "beforeFailed": 8265,
+          "afterFailed": 8305,
+          "beforeRate": 0.8766440390326686,
+          "afterRate": 0.8818220428965811,
+          "rateDelta": 0.005178003863912428
+        },
+        {
+          "title": "NAVIGATION DRIFT",
+          "beforeSeen": 1341,
+          "afterSeen": 1341,
+          "beforeFailed": 1081,
+          "afterFailed": 1088,
+          "beforeRate": 0.8061148396718867,
+          "afterRate": 0.8113348247576435,
+          "rateDelta": 0.005219985085756829
+        },
+        {
+          "title": "BATTERY DEGRADATION",
+          "beforeSeen": 8033,
+          "afterSeen": 8028,
+          "beforeFailed": 3446,
+          "afterFailed": 3486,
+          "beforeRate": 0.4289804556205652,
+          "afterRate": 0.4342301943198804,
+          "rateDelta": 0.005249738699315221
+        },
+        {
+          "title": "COARSE TRIM BURN",
+          "beforeSeen": 1327,
+          "afterSeen": 1335,
+          "beforeFailed": 386,
+          "afterFailed": 396,
+          "beforeRate": 0.2908816880180859,
+          "afterRate": 0.2966292134831461,
+          "rateDelta": 0.005747525465060188
+        },
+        {
+          "title": "GNC FINAL ALIGNMENT",
+          "beforeSeen": 1418,
+          "afterSeen": 1409,
+          "beforeFailed": 1316,
+          "afterFailed": 1323,
+          "beforeRate": 0.9280677009873061,
+          "afterRate": 0.9389638041163946,
+          "rateDelta": 0.010896103129088508
+        },
+        {
+          "title": "THRUSTER MISFIRE",
+          "beforeSeen": 8101,
+          "afterSeen": 8100,
+          "beforeFailed": 4979,
+          "afterFailed": 5074,
+          "beforeRate": 0.6146154795704234,
+          "afterRate": 0.6264197530864197,
+          "rateDelta": 0.011804273515996333
+        },
+        {
+          "title": "ATMOSPHERIC INTERFACE",
+          "beforeSeen": 1349,
+          "afterSeen": 1342,
+          "beforeFailed": 1049,
+          "afterFailed": 1063,
+          "beforeRate": 0.7776130467012602,
+          "afterRate": 0.7921013412816692,
+          "rateDelta": 0.014488294580409011
+        },
+        {
+          "title": "RE-ENTRY",
+          "beforeSeen": 5977,
+          "afterSeen": 5900,
+          "beforeFailed": 5724,
+          "afterFailed": 5771,
+          "beforeRate": 0.9576710724443701,
+          "afterRate": 0.9781355932203389,
+          "rateDelta": 0.02046452077596883
+        },
+        {
+          "title": "FIRST TURBULENCE",
+          "beforeSeen": 1313,
+          "afterSeen": 1308,
+          "beforeFailed": 449,
+          "afterFailed": 480,
+          "beforeRate": 0.341964965727342,
+          "afterRate": 0.3669724770642202,
+          "rateDelta": 0.02500751133687823
+        },
+        {
+          "title": "HEAT SHIELD STRESS",
+          "beforeSeen": 1306,
+          "afterSeen": 1301,
+          "beforeFailed": 983,
+          "afterFailed": 1019,
+          "beforeRate": 0.7526799387442573,
+          "afterRate": 0.7832436587240584,
+          "rateDelta": 0.03056371997980112
+        },
+        {
+          "title": "CHUTE & RECOVERY DEPLOY",
+          "beforeSeen": 1268,
+          "afterSeen": 1265,
+          "beforeFailed": 1094,
+          "afterFailed": 1132,
+          "beforeRate": 0.862776025236593,
+          "afterRate": 0.8948616600790514,
+          "rateDelta": 0.03208563484245841
+        },
+        {
+          "title": "RADIATION STORM",
+          "beforeSeen": 1303,
+          "afterSeen": 1293,
+          "beforeFailed": 753,
+          "afterFailed": 789,
+          "beforeRate": 0.577897160399079,
+          "afterRate": 0.6102088167053364,
+          "rateDelta": 0.03231165630625743
+        },
+        {
+          "title": "MICROMETEOROID IMPACT",
+          "beforeSeen": 8104,
+          "afterSeen": 8107,
+          "beforeFailed": 5315,
+          "afterFailed": 5624,
+          "beforeRate": 0.6558489634748272,
+          "afterRate": 0.6937214752682866,
+          "rateDelta": 0.03787251179345941
+        },
+        {
+          "title": "RE-ENTRY VECTOR TRIM",
+          "beforeSeen": 1281,
+          "afterSeen": 1292,
+          "beforeFailed": 989,
+          "afterFailed": 1088,
+          "beforeRate": 0.7720530835284933,
+          "afterRate": 0.8421052631578947,
+          "rateDelta": 0.07005217962940136
+        }
+      ]
+    },
+    "hard": {
+      "before": {
+        "winRate": 0.1434,
+        "winConfidence95": [
+          0.13666747905036294,
+          0.15040639864878017
+        ],
+        "ordinaryTurns": 19.4584,
+        "responses": 20.9861,
+        "ordinaryFailures": {
+          "seen": 192683,
+          "failed": 81640,
+          "rate": 0.42370110492363106
+        },
+        "losses": {
+          "CONTACT LOST — CREW LOST": 8186,
+          "CONTACT LOST — TRAJECTORY MISSED": 378,
+          "SHIP REDUCED TO A HULK": 2
+        },
+        "suffocationLosses": 3896,
+        "lossPhases": {
+          "2": 4723,
+          "3": 3843
+        },
+        "failedByStage5": 0,
+        "winningScore": 31.357043235704325,
+        "fitness": 0.6835176511323547,
+        "lowFitnessTurns": 5.6024
+      },
+      "after": {
+        "winRate": 0.1349,
+        "winConfidence95": [
+          0.12834433279493243,
+          0.14173607311633266
+        ],
+        "ordinaryTurns": 19.4321,
+        "responses": 20.9599,
+        "ordinaryFailures": {
+          "seen": 192505,
+          "failed": 81430,
+          "rate": 0.4230019999480533
+        },
+        "losses": {
+          "CONTACT LOST — CREW LOST": 8265,
+          "CONTACT LOST — TRAJECTORY MISSED": 382,
+          "SHIP REDUCED TO A HULK": 4
+        },
+        "suffocationLosses": 3904,
+        "lossPhases": {
+          "2": 4722,
+          "3": 3929
+        },
+        "failedByStage5": 0,
+        "winningScore": 30.93921423276501,
+        "fitness": 0.6829333258712168,
+        "lowFitnessTurns": 5.6391
+      },
+      "delta": {
+        "wins": {
+          "mean": -0.0085,
+          "approximate95": [
+            -0.013498355609186108,
+            -0.003501644390813894
+          ]
+        },
+        "ordinaryTurns": {
+          "mean": -0.0263,
+          "approximate95": [
+            -0.05630812305217353,
+            0.0037081230521735266
+          ]
+        }
+      },
+      "crisisChanges": [
+        {
+          "title": "WHEEL SPEED FAULT",
+          "beforeSeen": 1431,
+          "afterSeen": 1431,
+          "beforeFailed": 384,
+          "afterFailed": 210,
+          "beforeRate": 0.26834381551362685,
+          "afterRate": 0.14675052410901468,
+          "rateDelta": -0.12159329140461217
+        },
+        {
+          "title": "VALVE CHATTER",
+          "beforeSeen": 1408,
+          "afterSeen": 1408,
+          "beforeFailed": 352,
+          "afterFailed": 206,
+          "beforeRate": 0.25,
+          "afterRate": 0.14630681818181818,
+          "rateDelta": -0.10369318181818182
+        },
+        {
+          "title": "SOLAR WEATHER WATCH",
+          "beforeSeen": 1310,
+          "afterSeen": 1310,
+          "beforeFailed": 214,
+          "afterFailed": 158,
+          "beforeRate": 0.1633587786259542,
+          "afterRate": 0.12061068702290076,
+          "rateDelta": -0.04274809160305343
+        },
+        {
+          "title": "THERMAL OVERLOAD",
+          "beforeSeen": 607,
+          "afterSeen": 588,
+          "beforeFailed": 279,
+          "afterFailed": 248,
+          "beforeRate": 0.4596375617792422,
+          "afterRate": 0.4217687074829932,
+          "rateDelta": -0.03786885429624898
+        },
+        {
+          "title": "FLARE WARNING",
+          "beforeSeen": 1410,
+          "afterSeen": 1410,
+          "beforeFailed": 206,
+          "afterFailed": 154,
+          "beforeRate": 0.14609929078014183,
+          "afterRate": 0.10921985815602837,
+          "rateDelta": -0.03687943262411346
+        },
+        {
+          "title": "FINAL POWER SHUNT",
+          "beforeSeen": 568,
+          "afterSeen": 576,
+          "beforeFailed": 252,
+          "afterFailed": 235,
+          "beforeRate": 0.44366197183098594,
+          "afterRate": 0.4079861111111111,
+          "rateDelta": -0.03567586071987483
+        },
+        {
+          "title": "PRECISION NAVIGATION",
+          "beforeSeen": 571,
+          "afterSeen": 556,
+          "beforeFailed": 374,
+          "afterFailed": 349,
+          "beforeRate": 0.6549912434325744,
+          "afterRate": 0.6276978417266187,
+          "rateDelta": -0.027293401705955733
+        },
+        {
+          "title": "COARSE TRIM BURN",
+          "beforeSeen": 624,
+          "afterSeen": 612,
+          "beforeFailed": 189,
+          "afterFailed": 171,
+          "beforeRate": 0.30288461538461536,
+          "afterRate": 0.27941176470588236,
+          "rateDelta": -0.023472850678733004
+        },
+        {
+          "title": "CREW FATIGUE",
+          "beforeSeen": 634,
+          "afterSeen": 634,
+          "beforeFailed": 422,
+          "afterFailed": 411,
+          "beforeRate": 0.6656151419558359,
+          "afterRate": 0.6482649842271293,
+          "rateDelta": -0.017350157728706628
+        },
+        {
+          "title": "LIFE SUPPORT CONTAMINATION",
+          "beforeSeen": 603,
+          "afterSeen": 583,
+          "beforeFailed": 556,
+          "afterFailed": 529,
+          "beforeRate": 0.9220563847429519,
+          "afterRate": 0.9073756432246999,
+          "rateDelta": -0.01468074151825205
+        },
+        {
+          "title": "EPHEMERIS UPDATE",
+          "beforeSeen": 1356,
+          "afterSeen": 1356,
+          "beforeFailed": 343,
+          "afterFailed": 325,
+          "beforeRate": 0.2529498525073746,
+          "afterRate": 0.23967551622418878,
+          "rateDelta": -0.013274336283185834
+        },
+        {
+          "title": "SHIELD HOTSPOT",
+          "beforeSeen": 7222,
+          "afterSeen": 7215,
+          "beforeFailed": 2221,
+          "afterFailed": 2140,
+          "beforeRate": 0.3075325394627527,
+          "afterRate": 0.2966042966042966,
+          "rateDelta": -0.010928242858456116
+        },
+        {
+          "title": "COMPUTER REBOOT LOOP",
+          "beforeSeen": 7228,
+          "afterSeen": 7217,
+          "beforeFailed": 4033,
+          "afterFailed": 3968,
+          "beforeRate": 0.5579690094078583,
+          "afterRate": 0.549812941665512,
+          "rateDelta": -0.00815606774234634
+        },
+        {
+          "title": "NAVIGATION DRIFT",
+          "beforeSeen": 608,
+          "afterSeen": 588,
+          "beforeFailed": 506,
+          "afterFailed": 485,
+          "beforeRate": 0.8322368421052632,
+          "afterRate": 0.8248299319727891,
+          "rateDelta": -0.007406910132474076
+        },
+        {
+          "title": "GYROSCOPE FAULT",
+          "beforeSeen": 1438,
+          "afterSeen": 1438,
+          "beforeFailed": 863,
+          "afterFailed": 856,
+          "beforeRate": 0.6001390820584145,
+          "afterRate": 0.5952712100139083,
+          "rateDelta": -0.004867872044506227
+        },
+        {
+          "title": "OXYGEN SCRUBBER FAILURE",
+          "beforeSeen": 7607,
+          "afterSeen": 7596,
+          "beforeFailed": 4923,
+          "afterFailed": 4886,
+          "beforeRate": 0.6471670829499145,
+          "afterRate": 0.643233280674039,
+          "rateDelta": -0.003933802275875586
+        },
+        {
+          "title": "SIGNAL INTERFERENCE",
+          "beforeSeen": 7291,
+          "afterSeen": 7271,
+          "beforeFailed": 4005,
+          "afterFailed": 3972,
+          "beforeRate": 0.5493073652448224,
+          "afterRate": 0.5462797414385917,
+          "rateDelta": -0.0030276238062306726
+        },
+        {
+          "title": "SOLAR FLARE",
+          "beforeSeen": 7499,
+          "afterSeen": 7521,
+          "beforeFailed": 5517,
+          "afterFailed": 5513,
+          "beforeRate": 0.7356980930790772,
+          "afterRate": 0.7330142268315384,
+          "rateDelta": -0.002683866247538802
+        },
+        {
+          "title": "SENSOR GLINT",
+          "beforeSeen": 1324,
+          "afterSeen": 1324,
+          "beforeFailed": 190,
+          "afterFailed": 187,
+          "beforeRate": 0.14350453172205438,
+          "afterRate": 0.14123867069486404,
+          "rateDelta": -0.002265861027190341
+        },
+        {
+          "title": "DOOR SEAL HISS",
+          "beforeSeen": 1390,
+          "afterSeen": 1390,
+          "beforeFailed": 220,
+          "afterFailed": 217,
+          "beforeRate": 0.15827338129496402,
+          "afterRate": 0.15611510791366906,
+          "rateDelta": -0.002158273381294956
+        },
+        {
+          "title": "CHARGE CONTROLLER FAULT",
+          "beforeSeen": 1409,
+          "afterSeen": 1409,
+          "beforeFailed": 153,
+          "afterFailed": 150,
+          "beforeRate": 0.10858765081618169,
+          "afterRate": 0.10645848119233499,
+          "rateDelta": -0.0021291696238466967
+        },
+        {
+          "title": "COMMUNICATIONS ACQUISITION",
+          "beforeSeen": 605,
+          "afterSeen": 595,
+          "beforeFailed": 352,
+          "afterFailed": 345,
+          "beforeRate": 0.5818181818181818,
+          "afterRate": 0.5798319327731093,
+          "rateDelta": -0.0019862490450724968
+        },
+        {
+          "title": "INNER SYSTEM SLINGSHOT",
+          "beforeSeen": 10000,
+          "afterSeen": 10000,
+          "beforeFailed": 6522,
+          "afterFailed": 6504,
+          "beforeRate": 0.6522,
+          "afterRate": 0.6504,
+          "rateDelta": -0.0018000000000000238
+        },
+        {
+          "title": "BATTERY DEGRADATION",
+          "beforeSeen": 7221,
+          "afterSeen": 7217,
+          "beforeFailed": 3145,
+          "afterFailed": 3131,
+          "beforeRate": 0.4355352444259798,
+          "afterRate": 0.43383677428294304,
+          "rateDelta": -0.0016984701430367566
+        },
+        {
+          "title": "PATCHED FIRMWARE",
+          "beforeSeen": 1343,
+          "afterSeen": 1343,
+          "beforeFailed": 199,
+          "afterFailed": 197,
+          "beforeRate": 0.14817572598659717,
+          "afterRate": 0.14668652271034996,
+          "rateDelta": -0.001489203276247214
+        },
+        {
+          "title": "SHIPBOARD COLD",
+          "beforeSeen": 1358,
+          "afterSeen": 1358,
+          "beforeFailed": 6,
+          "afterFailed": 4,
+          "beforeRate": 0.004418262150220913,
+          "afterRate": 0.0029455081001472753,
+          "rateDelta": -0.0014727540500736377
+        },
+        {
+          "title": "SMOKE IN THE WIRING LOOM",
+          "beforeSeen": 1381,
+          "afterSeen": 1381,
+          "beforeFailed": 219,
+          "afterFailed": 217,
+          "beforeRate": 0.15858073859522084,
+          "afterRate": 0.15713251267197684,
+          "rateDelta": -0.0014482259232440065
+        },
+        {
+          "title": "FUEL LINE BLOCKAGE",
+          "beforeSeen": 1402,
+          "afterSeen": 1402,
+          "beforeFailed": 138,
+          "afterFailed": 136,
+          "beforeRate": 0.09843081312410841,
+          "afterRate": 0.09700427960057062,
+          "rateDelta": -0.0014265335235377902
+        },
+        {
+          "title": "FIRE IN THE AVIONICS BAY",
+          "beforeSeen": 1404,
+          "afterSeen": 1404,
+          "beforeFailed": 622,
+          "afterFailed": 620,
+          "beforeRate": 0.443019943019943,
+          "afterRate": 0.4415954415954416,
+          "rateDelta": -0.001424501424501401
+        },
+        {
+          "title": "CELL IMBALANCE",
+          "beforeSeen": 1436,
+          "afterSeen": 1436,
+          "beforeFailed": 63,
+          "afterFailed": 61,
+          "beforeRate": 0.04387186629526462,
+          "afterRate": 0.04247910863509749,
+          "rateDelta": -0.0013927576601671307
+        },
+        {
+          "title": "ELECTRICAL SHORT",
+          "beforeSeen": 7266,
+          "afterSeen": 7245,
+          "beforeFailed": 3227,
+          "afterFailed": 3208,
+          "beforeRate": 0.4441233140655106,
+          "afterRate": 0.4427881297446515,
+          "rateDelta": -0.0013351843208591063
+        },
+        {
+          "title": "CO₂ ACCUMULATION",
+          "beforeSeen": 637,
+          "afterSeen": 632,
+          "beforeFailed": 288,
+          "afterFailed": 285,
+          "beforeRate": 0.4521193092621664,
+          "afterRate": 0.4509493670886076,
+          "rateDelta": -0.0011699421735588134
+        },
+        {
+          "title": "STATIC STORM",
+          "beforeSeen": 1344,
+          "afterSeen": 1344,
+          "beforeFailed": 213,
+          "afterFailed": 212,
+          "beforeRate": 0.15848214285714285,
+          "afterRate": 0.15773809523809523,
+          "rateDelta": -0.0007440476190476164
+        },
+        {
+          "title": "SLEEP DEFICIT",
+          "beforeSeen": 1373,
+          "afterSeen": 1373,
+          "beforeFailed": 2,
+          "afterFailed": 1,
+          "beforeRate": 0.0014566642388929353,
+          "afterRate": 0.0007283321194464676,
+          "rateDelta": -0.0007283321194464676
+        },
+        {
+          "title": "SPARSE DEBRIS",
+          "beforeSeen": 1384,
+          "afterSeen": 1384,
+          "beforeFailed": 108,
+          "afterFailed": 107,
+          "beforeRate": 0.07803468208092486,
+          "afterRate": 0.0773121387283237,
+          "rateDelta": -0.0007225433526011626
+        },
+        {
+          "title": "SCRUBBER RATTLE",
+          "beforeSeen": 1389,
+          "afterSeen": 1389,
+          "beforeFailed": 226,
+          "afterFailed": 225,
+          "beforeRate": 0.1627069834413247,
+          "afterRate": 0.16198704103671707,
+          "rateDelta": -0.0007199424046076264
+        },
+        {
+          "title": "BATTERY SURGE",
+          "beforeSeen": 1407,
+          "afterSeen": 1407,
+          "beforeFailed": 205,
+          "afterFailed": 204,
+          "beforeRate": 0.1457000710732054,
+          "afterRate": 0.14498933901918976,
+          "rateDelta": -0.0007107320540156448
+        },
+        {
+          "title": "COOLANT SEEP",
+          "beforeSeen": 1414,
+          "afterSeen": 1414,
+          "beforeFailed": 223,
+          "afterFailed": 222,
+          "beforeRate": 0.15770862800565771,
+          "afterRate": 0.157001414427157,
+          "rateDelta": -0.0007072135785007039
+        },
+        {
+          "title": "STAR SIGHTING",
+          "beforeSeen": 1442,
+          "afterSeen": 1442,
+          "beforeFailed": 76,
+          "afterFailed": 76,
+          "beforeRate": 0.052704576976421634,
+          "afterRate": 0.052704576976421634,
+          "rateDelta": 0
+        },
+        {
+          "title": "FEED SPOOL SNAG",
+          "beforeSeen": 1439,
+          "afterSeen": 1439,
+          "beforeFailed": 132,
+          "afterFailed": 132,
+          "beforeRate": 0.0917303683113273,
+          "afterRate": 0.0917303683113273,
+          "rateDelta": 0
+        },
+        {
+          "title": "SCRUBBER OVERDRIVE",
+          "beforeSeen": 1427,
+          "afterSeen": 1427,
+          "beforeFailed": 2,
+          "afterFailed": 2,
+          "beforeRate": 0.001401541695865452,
+          "afterRate": 0.001401541695865452,
+          "rateDelta": 0
+        },
+        {
+          "title": "WARM BUS",
+          "beforeSeen": 1403,
+          "afterSeen": 1403,
+          "beforeFailed": 54,
+          "afterFailed": 54,
+          "beforeRate": 0.03848895224518888,
+          "afterRate": 0.03848895224518888,
+          "rateDelta": 0
+        },
+        {
+          "title": "FLICKERING BUS",
+          "beforeSeen": 1399,
+          "afterSeen": 1399,
+          "beforeFailed": 30,
+          "afterFailed": 30,
+          "beforeRate": 0.021443888491779844,
+          "afterRate": 0.021443888491779844,
+          "rateDelta": 0
+        },
+        {
+          "title": "BEACON SELF-TEST",
+          "beforeSeen": 1386,
+          "afterSeen": 1386,
+          "beforeFailed": 224,
+          "afterFailed": 224,
+          "beforeRate": 0.16161616161616163,
+          "afterRate": 0.16161616161616163,
+          "rateDelta": 0
+        },
+        {
+          "title": "BUS BROWNOUT",
+          "beforeSeen": 1383,
+          "afterSeen": 1383,
+          "beforeFailed": 25,
+          "afterFailed": 25,
+          "beforeRate": 0.018076644974692697,
+          "afterRate": 0.018076644974692697,
+          "rateDelta": 0
+        },
+        {
+          "title": "RECYCLER TASTE",
+          "beforeSeen": 1378,
+          "afterSeen": 1378,
+          "beforeFailed": 0,
+          "afterFailed": 0,
+          "beforeRate": 0,
+          "afterRate": 0,
+          "rateDelta": 0
+        },
+        {
+          "title": "SCRUBBER SATURATION",
+          "beforeSeen": 1378,
+          "afterSeen": 1378,
+          "beforeFailed": 2,
+          "afterFailed": 2,
+          "beforeRate": 0.001451378809869376,
+          "afterRate": 0.001451378809869376,
+          "rateDelta": 0
+        },
+        {
+          "title": "SPACE ADAPTATION",
+          "beforeSeen": 1377,
+          "afterSeen": 1377,
+          "beforeFailed": 1,
+          "afterFailed": 1,
+          "beforeRate": 0.0007262164124909223,
+          "afterRate": 0.0007262164124909223,
+          "rateDelta": 0
+        },
+        {
+          "title": "DUST STRIKES",
+          "beforeSeen": 1354,
+          "afterSeen": 1354,
+          "beforeFailed": 121,
+          "afterFailed": 121,
+          "beforeRate": 0.08936484490398819,
+          "afterRate": 0.08936484490398819,
+          "rateDelta": 0
+        },
+        {
+          "title": "DISTANT HAIL",
+          "beforeSeen": 1349,
+          "afterSeen": 1349,
+          "beforeFailed": 204,
+          "afterFailed": 204,
+          "beforeRate": 0.15122312824314307,
+          "afterRate": 0.15122312824314307,
+          "rateDelta": 0
+        },
+        {
+          "title": "CREW ILLNESS",
+          "beforeSeen": 7338,
+          "afterSeen": 7328,
+          "beforeFailed": 3921,
+          "afterFailed": 3916,
+          "beforeRate": 0.5343417825020441,
+          "afterRate": 0.5343886462882096,
+          "rateDelta": 0.00004686378616547415
+        },
+        {
+          "title": "FABRICATOR JAM",
+          "beforeSeen": 7328,
+          "afterSeen": 7314,
+          "beforeFailed": 4486,
+          "afterFailed": 4480,
+          "beforeRate": 0.6121724890829694,
+          "afterRate": 0.6125239267158873,
+          "rateDelta": 0.00035143763291789476
+        },
+        {
+          "title": "SEAL DEGRADATION",
+          "beforeSeen": 1427,
+          "afterSeen": 1427,
+          "beforeFailed": 239,
+          "afterFailed": 240,
+          "beforeRate": 0.16748423265592152,
+          "afterRate": 0.16818500350385424,
+          "rateDelta": 0.0007007708479327135
+        },
+        {
+          "title": "CO₂ BUILDUP",
+          "beforeSeen": 1398,
+          "afterSeen": 1398,
+          "beforeFailed": 367,
+          "afterFailed": 368,
+          "beforeRate": 0.2625178826895565,
+          "afterRate": 0.2632331902718169,
+          "rateDelta": 0.0007153075822604049
+        },
+        {
+          "title": "FUEL FILTER CLOG",
+          "beforeSeen": 1349,
+          "afterSeen": 1349,
+          "beforeFailed": 329,
+          "afterFailed": 330,
+          "beforeRate": 0.24388435878428466,
+          "afterRate": 0.2446256486286138,
+          "rateDelta": 0.0007412898443291405
+        },
+        {
+          "title": "HULL MICROPUNCTURE",
+          "beforeSeen": 7272,
+          "afterSeen": 7268,
+          "beforeFailed": 4281,
+          "afterFailed": 4287,
+          "beforeRate": 0.5886963696369637,
+          "afterRate": 0.5898458998348927,
+          "rateDelta": 0.0011495301979289607
+        },
+        {
+          "title": "ZERO-G ADAPTATION SICKNESS",
+          "beforeSeen": 7388,
+          "afterSeen": 7390,
+          "beforeFailed": 3784,
+          "afterFailed": 3797,
+          "beforeRate": 0.5121819166215484,
+          "afterRate": 0.5138024357239512,
+          "rateDelta": 0.0016205191024027954
+        },
+        {
+          "title": "RECOVERY BEACON",
+          "beforeSeen": 590,
+          "afterSeen": 585,
+          "beforeFailed": 364,
+          "afterFailed": 362,
+          "beforeRate": 0.6169491525423729,
+          "afterRate": 0.6188034188034188,
+          "rateDelta": 0.0018542662610459004
+        },
+        {
+          "title": "SENSOR FAULT ALARM",
+          "beforeSeen": 7256,
+          "afterSeen": 7252,
+          "beforeFailed": 2627,
+          "afterFailed": 2641,
+          "beforeRate": 0.362045203969129,
+          "afterRate": 0.3641753998896856,
+          "rateDelta": 0.0021301959205566323
+        },
+        {
+          "title": "REACTOR TRIP",
+          "beforeSeen": 7203,
+          "afterSeen": 7198,
+          "beforeFailed": 1397,
+          "afterFailed": 1412,
+          "beforeRate": 0.19394696654171872,
+          "afterRate": 0.19616560155598778,
+          "rateDelta": 0.0022186350142690547
+        },
+        {
+          "title": "BUS LOAD SHED",
+          "beforeSeen": 7166,
+          "afterSeen": 7175,
+          "beforeFailed": 323,
+          "afterFailed": 341,
+          "beforeRate": 0.045073960368406364,
+          "afterRate": 0.04752613240418119,
+          "rateDelta": 0.002452172035774823
+        },
+        {
+          "title": "CABIN PRESSURE DROP",
+          "beforeSeen": 7502,
+          "afterSeen": 7513,
+          "beforeFailed": 4783,
+          "afterFailed": 4812,
+          "beforeRate": 0.6375633164489469,
+          "afterRate": 0.6404898176494077,
+          "rateDelta": 0.002926501200460785
+        },
+        {
+          "title": "GNC FINAL ALIGNMENT",
+          "beforeSeen": 688,
+          "afterSeen": 657,
+          "beforeFailed": 644,
+          "afterFailed": 617,
+          "beforeRate": 0.936046511627907,
+          "afterRate": 0.939117199391172,
+          "rateDelta": 0.003070687763265023
+        },
+        {
+          "title": "DEBRIS FIELD",
+          "beforeSeen": 594,
+          "afterSeen": 594,
+          "beforeFailed": 514,
+          "afterFailed": 516,
+          "beforeRate": 0.8653198653198653,
+          "afterRate": 0.8686868686868687,
+          "rateDelta": 0.0033670033670034627
+        },
+        {
+          "title": "DIRECT RETURN",
+          "beforeSeen": 5277,
+          "afterSeen": 5278,
+          "beforeFailed": 4721,
+          "afterFailed": 4754,
+          "beforeRate": 0.8946371044153876,
+          "afterRate": 0.900719969685487,
+          "rateDelta": 0.00608286527009938
+        },
+        {
+          "title": "THRUSTER MISFIRE",
+          "beforeSeen": 7308,
+          "afterSeen": 7313,
+          "beforeFailed": 4548,
+          "afterFailed": 4634,
+          "beforeRate": 0.6223316912972086,
+          "afterRate": 0.6336660741145904,
+          "rateDelta": 0.01133438281738186
+        },
+        {
+          "title": "COOLANT LOOP RUPTURE",
+          "beforeSeen": 7290,
+          "afterSeen": 7280,
+          "beforeFailed": 5232,
+          "afterFailed": 5361,
+          "beforeRate": 0.7176954732510288,
+          "afterRate": 0.736401098901099,
+          "rateDelta": 0.018705625650070168
+        },
+        {
+          "title": "MICROMETEOROID IMPACT",
+          "beforeSeen": 7410,
+          "afterSeen": 7422,
+          "beforeFailed": 5133,
+          "afterFailed": 5308,
+          "beforeRate": 0.6927125506072874,
+          "afterRate": 0.7151711129075721,
+          "rateDelta": 0.022458562300284646
+        },
+        {
+          "title": "RE-ENTRY",
+          "beforeSeen": 1901,
+          "afterSeen": 1816,
+          "beforeFailed": 1826,
+          "afterFailed": 1789,
+          "beforeRate": 0.9605470804839558,
+          "afterRate": 0.9851321585903083,
+          "rateDelta": 0.024585078106352576
+        },
+        {
+          "title": "ATMOSPHERIC INTERFACE",
+          "beforeSeen": 607,
+          "afterSeen": 607,
+          "beforeFailed": 481,
+          "afterFailed": 497,
+          "beforeRate": 0.7924217462932455,
+          "afterRate": 0.8187808896210873,
+          "rateDelta": 0.02635914332784184
+        },
+        {
+          "title": "HEAT SHIELD STRESS",
+          "beforeSeen": 596,
+          "afterSeen": 594,
+          "beforeFailed": 445,
+          "afterFailed": 466,
+          "beforeRate": 0.7466442953020134,
+          "afterRate": 0.7845117845117845,
+          "rateDelta": 0.03786748920977112
+        },
+        {
+          "title": "FIRST TURBULENCE",
+          "beforeSeen": 575,
+          "afterSeen": 581,
+          "beforeFailed": 185,
+          "afterFailed": 214,
+          "beforeRate": 0.3217391304347826,
+          "afterRate": 0.3683304647160069,
+          "rateDelta": 0.046591334281224306
+        },
+        {
+          "title": "CHUTE & RECOVERY DEPLOY",
+          "beforeSeen": 591,
+          "afterSeen": 590,
+          "beforeFailed": 489,
+          "afterFailed": 520,
+          "beforeRate": 0.8274111675126904,
+          "afterRate": 0.8813559322033898,
+          "rateDelta": 0.05394476469069942
+        },
+        {
+          "title": "RADIATION STORM",
+          "beforeSeen": 593,
+          "afterSeen": 583,
+          "beforeFailed": 313,
+          "afterFailed": 357,
+          "beforeRate": 0.5278246205733558,
+          "afterRate": 0.6123499142367067,
+          "rateDelta": 0.08452529366335093
+        },
+        {
+          "title": "RE-ENTRY VECTOR TRIM",
+          "beforeSeen": 597,
+          "afterSeen": 615,
+          "beforeFailed": 446,
+          "afterFailed": 538,
+          "beforeRate": 0.7470686767169179,
+          "afterRate": 0.8747967479674796,
+          "rateDelta": 0.12772807125056174
+        }
+      ]
+    }
+  },
+  "baselineValidated": true
+}

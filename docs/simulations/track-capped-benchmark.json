@@ -1,0 +1,904 @@
+{
+  "engineSha256": "1c01fbf184d616fb97aab9be383a40152c5426aeaa71a905b8c30b0263b46e4e",
+  "games": 10000,
+  "seedStart": 2000000,
+  "policy": "salvage",
+  "commitmentCost": 0.5,
+  "baseline": false,
+  "flatInjuries": false,
+  "uncappedTracks": false,
+  "trackCapsApplied": true,
+  "balance": {
+    "injuriesByPhase": {
+      "1": {
+        "major": 1,
+        "minor": 0
+      },
+      "2": {
+        "major": 3,
+        "minor": 2
+      },
+      "3": {
+        "major": 5,
+        "minor": 4
+      }
+    },
+    "environmentOxygen": 3,
+    "extraCourseError": 1,
+    "trackCapsByPhase": {
+      "1": {
+        "heat": 2,
+        "oxygen": 2,
+        "course": 1
+      },
+      "2": {
+        "heat": 3,
+        "oxygen": 3,
+        "course": 1
+      },
+      "3": {
+        "heat": 3,
+        "oxygen": 3,
+        "course": 2
+      }
+    }
+  },
+  "profiles": {
+    "major": 0,
+    "minor": 0,
+    "oxygen": 0,
+    "course": 0,
+    "damage": 0,
+    "terminal": 0,
+    "opening": 0,
+    "return": 0
+  },
+  "winRate": 0.2818,
+  "confidence95": [
+    0.27306750941401775,
+    0.29070007363127953
+  ],
+  "wins": 2818,
+  "losses": {
+    "CONTACT LOST — CREW LOST": 6408,
+    "CONTACT LOST — TRAJECTORY MISSED": 774
+  },
+  "crewDeathsFromSuffocation": 983,
+  "meanTurns": 11.0843,
+  "duration": {
+    "unit": "journey stages reached: engine consume counter + 1 for the opening crisis; route burns add responses but not journey stages",
+    "all": {
+      "n": 10000,
+      "mean": 12.0843,
+      "standardDeviation": 1.4950563567972617,
+      "min": 6,
+      "p10": 10,
+      "p25": 11,
+      "median": 12,
+      "p75": 13,
+      "p90": 14,
+      "max": 14,
+      "histogram": {
+        "6": 1,
+        "7": 14,
+        "8": 106,
+        "9": 418,
+        "10": 994,
+        "11": 1969,
+        "12": 1984,
+        "13": 2474,
+        "14": 2040
+      }
+    },
+    "wins": {
+      "n": 2818,
+      "mean": 13.479063165365508,
+      "standardDeviation": 0.6049431833313659,
+      "min": 12,
+      "p10": 13,
+      "p25": 13,
+      "median": 14,
+      "p75": 14,
+      "p90": 14,
+      "max": 14,
+      "histogram": {
+        "12": 164,
+        "13": 1140,
+        "14": 1514
+      }
+    },
+    "losses": {
+      "n": 7182,
+      "mean": 11.537037037037036,
+      "standardDeviation": 1.3805168632881453,
+      "min": 6,
+      "p10": 10,
+      "p25": 11,
+      "median": 12,
+      "p75": 13,
+      "p90": 13,
+      "max": 14,
+      "histogram": {
+        "6": 1,
+        "7": 14,
+        "8": 106,
+        "9": 418,
+        "10": 994,
+        "11": 1969,
+        "12": 1820,
+        "13": 1334,
+        "14": 526
+      }
+    },
+    "responses": {
+      "n": 10000,
+      "mean": 13.8786,
+      "standardDeviation": 1.7647271857143647,
+      "min": 7,
+      "p10": 11,
+      "p25": 13,
+      "median": 14,
+      "p75": 15,
+      "p90": 16,
+      "max": 16,
+      "histogram": {
+        "7": 1,
+        "8": 26,
+        "9": 164,
+        "10": 450,
+        "11": 464,
+        "12": 671,
+        "13": 1972,
+        "14": 1926,
+        "15": 2377,
+        "16": 1949
+      }
+    },
+    "winningResponses": {
+      "n": 2818,
+      "mean": 15.479063165365508,
+      "standardDeviation": 0.6049431833313659,
+      "min": 14,
+      "p10": 15,
+      "p25": 15,
+      "median": 16,
+      "p75": 16,
+      "p90": 16,
+      "max": 16,
+      "histogram": {
+        "14": 164,
+        "15": 1140,
+        "16": 1514
+      }
+    },
+    "losingResponses": {
+      "n": 7182,
+      "mean": 13.25062656641604,
+      "standardDeviation": 1.6712915022517023,
+      "min": 7,
+      "p10": 11,
+      "p25": 13,
+      "median": 13,
+      "p75": 14,
+      "p90": 15,
+      "max": 16,
+      "histogram": {
+        "7": 1,
+        "8": 26,
+        "9": 164,
+        "10": 450,
+        "11": 464,
+        "12": 671,
+        "13": 1972,
+        "14": 1762,
+        "15": 1237,
+        "16": 435
+      }
+    },
+    "lossPhases": {
+      "2": 1074,
+      "3": 6108
+    },
+    "lossByCause": {
+      "CONTACT LOST — CREW LOST": {
+        "n": 6408,
+        "mean": 11.544787765293384,
+        "standardDeviation": 1.4195633478386704,
+        "min": 6,
+        "p10": 10,
+        "p25": 11,
+        "median": 12,
+        "p75": 13,
+        "p90": 13,
+        "max": 14,
+        "histogram": {
+          "6": 1,
+          "7": 11,
+          "8": 104,
+          "9": 415,
+          "10": 895,
+          "11": 1652,
+          "12": 1609,
+          "13": 1195,
+          "14": 526
+        }
+      },
+      "CONTACT LOST — TRAJECTORY MISSED": {
+        "n": 774,
+        "mean": 11.472868217054264,
+        "standardDeviation": 0.9980149759367214,
+        "min": 7,
+        "p10": 10,
+        "p25": 11,
+        "median": 11,
+        "p75": 12,
+        "p90": 13,
+        "max": 13,
+        "histogram": {
+          "7": 3,
+          "8": 2,
+          "9": 3,
+          "10": 99,
+          "11": 317,
+          "12": 211,
+          "13": 139
+        }
+      }
+    },
+    "failedByStage3": 0,
+    "failedByStage5": 0
+  },
+  "recovery": null,
+  "meanWinningScore": 41.05961674946771,
+  "terminalTriggers": [
+    [
+      "Oxygen depletion (Consume)",
+      983
+    ],
+    [
+      "RE-ENTRY",
+      747
+    ],
+    [
+      "CREW FATIGUE",
+      585
+    ],
+    [
+      "PRECISION NAVIGATION",
+      515
+    ],
+    [
+      "GNC FINAL ALIGNMENT",
+      502
+    ],
+    [
+      "RE-ENTRY VECTOR TRIM",
+      377
+    ],
+    [
+      "CHUTE & RECOVERY DEPLOY",
+      370
+    ],
+    [
+      "ATMOSPHERIC INTERFACE",
+      364
+    ],
+    [
+      "RECOVERY BEACON",
+      353
+    ],
+    [
+      "HEAT SHIELD STRESS",
+      333
+    ],
+    [
+      "COMMUNICATIONS ACQUISITION",
+      240
+    ],
+    [
+      "FINAL POWER SHUNT",
+      231
+    ],
+    [
+      "STAR SIGHTING",
+      148
+    ],
+    [
+      "SHIELD HOTSPOT",
+      104
+    ],
+    [
+      "COARSE TRIM BURN",
+      101
+    ],
+    [
+      "FIRST TURBULENCE",
+      99
+    ],
+    [
+      "BEACON SELF-TEST",
+      96
+    ],
+    [
+      "CREW ILLNESS",
+      83
+    ],
+    [
+      "RADIATION STORM",
+      74
+    ],
+    [
+      "SLEEP DEFICIT",
+      70
+    ],
+    [
+      "ZERO-G ADAPTATION SICKNESS",
+      69
+    ],
+    [
+      "SOLAR FLARE",
+      61
+    ],
+    [
+      "LIFE SUPPORT CONTAMINATION",
+      61
+    ],
+    [
+      "NAVIGATION DRIFT",
+      56
+    ],
+    [
+      "FABRICATOR JAM",
+      50
+    ],
+    [
+      "THRUSTER MISFIRE",
+      44
+    ],
+    [
+      "CO₂ ACCUMULATION",
+      44
+    ],
+    [
+      "THERMAL OVERLOAD",
+      43
+    ],
+    [
+      "DEBRIS FIELD",
+      43
+    ],
+    [
+      "DISTANT HAIL",
+      42
+    ],
+    [
+      "OXYGEN SCRUBBER FAILURE",
+      36
+    ],
+    [
+      "MICROMETEOROID IMPACT",
+      34
+    ],
+    [
+      "BATTERY DEGRADATION",
+      33
+    ],
+    [
+      "BUS LOAD SHED",
+      32
+    ],
+    [
+      "SIGNAL INTERFERENCE",
+      30
+    ],
+    [
+      "SPACE ADAPTATION",
+      23
+    ],
+    [
+      "FLARE WARNING",
+      21
+    ],
+    [
+      "SCRUBBER SATURATION",
+      18
+    ],
+    [
+      "RECYCLER TASTE",
+      17
+    ],
+    [
+      "DUST STRIKES",
+      9
+    ],
+    [
+      "VALVE CHATTER",
+      9
+    ],
+    [
+      "CHARGE CONTROLLER FAULT",
+      7
+    ],
+    [
+      "SHIPBOARD COLD",
+      6
+    ],
+    [
+      "SPARSE DEBRIS",
+      4
+    ],
+    [
+      "WARM BUS",
+      4
+    ],
+    [
+      "STATIC STORM",
+      4
+    ],
+    [
+      "SOLAR WEATHER WATCH",
+      4
+    ],
+    [
+      "EPHEMERIS UPDATE",
+      2
+    ],
+    [
+      "SCRUBBER RATTLE",
+      1
+    ]
+  ],
+  "failedCrises": [
+    {
+      "title": "DIRECT RETURN",
+      "failed": 8024,
+      "seen": 8926,
+      "failureRate": 0.8989468967062514
+    },
+    {
+      "title": "INNER SYSTEM SLINGSHOT",
+      "failed": 7029,
+      "seen": 10000,
+      "failureRate": 0.7029
+    },
+    {
+      "title": "RE-ENTRY",
+      "failed": 3501,
+      "seen": 3565,
+      "failureRate": 0.9820476858345021
+    },
+    {
+      "title": "SENSOR FAULT ALARM",
+      "failed": 1502,
+      "seen": 2075,
+      "failureRate": 0.723855421686747
+    },
+    {
+      "title": "LIFE SUPPORT CONTAMINATION",
+      "failed": 1491,
+      "seen": 1591,
+      "failureRate": 0.9371464487743557
+    },
+    {
+      "title": "COMPUTER REBOOT LOOP",
+      "failed": 1487,
+      "seen": 2094,
+      "failureRate": 0.710124164278892
+    },
+    {
+      "title": "CABIN PRESSURE DROP",
+      "failed": 1479,
+      "seen": 2107,
+      "failureRate": 0.7019458946369246
+    },
+    {
+      "title": "CO₂ BUILDUP",
+      "failed": 1469,
+      "seen": 2081,
+      "failureRate": 0.7059106198942816
+    },
+    {
+      "title": "SOLAR FLARE",
+      "failed": 1440,
+      "seen": 1573,
+      "failureRate": 0.9154481881754609
+    },
+    {
+      "title": "NAVIGATION DRIFT",
+      "failed": 1432,
+      "seen": 1553,
+      "failureRate": 0.9220862846104314
+    },
+    {
+      "title": "DEBRIS FIELD",
+      "failed": 1360,
+      "seen": 1542,
+      "failureRate": 0.8819714656290532
+    },
+    {
+      "title": "FABRICATOR JAM",
+      "failed": 1313,
+      "seen": 1548,
+      "failureRate": 0.8481912144702842
+    },
+    {
+      "title": "COOLANT LOOP RUPTURE",
+      "failed": 1264,
+      "seen": 2044,
+      "failureRate": 0.6183953033268101
+    },
+    {
+      "title": "THRUSTER MISFIRE",
+      "failed": 1201,
+      "seen": 1538,
+      "failureRate": 0.7808842652795839
+    },
+    {
+      "title": "ZERO-G ADAPTATION SICKNESS",
+      "failed": 1164,
+      "seen": 1528,
+      "failureRate": 0.7617801047120419
+    },
+    {
+      "title": "GNC FINAL ALIGNMENT",
+      "failed": 1138,
+      "seen": 1190,
+      "failureRate": 0.9563025210084034
+    },
+    {
+      "title": "OXYGEN SCRUBBER FAILURE",
+      "failed": 1135,
+      "seen": 1517,
+      "failureRate": 0.7481872116018458
+    },
+    {
+      "title": "CREW ILLNESS",
+      "failed": 1125,
+      "seen": 1476,
+      "failureRate": 0.7621951219512195
+    },
+    {
+      "title": "THERMAL OVERLOAD",
+      "failed": 1120,
+      "seen": 1603,
+      "failureRate": 0.6986899563318777
+    },
+    {
+      "title": "SIGNAL INTERFERENCE",
+      "failed": 1115,
+      "seen": 1612,
+      "failureRate": 0.6916873449131513
+    },
+    {
+      "title": "CREW FATIGUE",
+      "failed": 1110,
+      "seen": 1161,
+      "failureRate": 0.9560723514211886
+    },
+    {
+      "title": "CO₂ ACCUMULATION",
+      "failed": 1090,
+      "seen": 1543,
+      "failureRate": 0.7064160725858717
+    },
+    {
+      "title": "RADIATION STORM",
+      "failed": 1075,
+      "seen": 1567,
+      "failureRate": 0.6860242501595405
+    },
+    {
+      "title": "HULL MICROPUNCTURE",
+      "failed": 1056,
+      "seen": 2132,
+      "failureRate": 0.49530956848030017
+    },
+    {
+      "title": "FIRE IN THE AVIONICS BAY",
+      "failed": 1042,
+      "seen": 2073,
+      "failureRate": 0.502653159671973
+    },
+    {
+      "title": "RECOVERY BEACON",
+      "failed": 1039,
+      "seen": 1132,
+      "failureRate": 0.9178445229681979
+    },
+    {
+      "title": "GYROSCOPE FAULT",
+      "failed": 1033,
+      "seen": 2072,
+      "failureRate": 0.4985521235521235
+    },
+    {
+      "title": "PRECISION NAVIGATION",
+      "failed": 1028,
+      "seen": 1124,
+      "failureRate": 0.9145907473309609
+    },
+    {
+      "title": "FUEL LINE BLOCKAGE",
+      "failed": 1011,
+      "seen": 2038,
+      "failureRate": 0.49607458292443574
+    },
+    {
+      "title": "ATMOSPHERIC INTERFACE",
+      "failed": 1008,
+      "seen": 1101,
+      "failureRate": 0.9155313351498637
+    },
+    {
+      "title": "HEAT SHIELD STRESS",
+      "failed": 994,
+      "seen": 1093,
+      "failureRate": 0.909423604757548
+    },
+    {
+      "title": "CHUTE & RECOVERY DEPLOY",
+      "failed": 862,
+      "seen": 1142,
+      "failureRate": 0.7548161120840631
+    },
+    {
+      "title": "MICROMETEOROID IMPACT",
+      "failed": 862,
+      "seen": 1556,
+      "failureRate": 0.5539845758354756
+    },
+    {
+      "title": "RE-ENTRY VECTOR TRIM",
+      "failed": 796,
+      "seen": 1108,
+      "failureRate": 0.7184115523465704
+    },
+    {
+      "title": "COMMUNICATIONS ACQUISITION",
+      "failed": 741,
+      "seen": 1059,
+      "failureRate": 0.6997167138810199
+    },
+    {
+      "title": "BATTERY DEGRADATION",
+      "failed": 571,
+      "seen": 1584,
+      "failureRate": 0.36047979797979796
+    },
+    {
+      "title": "FLARE WARNING",
+      "failed": 538,
+      "seen": 1556,
+      "failureRate": 0.34575835475578404
+    },
+    {
+      "title": "SPARSE DEBRIS",
+      "failed": 496,
+      "seen": 1528,
+      "failureRate": 0.32460732984293195
+    },
+    {
+      "title": "FINAL POWER SHUNT",
+      "failed": 482,
+      "seen": 1148,
+      "failureRate": 0.41986062717770034
+    },
+    {
+      "title": "BATTERY SURGE",
+      "failed": 481,
+      "seen": 2054,
+      "failureRate": 0.23417721518987342
+    },
+    {
+      "title": "ELECTRICAL SHORT",
+      "failed": 479,
+      "seen": 2031,
+      "failureRate": 0.23584441161989167
+    },
+    {
+      "title": "REACTOR TRIP",
+      "failed": 448,
+      "seen": 2060,
+      "failureRate": 0.2174757281553398
+    },
+    {
+      "title": "FIRST TURBULENCE",
+      "failed": 363,
+      "seen": 1067,
+      "failureRate": 0.3402061855670103
+    },
+    {
+      "title": "STAR SIGHTING",
+      "failed": 317,
+      "seen": 1053,
+      "failureRate": 0.3010446343779677
+    },
+    {
+      "title": "SCRUBBER OVERDRIVE",
+      "failed": 311,
+      "seen": 2079,
+      "failureRate": 0.14959114959114958
+    },
+    {
+      "title": "BEACON SELF-TEST",
+      "failed": 291,
+      "seen": 1138,
+      "failureRate": 0.2557117750439367
+    },
+    {
+      "title": "SCRUBBER SATURATION",
+      "failed": 286,
+      "seen": 1480,
+      "failureRate": 0.19324324324324324
+    },
+    {
+      "title": "SENSOR GLINT",
+      "failed": 285,
+      "seen": 2139,
+      "failureRate": 0.1332398316970547
+    },
+    {
+      "title": "SHIELD HOTSPOT",
+      "failed": 271,
+      "seen": 1107,
+      "failureRate": 0.24480578139114725
+    },
+    {
+      "title": "COARSE TRIM BURN",
+      "failed": 236,
+      "seen": 1058,
+      "failureRate": 0.22306238185255198
+    },
+    {
+      "title": "STATIC STORM",
+      "failed": 221,
+      "seen": 1600,
+      "failureRate": 0.138125
+    },
+    {
+      "title": "WARM BUS",
+      "failed": 208,
+      "seen": 1513,
+      "failureRate": 0.13747521480502314
+    },
+    {
+      "title": "SPACE ADAPTATION",
+      "failed": 198,
+      "seen": 1552,
+      "failureRate": 0.12757731958762886
+    },
+    {
+      "title": "SOLAR WEATHER WATCH",
+      "failed": 196,
+      "seen": 1556,
+      "failureRate": 0.12596401028277635
+    },
+    {
+      "title": "CHARGE CONTROLLER FAULT",
+      "failed": 169,
+      "seen": 1476,
+      "failureRate": 0.11449864498644986
+    },
+    {
+      "title": "SLEEP DEFICIT",
+      "failed": 163,
+      "seen": 1084,
+      "failureRate": 0.1503690036900369
+    },
+    {
+      "title": "RECYCLER TASTE",
+      "failed": 162,
+      "seen": 1561,
+      "failureRate": 0.10377962844330557
+    },
+    {
+      "title": "FUEL FILTER CLOG",
+      "failed": 160,
+      "seen": 2096,
+      "failureRate": 0.07633587786259542
+    },
+    {
+      "title": "DISTANT HAIL",
+      "failed": 140,
+      "seen": 1074,
+      "failureRate": 0.1303538175046555
+    },
+    {
+      "title": "SHIPBOARD COLD",
+      "failed": 119,
+      "seen": 1490,
+      "failureRate": 0.07986577181208054
+    },
+    {
+      "title": "VALVE CHATTER",
+      "failed": 101,
+      "seen": 1554,
+      "failureRate": 0.064993564993565
+    },
+    {
+      "title": "DUST STRIKES",
+      "failed": 92,
+      "seen": 1544,
+      "failureRate": 0.05958549222797927
+    },
+    {
+      "title": "BUS LOAD SHED",
+      "failed": 66,
+      "seen": 1126,
+      "failureRate": 0.0586145648312611
+    },
+    {
+      "title": "EPHEMERIS UPDATE",
+      "failed": 61,
+      "seen": 1521,
+      "failureRate": 0.040105193951347796
+    },
+    {
+      "title": "SCRUBBER RATTLE",
+      "failed": 36,
+      "seen": 1520,
+      "failureRate": 0.02368421052631579
+    },
+    {
+      "title": "FEED SPOOL SNAG",
+      "failed": 29,
+      "seen": 1548,
+      "failureRate": 0.018733850129198967
+    },
+    {
+      "title": "COOLANT SEEP",
+      "failed": 11,
+      "seen": 2060,
+      "failureRate": 0.005339805825242718
+    },
+    {
+      "title": "PATCHED FIRMWARE",
+      "failed": 10,
+      "seen": 2063,
+      "failureRate": 0.004847309743092583
+    },
+    {
+      "title": "DOOR SEAL HISS",
+      "failed": 4,
+      "seen": 2052,
+      "failureRate": 0.001949317738791423
+    },
+    {
+      "title": "CELL IMBALANCE",
+      "failed": 3,
+      "seen": 2091,
+      "failureRate": 0.0014347202295552368
+    },
+    {
+      "title": "BUS BROWNOUT",
+      "failed": 2,
+      "seen": 2090,
+      "failureRate": 0.0009569377990430622
+    },
+    {
+      "title": "WHEEL SPEED FAULT",
+      "failed": 1,
+      "seen": 2138,
+      "failureRate": 0.0004677268475210477
+    },
+    {
+      "title": "FLICKERING BUS",
+      "failed": 1,
+      "seen": 2115,
+      "failureRate": 0.00047281323877068556
+    },
+    {
+      "title": "SEAL DEGRADATION",
+      "failed": 1,
+      "seen": 2135,
+      "failureRate": 0.000468384074941452
+    },
+    {
+      "title": "SMOKE IN THE WIRING LOOM",
+      "failed": 1,
+      "seen": 2081,
+      "failureRate": 0.0004805382027871216
+    }
+  ],
+  "evaluations": 4759868
+}

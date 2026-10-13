@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RUST BUCKET RETURN</title>
+<style>
+  :root{
+    --bg:#050807; --panel:#0b120b; --panel2:#0e160e; --line:#234026;
+    --grn:#8fdc96; --grn-dim:#4d7a52; --amb:#e0b34a; --red:#e05a4a; --cyan:#6ac8c8;
+    --txt:#a9d9ae; --dim:#5c7d60;
+  }
+  *{box-sizing:border-box}
+  [title]{cursor:help}
+  button[title]{cursor:pointer}
+  button[title]:disabled{cursor:default}
+  body{background:var(--bg);color:var(--txt);font-family:"SFMono-Regular",Consolas,"Courier New",monospace;
+       margin:0;padding:0 0 40px;font-size:14px;line-height:1.45}
+  button{font-family:inherit;cursor:pointer;background:#0d1a0e;color:var(--grn);border:1px solid var(--line);
+         padding:3px 8px;font-size:11px;letter-spacing:.5px;text-transform:uppercase}
+  select{font-family:inherit;background:#0d1a0e;color:var(--grn);border:1px solid var(--line);padding:3px 6px;font-size:11px;cursor:pointer}
+  .difficultybox{color:var(--dim);font-size:11px;white-space:nowrap}
+  button:hover:not(:disabled){background:#16301a;border-color:var(--grn-dim)}
+  button:disabled{opacity:.32;cursor:default}
+  button.on{background:#1e4423;border-color:var(--grn);color:#d6ffd9;box-shadow:0 0 6px #2e5c3366}
+  button.danger{color:var(--amb)}
+  button.danger.on{background:#3a2d10;border-color:var(--amb);color:#ffe1a1}
+  button.sac{color:var(--red)}
+  button.sac.on{background:#3a1410;border-color:var(--red);color:#ffc4bb}
+
+  header{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:10px 16px;border-bottom:1px solid var(--line);
+         background:linear-gradient(#0a120b,#070c08)}
+  header h1{font-size:16px;margin:0;letter-spacing:3px;color:#d6ffd9;text-shadow:0 0 8px #39ff6a33}
+  header .sub{color:var(--dim);font-size:11px;letter-spacing:2px}
+  header .spacer{flex:1}
+  .seedbox{color:var(--dim);font-size:11px}
+  .fitnessdebug{color:var(--grn);font-size:11px;border:1px solid var(--line);padding:4px 8px;font-variant-numeric:tabular-nums;cursor:help}
+  .fitnessdebug[hidden]{display:none}
+
+  #tracks{display:flex;gap:22px;flex-wrap:wrap;padding:10px 16px;border-bottom:1px solid var(--line);background:#070d08}
+  .track{font-size:11px;letter-spacing:1px}
+  .track .label{color:var(--dim);margin-right:6px}
+  .seg{display:inline-block;width:14px;height:12px;border:1px solid var(--line);margin-right:2px;background:#0a100a;vertical-align:middle}
+  .seg.f{background:var(--grn-dim)}
+  .seg.f.warn{background:var(--amb)}
+  .seg.f.crit{background:var(--red);box-shadow:0 0 6px var(--red)}
+  .track .val{margin-left:6px;color:#d6ffd9}
+
+  #main{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:14px;padding:14px 16px}
+  @media(max-width:1000px){#main{grid-template-columns:1fr}}
+
+  .panel{background:var(--panel);border:1px solid var(--line);padding:10px 12px;margin-bottom:14px}
+  .panel h2{font-size:11px;letter-spacing:2px;color:var(--dim);margin:0 0 8px;text-transform:uppercase;
+            border-bottom:1px dashed var(--line);padding-bottom:5px}
+
+  #crisis{border-color:#3d5c40;background:linear-gradient(160deg,#0c150c,#0a120b)}
+  #crisis .cat{color:var(--cyan);font-size:11px;letter-spacing:2px}
+  #crisis .title{font-size:18px;color:#e8ffe9;letter-spacing:2px;margin:2px 0}
+  #crisis .flavor{color:var(--dim);font-style:italic;margin-bottom:8px}
+  #crisis .fx{font-size:12px;margin-top:6px}
+  #crisis .fx .fail{color:var(--red)} #crisis .fx .win{color:var(--grn)}
+  .reqchip{display:inline-block;border:1px solid var(--line);padding:2px 8px;margin:2px 4px 2px 0;font-size:12px}
+  .reqchip.met{border-color:var(--grn-dim);color:#c9f7cf;background:#12270f}
+  .reqchip.unmet{border-color:var(--amb);color:var(--amb)}
+  .reqchip.pickable{cursor:pointer;box-shadow:0 0 8px var(--amb)}
+  .reqstatus{font-size:11px;margin:5px 0}
+  .reqstatus.met{color:var(--grn)}
+  .reqstatus.unmet{color:var(--amb)}
+  .orsep{color:var(--cyan);font-size:11px;letter-spacing:1px;margin:0 2px}
+  #forecast{font-size:11px;color:var(--cyan);letter-spacing:1px;margin-top:8px;border-top:1px dashed var(--line);padding-top:6px}
+
+  #drawn{display:flex;gap:10px;flex-wrap:wrap}
+  .card{background:var(--panel2);border:1px solid var(--line);width:196px;padding:8px;position:relative;cursor:help}
+  .card.op{border-color:#2f5c34}
+  .card.damaged{border-color:var(--amb);background:#141106}
+  .card.damaged .name::after{content:" ⚠ DAMAGED";color:var(--amb);font-size:9px}
+  .card.patched .name::after{content:" ✚ PATCHED";color:var(--cyan);font-size:9px}
+  .card .name{font-size:12px;color:#d6ffd9;letter-spacing:1px;margin-bottom:4px}
+  .card .vals{font-size:10.5px;color:var(--dim);white-space:pre-line;margin-bottom:6px}
+  .card .vals b{color:var(--txt)}
+  .card .modes{display:flex;gap:4px;margin-bottom:5px}
+  .card .modes button{flex:1;padding:3px 0}
+  .card .xactions{display:flex;gap:4px}
+  .card .buildbtn{width:100%;margin-top:5px}
+  .blueprint{border:1px solid var(--line);padding:8px;margin:8px 0;font-size:11px}
+  .blueprint button{float:right;margin-left:8px}
+  .blueprint .details{color:var(--dim);margin-top:3px}
+  .card .xactions button{flex:1;font-size:9px;padding:2px 0}
+  .card .contrib{font-size:10px;color:var(--cyan);min-height:13px;margin-bottom:4px}
+  .card.searmed{cursor:pointer}
+
+  #respondBar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:10px}
+  #totals{font-size:11px;color:var(--dim)}
+  #totals b{color:var(--txt)}
+  #hint{color:var(--amb);font-size:12px;min-height:16px}
+  #resolveBtn{font-size:13px;padding:8px 22px}
+
+  .crewmember{border:1px solid var(--line);padding:6px 8px;margin-bottom:6px;background:var(--panel2)}
+  .crewmember .cname{color:#d6ffd9;font-size:12px;letter-spacing:1px}
+  .crewmember .crole{color:var(--dim);font-size:10px}
+  .crewmember .cability{color:var(--dim);font-size:10.5px;margin:3px 0}
+  .crewmember.injured{border-color:var(--amb)} .crewmember.injured .cname{color:var(--amb)}
+  .crewmember.dead{border-color:var(--red);opacity:.45} .crewmember.dead .cname{color:var(--red);text-decoration:line-through}
+  .badge{font-size:9px;padding:0 5px;border:1px solid currentColor;letter-spacing:1px;vertical-align:1px;margin-left:6px}
+  .b-ok{color:var(--grn)} .b-injured{color:var(--amb)} .b-dead{color:var(--red)}
+
+  #components .comp{display:inline-block;border:1px solid var(--line);padding:3px 10px;margin:0 6px 6px 0;font-size:12px}
+  #components .comp b{color:#d6ffd9}
+  #ongoingList{color:var(--red);font-size:11px;margin-top:4px}
+
+  #log{height:300px;overflow-y:auto;font-size:11px}
+  #log div{padding:2px 0;border-bottom:1px dotted #15241569}
+  #log .t{color:var(--dim)}
+  #log .bad{color:var(--red)} #log .good{color:var(--grn)} #log .sys{color:var(--cyan)}
+
+  #tableauWrap{padding:0 16px}
+  #tableau{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+  .sys{border:1px solid var(--line);padding:6px 8px;font-size:11px;background:var(--panel2)}
+  .sys .sname{letter-spacing:1px;color:#d6ffd9;font-size:11px}
+  .sys .sstate{font-size:9px;letter-spacing:1px}
+  .sys.op .sstate{color:var(--grn)}
+  .sys.damaged{border-color:var(--amb)} .sys.damaged .sstate{color:var(--amb)}
+  .sys.destroyed{border-color:#5c2118;opacity:.55;background:#120a08}
+  .sys.destroyed .sname{text-decoration:line-through;color:var(--red)}
+  .sys.destroyed .sstate{color:var(--red)}
+  .sys .sbtns{margin-top:4px;display:flex;gap:4px}
+  .sys .sbtns button{font-size:8.5px;padding:1px 4px}
+
+  #modalOverlay{position:fixed;inset:0;background:#000c;display:none;align-items:center;justify-content:center;z-index:10}
+  #modalOverlay.show{display:flex}
+  #modal{background:var(--panel);border:1px solid var(--grn-dim);max-width:640px;width:92%;padding:22px 26px;
+         box-shadow:0 0 40px #39ff6a22;max-height:86vh;overflow-y:auto}
+  #modal h2{letter-spacing:3px;color:#e8ffe9;margin-top:0}
+  #modal .opts{display:flex;gap:14px;margin-top:14px}
+  #modal .opt{flex:1;border:1px solid var(--line);padding:12px;cursor:pointer}
+  #modal .opt:hover{border-color:var(--grn);background:#0f1c10}
+  #modal .opt h3{margin:0 0 6px;font-size:13px;letter-spacing:1px}
+  #modal .opt p{font-size:11.5px;color:var(--dim);margin:0}
+  .scoreline{display:flex;justify-content:space-between;border-bottom:1px dotted var(--line);padding:3px 0;font-size:13px}
+  #modal .final{font-size:16px;color:#e8ffe9;margin-top:10px;text-align:right}
+  #modal h2.lost{color:var(--red)} #modal h2.won{color:var(--grn)}
+  .postmortem{margin-top:20px;border-top:1px solid var(--line);padding-top:12px}
+  .postmortem h3{font-size:13px;letter-spacing:1px;margin:14px 0 8px}
+  .postmortem p,.postmortem small{font-size:11px;color:var(--dim)}
+  .postmortem table{width:100%;border-collapse:collapse;font-size:11px}
+  .postmortem th,.postmortem td{text-align:left;vertical-align:top;padding:6px 4px;border-bottom:1px dotted var(--line)}
+  .postmortem th{color:var(--grn)}
+  .postmortem .dead,.postmortem .destroyed{color:var(--red)}
+  .postmortem .injured,.postmortem .damaged{color:var(--amb)}
+  kbd{border:1px solid var(--line);padding:0 4px;font-size:10px}
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>RUST BUCKET RETURN</h1>
+    <div class="sub">ONE-WAY TRIP TO POINT NEMO</div>
+  </div>
+  <div class="spacer"></div>
+  <span class="seedbox" id="seedBox" title="Random seed for this run. Replay or share it via index.html?seed=N"></span>
+  <label class="difficultybox" for="difficultySelect">Difficulty
+    <select id="difficultySelect" title="Changes only added crew injury hits. Changing level requires starting a new run with the same seed.">
+      <option value="easy">Easy</option><option value="normal" selected>Normal</option><option value="hard">Hard</option>
+    </select>
+  </label>
+  <button id="reportBtn" data-act="postmortem" disabled title="Review the final damage bill and crew outcomes">Post-mortem</button>
+  <button data-act="help" title="How to play: turn structure, modes, tracks, scoring">Help / Rules</button>
+  <button data-act="newgame" title="Abandon this run and start a new one with a fresh random seed">New Game</button>
+  <button data-act="restartgame" title="Start over with the current seed and the same opening setup">Restart Game</button>
+  <button id="debugBtn" data-act="debug" aria-pressed="false" title="Toggle asset-only fitness debugging; does not change gameplay">DEBUG</button>
+  <span id="fitnessDebug" class="fitnessdebug" hidden aria-live="polite"></span>
+</header>
+
+<div id="tracks"></div>
+
+<div id="main">
+  <div id="left">
+    <div class="panel" id="crisisPanel">
+      <div id="crisis"></div>
+      <div id="forecast"></div>
+    </div>
+    <div class="panel">
+      <h2>Available Systems — route power &amp; respond</h2>
+      <div id="drawn"></div>
+      <div id="respondBar">
+        <button id="resolveBtn" data-act="resolve" title="Apply committed systems and crew. Meet every requirement in one complete arm; either side of OR is sufficient. Otherwise the crisis's full failure consequences apply.">Resolve Crisis ▸</button>
+        <span id="totals"></span>
+      </div>
+      <div id="hint"></div>
+    </div>
+  </div>
+  <div id="right">
+    <div class="panel"><h2>Crew — 4 core + 2 specialists</h2><div id="crew"></div></div>
+    <div class="panel"><h2>Components &amp; Ship Status</h2><div id="components"></div><div id="ongoingList"></div></div>
+    <div class="panel"><h2>Ship Log</h2><div id="log"></div></div>
+  </div>
+</div>
+
+<div id="tableauWrap">
+  <div class="panel">
+    <h2>Ship Tableau — the vessel you are dismantling</h2>
+    <div id="tableau"></div>
+  </div>
+</div>
+
+<div id="modalOverlay"><div id="modal"></div></div>
+
+<script>
+"use strict";
+/* ============================================================================
+   RUST BUCKET RETURN — single-file implementation of the design in
+   docs/crippled_spaceship_game_design.pdf
+   Domain vocabulary: see CONTEXT.md. Capability set: docs/adr/0001.
+   ==========================================================================*/
+
+// ---------- RNG (seeded, reproducible runs) ----------
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+const urlSeed=new URLSearchParams(location.search).get("seed");
+let SEED=urlSeed?urlSeed|0:(Math.random()*1e9)|0;
+let rng=mulberry32(SEED);
+function shuffle(arr){const a=arr.slice();for(let i=a.length-1;i>0;i--){const j=(rng()*(i+1))|0;[a[i],a[j]]=[a[j],a[i]]}return a}
+function pick(arr){return arr[(rng()*arr.length)|0]}
+
+// ---------- Capabilities ----------
+const CAPS={POW:"POWER",THR:"THRUST",CON:"CONTROL",ENG:"ENGINEERING",NAV:"NAVIGATION",
+            SIG:"SIGNAL",DET:"DETECTION",LFS:"LIFE SUPPORT",CLG:"COOLING",PRO:"PROTECTION"};
+const COMP_TYPES=["Electronics","Wiring","Power Cell"];
+
+// ---------- Systems (16) ----------
+// n/r/s: capability output at Normal / Redline / Sacrifice. nh/rh: heat added. comp: component type.
+// sfx: extra effect on Sacrifice. yield3: cannibalise gives 3 of own type instead of 2 + 1 Wiring.
+const SYSTEM_DEFS=[
+ {id:"reactor",   name:"Main Reactor",        comp:"Power Cell",  n:{POW:3},nh:1, r:{POW:7},rh:3, s:{POW:10},desc:"Primary power plant. The biggest source of POWER, but adds HEAT every time it runs."},
+ {id:"aux",       name:"Auxiliary Reactor",   comp:"Power Cell",  n:{POW:2,CLG:1},nh:1, r:{POW:4,CLG:2},rh:2, s:{POW:6,CLG:3},desc:"Backup power with independent coolant pumps. Adds COOLING as well as POWER; surplus cooling offsets use heat."},
+ {id:"batteries", name:"Batteries",           comp:"Power Cell",  n:{POW:2,CON:1},r:{POW:5,CON:1},s:{POW:6},desc:"Stored charge and regulated actuator power. POWER with no HEAT, plus backup CONTROL at Normal and Redline. Sacrifice is POWER only."},
+ {id:"fuelcells", name:"Fuel Cells",          comp:"Power Cell",  n:{POW:1},      r:{POW:3},rh:1, s:{POW:5},desc:"Chemical power. No HEAT at Normal, a little at Redline."},
+ {id:"engine",    name:"Main Engine",         comp:"Wiring",      n:{THR:3,NAV:1},r:{THR:7,NAV:2},s:{THR:10,NAV:3},desc:"Main propulsion and trajectory correction. Big THRUST for direct-route burns, plus backup NAVIGATION for ordinary responses."},
+ {id:"thrusters", name:"Manoeuvring Thrusters",comp:"Wiring",     n:{THR:1,CON:2,NAV:1},r:{CON:4,NAV:2},s:{THR:4,CON:6,NAV:3},desc:"Attitude and fine trajectory control. A little THRUST, primary CONTROL backed by Batteries, and backup NAVIGATION."},
+ {id:"navcomp",   name:"Navigation Computer", comp:"Electronics", n:{NAV:3,DET:1},r:{NAV:6,DET:2},s:{NAV:8,DET:3},desc:"Plots the course and tracks reference stars: primary NAVIGATION plus backup DETECTION. Surplus NAVIGATION pays down Course Error."},
+ {id:"comms",     name:"Communications",      comp:"Electronics", n:{SIG:3,DET:1},r:{SIG:6,DET:2},s:{SIG:8,DET:3},desc:"Deep-space antenna. Primary SIGNAL plus backup DETECTION through radio ranging; useful throughout the journey, not just on return."},
+ {id:"lifesupport",name:"Life Support",       comp:"Wiring",      n:{LFS:3},      r:{LFS:6},      s:{LFS:8},sfx:{oxygen:2,heal:1},desc:"Air, water and crew support. Sacrifice restores 2 Oxygen and heals one injured crew member. While OPERATIONAL, oxygen holds steady each turn. Damaged: −1 O₂/turn. Destroyed: −2 O₂/turn. Guard it."},
+ {id:"thermal",   name:"Thermal Control",     comp:"Wiring",      n:{CLG:3},      r:{CLG:6},      s:{CLG:8},desc:"Radiators and coolant loops. COOLING spent beyond a crisis's requirement bleeds HEAT off the ship."},
+ {id:"sensors",   name:"Sensors",             comp:"Electronics", n:{DET:3,SIG:1},r:{DET:6,SIG:2},s:{DET:8,SIG:3},desc:"Telescopes and radar: primary DETECTION plus backup SIGNAL through the tracking array."},
+ {id:"fabricator",name:"Fabricator",          comp:"Wiring",      n:{ENG:2,SIG:1},r:{ENG:5,SIG:2},s:{ENG:4,SIG:3},sfx:{components:3},desc:"Machine shop and diagnostic telemetry. ENGINEERING plus backup SIGNAL output, or fabricate a new system for 4 matching components instead of producing capabilities this crisis. Sacrifice shares the fleet's one-off ENGINEERING output with Service Module and yields components."},
+ {id:"shielding", name:"Radiation Shielding", comp:"Wiring",      n:{PRO:2},      r:{PRO:4},      s:{PRO:6},desc:"Storm-shelter plating. Primary PROTECTION, backed by Habitat's protected crew compartments. High-load storms may require both sources or a costly Sacrifice."},
+ {id:"cargo",     name:"Cargo Bay",           comp:"Wiring",      n:{},passive:"Storage — mission data is kept here",r:null,s:null,yield3:true,desc:"Stores and mission data. Has no use modes — its value is what it holds. If destroyed, the mission data is lost."},
+ {id:"habitat",   name:"Habitat",             comp:"Wiring",      n:{PRO:1},passive:"Crew capacity",r:{PRO:2},s:{PRO:2},sfx:{shelter:2},desc:"Protected crew quarters. Backup PROTECTION at Normal, Redline or Sacrifice. Sacrifice also converts it into an emergency shelter that absorbs the next 2 crew injuries."},
+ {id:"service",   name:"Service Module",      comp:"Wiring",      n:{ENG:1,CLG:1,LFS:1},r:{ENG:4,CLG:2,LFS:2},s:{ENG:1},sfx:{components:3},yield3:true,desc:"Workshop and bypass plumbing: modest ENGINEERING plus backup COOLING and LIFE SUPPORT. Its LIFE SUPPORT output does not provide the oxygen passive. Sacrifice provides ENGINEERING and components, but no COOLING or LIFE SUPPORT."},
+];
+const POWER_SYSTEMS=["reactor","aux","batteries","fuelcells"];
+const ENGINE_SYSTEMS=["engine","thrusters"];
+const FABRICATION_COST=4;
+const MULTI_SYSTEMS=["aux","batteries","fuelcells","thrusters","navcomp","lifesupport","thermal","sensors","shielding","service","fabricator"];
+
+// ---------- Crew ----------
+const CREW_DEFS=[
+ {id:"cmdr",  name:"Cmdr. Reyes",   role:"Commander",        ability:"+1 to any one required capability (click a requirement)",tip:"Click her button, then click one requirement chip on the crisis card to add +1 to that capability."},
+ {id:"syseng",name:"Ens. Lindqvist",role:"Systems Engineer",  ability:"One damaged system acts at full Normal value (click its card)",tip:"Click his button, then click a DAMAGED drawn system card — it acts at full Normal value for this crisis instead of half."},
+ {id:"doc",   name:"Dr. Amar",      role:"Doctor",            ability:"Heal one injured crew member, or +2 Life Support",tip:"If another crew member is injured, she heals the first injured one (roster order; she cannot heal herself). If nobody is injured, she instead adds +2 LIFE SUPPORT to this crisis's response."},
+ {id:"spec",name:"Dr. Chen",role:"Mission Specialist",mission:"chen",field:"Astrophysics",action:"Reveal",ability:"Once per game: reveal all future crisis forecasts",tip:"Once per game while healthy: future forecasts show exact crisis identities and requirements. Sensor-blinding penalties still temporarily hide forecasts."},
+];
+
+const MISSION_SPECIALISTS=[
+ CREW_DEFS.find(c=>c.id==="spec"),
+ {mission:"rahman",name:"Dr. Rahman",field:"Materials Science",action:"Gain parts",ability:"Once per game: gain 2 components of a chosen type",tip:"While healthy, choose Electronics, Wiring or Power Cell and gain two of that type. No system commitment required."},
+ {mission:"ortega",name:"Dr. Ortega",field:"Human Factors",action:"Protect crew",ability:"Once per game: absorb the next 2 injury hits",tip:"While healthy, establish emergency procedures absorbing the next two individual injury hits, including suffocation. Stacks with existing emergency protection."},
+ {mission:"nasser",name:"Dr. Nasser",field:"Flight Dynamics",action:"Correct / reveal",ability:"Once per game: −1 Course Error and reveal the next crisis",tip:"While healthy, reduce Course Error by one (minimum zero) and reveal the next queued crisis, even if sensors are blind. The exact reveal lasts only until that card becomes current."},
+ {mission:"kim",name:"Dr. Kim",field:"Operations Research",action:"Redraw systems",ability:"Once per game: redraw systems, optionally keeping 2",tip:"While healthy and before system commitments or fabrication, keep up to two current cards and replace the rest with surviving systems. Prefer fresh cards; reuse discarded cards only if too few survivors remain. Crew uses, bonuses, patches and health do not reset."},
+ {mission:"voss",name:"Dr. Voss",field:"Environmental Science",action:"Clear / +1 Oxygen",ability:"Once per game: clear 1 ongoing penalty and restore 1 Oxygen",tip:"While healthy, choose one ongoing penalty to remove, then restore one Oxygen (maximum six). If there are no penalties, you may still restore Oxygen."},
+ {mission:"adeyemi",name:"Dr. Adeyemi",field:"Space Medicine",action:"Heal 2",ability:"Once per game: heal up to 2 injured crew",tip:"While healthy, heal the first two injured crew in roster order, including the Doctor if injured. Never resurrects dead crew; unusable if nobody is injured."}
+].map(c=>({...c,id:"spec",role:"Mission Specialist"}));
+
+const SYSTEM_SPECIALISTS=[
+ {id:"pilot",name:"Lt. Okafor",role:"Pilot",cap:"CON"},
+ {id:"eng",name:"CPO Vasquez",role:"Engineer",cap:"ENG"},
+ {id:"navigator",name:"Lt. Ilyin",role:"Navigator",cap:"NAV"},
+ {id:"sensorOfficer",name:"Ens. Iqbal",role:"Sensor Specialist",cap:"DET"},
+ {id:"commsOfficer",name:"Lt. Torres",role:"Communications Officer",cap:"SIG"},
+ {id:"lifeTech",name:"CPO Dubois",role:"Life Support Technician",cap:"LFS"},
+ {id:"thermalEng",name:"Lt. Novak",role:"Thermal Engineer",cap:"CLG"},
+ {id:"propulsion",name:"CPO Mensah",role:"Propulsion Engineer",cap:"THR"},
+ {id:"powertech",name:"CPO Petrov",role:"Reactor Technician",cap:"POW"},
+ {id:"safetyOfficer",name:"Lt. Haddad",role:"Safety Officer",cap:"PRO"}
+].map(c=>({...c,ability:"+2 "+CAPS[c.cap]+" on one committed system"+(c.id==="eng"?" · cannibalising yields +1 component":""),
+ tip:"Click this crew member, then choose an output mode on a drawn matching system, or click its card if already committed. The selected mode must produce "+CAPS[c.cap]+". Adds +2 to that system's output this crisis, after damage halving. No bonus without a matching committed mode; changing modes can remove the bonus. Does not prevent Redline damage or Sacrifice destruction."+(c.id==="eng"?" Passive while healthy and in this run's roster: cannibalising yields +1 extra matching component.":"")}));
+
+// ---------- Crises ----------
+// req: capabilities needed. fail/win: effect maps (see applyEffects). cat: forecast category.
+const CRISES={1:[
+ {id:"fire",cat:"ENGINEERING",title:"FIRE IN THE AVIONICS BAY",flavor:"Smoke crawls through the wiring loom. Starve it of air or fight it panel by panel.",req:{ENG:5},fail:{damageRandom:2},win:{}},
+ {id:"coolant",cat:"ENGINEERING",title:"COOLANT LOOP RUPTURE",flavor:"A coolant main has split. Heat is already climbing the bulkheads.",req:{ENG:5,POW:3},fail:{heat:2},win:{repairSystem:"thermal"}},
+ {id:"reactor-trip",cat:"ELECTRICAL",title:"REACTOR TRIP",flavor:"The main reactor has scrammed on a false positive. Bring it back before the bus browns out.",req:{POW:6},fail:{damageSystem:"reactor",heat:1},win:{}},
+ {id:"puncture",cat:"ENVIRONMENT",title:"HULL MICROPUNCTURE",flavor:"Something small and fast has holed the crew deck. The wind sound is getting louder.",req:{ENG:4},fail:{oxygen:-2},win:{oxygen:1}},
+ {id:"short",cat:"ELECTRICAL",title:"ELECTRICAL SHORT",flavor:"A junction box is arcing. Isolate the feed and command the remote breakers before it burns through your spares.",req:{POW:4,SIG:2},fail:{damageRandom:1,components:-2},win:{}},
+ // Preserve 2 total failure injury hits despite the Phase-I OR balance addition being zero.
+ {id:"co2",cat:"ENVIRONMENT",title:"CO₂ BUILDUP",flavor:"The scrubbers are saturating. Headaches. Nausea. Bad decisions.",req:{LFS:6},alt:{ENG:5},fail:{injure:2,ongoing:{key:"co2",text:"CO₂ buildup: −1 O₂ per turn",oxygen:-1,turns:3}},win:{oxygen:1}},
+ {id:"gyro",cat:"NAVIGATION",title:"GYROSCOPE FAULT",flavor:"A reaction wheel is seizing. The stars have begun to drift sideways.",req:{CON:4},fail:{course:1},win:{}},
+ {id:"battery-surge",cat:"ELECTRICAL",title:"BATTERY SURGE",flavor:"Cell three is thermal-runaway adjacent. Vent it or contain it.",req:{POW:5},fail:{damageSystem:"batteries"},win:{}},
+ {id:"pressure",cat:"ENVIRONMENT",title:"CABIN PRESSURE DROP",flavor:"A seal is failing somewhere aft. Keep the air circulating while sensors locate the leaking compartment.",req:{LFS:4,DET:2},fail:{oxygen:-2,injure:1},win:{}},
+ // Preserve major failure pressure when adding an alternative solution.
+ {id:"fuelline",cat:"ENGINEERING",title:"FUEL LINE BLOCKAGE",flavor:"Sludge in the feed line. Clear it mechanically or power a forced backflush before the fuel cells starve.",req:{ENG:5},alt:{POW:7},failureTier:"major",fail:{damageSystem:"fuelcells"},win:{}},
+ {id:"reboot",cat:"ELECTRICAL",title:"COMPUTER REBOOT LOOP",flavor:"The communications controller is stuck cycling its bootstrap. Uplink a verified recovery image before the command link fails.",req:{SIG:5},fail:{damageSystem:"comms"},win:{}},
+ // --- minor variants: single lower requirement, milder consequences ---
+ {id:"e-smoke",cat:"ENGINEERING",title:"SMOKE IN THE WIRING LOOM",flavor:"A wisp of smoke behind panel six. Repair the fault or cool the loom before it becomes a fire.",req:{ENG:3},alt:{CLG:3},fail:{damageRandom:1},win:{}},
+ {id:"e-seep",cat:"ENGINEERING",title:"COOLANT SEEP",flavor:"A slow weep at a coupling. Top up the loop and re-torque the fitting.",req:{ENG:3},alt:{CLG:2},fail:{heat:1},win:{}},
+ {id:"e-brownout",cat:"ELECTRICAL",title:"BUS BROWNOUT",flavor:"Lights dip across two decks. Supply stable power or use the command link to isolate the faulty branch.",req:{POW:4},alt:{SIG:3},fail:{components:-1},win:{}},
+ {id:"e-seal",cat:"ENVIRONMENT",title:"SEAL DEGRADATION",flavor:"A hatch seal is perishing. The leak is a whisper, for now.",req:{ENG:2},alt:{THR:2},fail:{oxygen:-1},win:{}},
+ {id:"e-flicker",cat:"ELECTRICAL",title:"FLICKERING BUS",flavor:"A loose bus bar arcs intermittently. Stabilise the supply or locate and isolate the arc with sensors.",req:{POW:3},alt:{DET:2},fail:{components:-1},win:{}},
+ {id:"e-overdrive",cat:"ENVIRONMENT",title:"SCRUBBER OVERDRIVE",flavor:"The CO₂ curve is climbing. Increase life-support throughput or cool the beds to keep them absorbing.",req:{LFS:2},alt:{CLG:3},fail:{ongoing:{key:"co2",text:"CO₂ buildup: −1 O₂ per turn",oxygen:-1,turns:2}},win:{oxygen:1}},
+ {id:"e-wheel",cat:"NAVIGATION",title:"WHEEL SPEED FAULT",flavor:"A reaction wheel is running rough. Trim it directly or plot a profile that avoids the unstable speed.",req:{CON:2},alt:{NAV:3},fail:{course:1},win:{}},
+ {id:"e-glint",cat:"ELECTRICAL",title:"SENSOR GLINT",flavor:"Intermittent returns on the forward array. Resolve them locally or cross-check with the tracking network.",req:{DET:2},alt:{SIG:3},fail:{forecastHidden:1},win:{}},
+ {id:"e-imbalance",cat:"ELECTRICAL",title:"CELL IMBALANCE",flavor:"One bank is drifting out of balance. Equalise the charge or stabilise the cell temperatures.",req:{POW:3},alt:{CLG:2},fail:{components:-1},win:{}},
+ {id:"e-hiss",cat:"ENVIRONMENT",title:"DOOR SEAL HISS",flavor:"A faint hiss at the aft hatch. Soapy water and a steady hand.",req:{ENG:2},alt:{THR:2},fail:{oxygen:-1},win:{}},
+ {id:"e-filter",cat:"ENGINEERING",title:"FUEL FILTER CLOG",flavor:"The feed filter is loading up with residue. Clear it mechanically or cycle the loop temperature to free it.",req:{ENG:5},alt:{CLG:5},fail:{damageSystem:"fuelcells"},win:{}},
+ {id:"e-firmware",cat:"ELECTRICAL",title:"PATCHED FIRMWARE",flavor:"A vendor patch wants a maintenance window. Install it through the workshop or request a signed recovery image from home.",req:{ENG:2},alt:{SIG:2},fail:{forecastHidden:1},win:{}},
+],2:[
+ // Preserve the original injury hit in addition to the current Phase-II OR balance addition.
+ {id:"sensor-alarm",cat:"ELECTRICAL",title:"SENSOR FAULT ALARM",flavor:"The sensor suite is reporting ghosts — or failing to report something real. Resolve the returns locally or cross-check with ground telemetry.",req:{DET:5},alt:{SIG:5},fail:{injure:1,forecastHidden:2},win:{}},
+ {id:"radstorm",cat:"ENVIRONMENT",title:"RADIATION STORM",flavor:"A solar proton event washes over the hull. Everyone not behind shielding is counting sieverts.",req:{PRO:6},fail:{injure:2},win:{}},
+ {id:"navdrift",cat:"NAVIGATION",title:"NAVIGATION DRIFT",flavor:"The ephemeris no longer matches the stars. Recalculate the trajectory and correct the ship's attitude.",req:{NAV:4,CON:4},fail:{course:1},win:{course:-1}},
+ {id:"micro",cat:"ENVIRONMENT",title:"MICROMETEOROID IMPACT",flavor:"Incoming gravel on the forward scan. Track the swarm and slew the fragile sections out of its path.",req:{DET:4,CON:2},fail:{damageRandom:2},win:{}},
+ {id:"co2acc",cat:"ENVIRONMENT",title:"CO₂ ACCUMULATION",flavor:"The air tastes of pennies again. The scrubbers never fully recovered.",req:{LFS:6},fail:{injure:1,ongoing:{key:"co2",text:"CO₂ buildup: −1 O₂ per turn",oxygen:-1,turns:3}},win:{oxygen:1}},
+ {id:"battery-deg",cat:"ELECTRICAL",title:"BATTERY DEGRADATION",flavor:"The cells are losing capacity in the cold soak. Rebalance the power bus while restoring their thermal operating range.",req:{POW:4,CLG:3},fail:{damageSystem:"batteries",damageSystem2:"fuelcells"},win:{}},
+ {id:"illness",cat:"MEDICAL",title:"CREW ILLNESS",flavor:"Fever in the close air. Isolate the bunks and run filtered air and clean water for the sick crew.",req:{LFS:5},fail:{injure:2},win:{heal:1}},
+ {id:"flare",cat:"ENVIRONMENT",title:"SOLAR FLARE",flavor:"The star clears its throat. Everything electronic flinches.",req:{PRO:5,DET:3},fail:{damageRandom:1,injure:1},win:{}},
+ {id:"misfire",cat:"NAVIGATION",title:"THRUSTER MISFIRE",flavor:"A vernier fires out of sequence. Regain attitude control and recalculate the correction trajectory.",req:{CON:4,NAV:3},fail:{course:1,damageSystem:"thrusters"},win:{}},
+ {id:"lscontam",cat:"MEDICAL",title:"LIFE SUPPORT CONTAMINATION",flavor:"Something is growing in the water recycler. Service the contaminated assembly while circulating clean backup water.",req:{ENG:4,LFS:4},fail:{oxygen:-2,injure:1},win:{oxygen:1}},
+ {id:"thermal-over",cat:"ENGINEERING",title:"THERMAL OVERLOAD",flavor:"The radiators cannot keep pace. The hull pings like a cooling engine block — in reverse.",req:{CLG:6},fail:{heat:2,damageSystem:"thermal"},win:{heat:-2}},
+ {id:"signal-int",cat:"ELECTRICAL",title:"SIGNAL INTERFERENCE",flavor:"Static swallows the deep-space network. Home is a rumour again.",req:{SIG:5},fail:{components:-2,forecastHidden:2},win:{clearOngoing:1}},
+ {id:"scrubber",cat:"ENVIRONMENT",title:"OXYGEN SCRUBBER FAILURE",flavor:"The primary scrubber assembly has failed hard. Route air through the backup beds and regulate their coolant loop.",req:{LFS:4,CLG:2},fail:{ongoing:{key:"scrubber",text:"Scrubber failure: −2 O₂ per turn",oxygen:-2,turns:3}},win:{oxygen:2}},
+ {id:"fabjam",cat:"ENGINEERING",title:"FABRICATOR JAM",flavor:"The fabricator chews a feed spool and half your raw stock with it. Clear the feed and verify its controller through telemetry.",req:{ENG:4,SIG:3},fail:{components:-3,damageSystem:"fabricator"},win:{}},
+ {id:"zerog",cat:"MEDICAL",title:"ZERO-G ADAPTATION SICKNESS",flavor:"Vestibular systems were never meant for this. Set up recovery bunks, hydration and a stable cabin environment.",req:{LFS:4},fail:{injure:1},win:{heal:1}},
+ {id:"debris",cat:"NAVIGATION",title:"DEBRIS FIELD",flavor:"An old collision cloud stretches across the trajectory. Thread the needle.",req:{DET:4,CON:4},fail:{damageRandom:2,course:1},win:{}},
+ // --- minor variants ---
+ {id:"e-watch",cat:"ENVIRONMENT",title:"SOLAR WEATHER WATCH",flavor:"The star is restless. Shelter behind shielding or monitor the event closely enough to time exposure safely.",req:{PRO:2},alt:{DET:3},fail:{injure:1},win:{}},
+ {id:"e-ephemeris",cat:"NAVIGATION",title:"EPHEMERIS UPDATE",flavor:"Fresh orbital elements are due. Trim to the reference heading or calculate an updated trajectory.",req:{CON:3},alt:{NAV:3},fail:{course:1},win:{course:-1}},
+ {id:"e-dust",cat:"ENVIRONMENT",title:"DUST STRIKES",flavor:"Micrometeorite grit crosses the trajectory. Track a clear gap or thrust out of the cloud.",req:{DET:3},alt:{THR:3},fail:{damageRandom:1},win:{}},
+ {id:"e-saturation",cat:"ENVIRONMENT",title:"SCRUBBER SATURATION",flavor:"The scrubber beds are loading up early. Service the air loop or cool the beds to extend their adsorption window.",req:{LFS:3},alt:{CLG:4},fail:{ongoing:{key:"co2",text:"CO₂ buildup: −1 O₂ per turn",oxygen:-1,turns:2}},win:{oxygen:1}},
+ {id:"e-charge",cat:"ELECTRICAL",title:"CHARGE CONTROLLER FAULT",flavor:"The charge controller is lying about the cells. Rebalance under power or uplink a verified controller reset.",req:{POW:7},alt:{SIG:5},fail:{components:-1},win:{}},
+ {id:"e-cold",cat:"MEDICAL",title:"SHIPBOARD COLD",flavor:"A sniffle works its way through the crew. Filter the cabin air or control the cabin temperature to limit cold stress.",req:{LFS:2},alt:{CLG:3},fail:{injure:1},win:{heal:1}},
+ {id:"e-flarewarn",cat:"ENVIRONMENT",title:"FLARE WARNING",flavor:"Space weather flags a minor event. Run the shelter drill or track the quiet interval for exposed work.",req:{PRO:3},alt:{DET:3},fail:{injure:1},win:{}},
+ {id:"e-chatter",cat:"NAVIGATION",title:"VALVE CHATTER",flavor:"A vernier valve buzzes at its limit. Damp it directly or replan the manoeuvre to avoid the unstable range.",req:{CON:2},alt:{NAV:3},fail:{course:1},win:{}},
+ {id:"e-recycler",cat:"MEDICAL",title:"RECYCLER TASTE",flavor:"The water tastes wrong. Flush the water loop or detect and isolate the contaminated reservoir.",req:{LFS:2},alt:{DET:2},fail:{oxygen:-1},win:{oxygen:1}},
+ {id:"e-warmbus",cat:"ENGINEERING",title:"WARM BUS",flavor:"The radiator loop is warm in the sun-side attitude. Cool it directly or plan a shaded flight profile.",req:{CLG:2},alt:{NAV:3},fail:{heat:1},win:{}},
+ {id:"e-static",cat:"ELECTRICAL",title:"STATIC STORM",flavor:"The band is full of crackle. Recover the carrier or scan for a clear frequency window.",req:{SIG:2},alt:{DET:3},fail:{forecastHidden:1},win:{}},
+ {id:"e-rattle",cat:"ENVIRONMENT",title:"SCRUBBER RATTLE",flavor:"The scrubber fan rattles under load. Repair the mount or cool and derate the assembly.",req:{ENG:3},alt:{CLG:4},fail:{ongoing:{key:"co2",text:"CO₂ buildup: −1 O₂ per turn",oxygen:-1,turns:2}},win:{}},
+ {id:"e-spool",cat:"ENGINEERING",title:"FEED SPOOL SNAG",flavor:"A feed spool snags mid-print. Clear it mechanically or use the inspection sensors to realign the feed.",req:{ENG:2},alt:{DET:2},fail:{components:-1},win:{}},
+ {id:"e-adaptation",cat:"MEDICAL",title:"SPACE ADAPTATION",flavor:"New crew queasy, old crew grim. Provide recovery bunks and hydration or plot a gentler manoeuvre schedule.",req:{LFS:3},alt:{NAV:3},fail:{injure:1},win:{}},
+ {id:"e-sparse",cat:"NAVIGATION",title:"SPARSE DEBRIS",flavor:"A thin scatter of junk on the scope. Nudge around it.",req:{DET:2},alt:{THR:3},fail:{damageRandom:1},win:{}},
+],3:[
+ {id:"comms-acq",cat:"ELECTRICAL",title:"COMMUNICATIONS ACQUISITION",flavor:"Earth is close enough to hear. Someone has to answer when they call.",req:{SIG:6},fail:{dataLost:1},win:{course:-1}},
+ {id:"precision-nav",cat:"NAVIGATION",title:"PRECISION NAVIGATION",flavor:"The corridor home is kilometres wide. Plot the trajectory and confirm the reference stars on the tracking array.",req:{NAV:6,DET:4},fail:{course:1},win:{course:-1}},
+ {id:"heatshield",cat:"ENGINEERING",title:"HEAT SHIELD STRESS",flavor:"The ablative shield is cracking under the thermal load you never shed.",req:{PRO:5,CLG:4},fail:{heat:2,damageRandom:2},win:{}},
+ {id:"vector-trim",cat:"NAVIGATION",title:"RE-ENTRY VECTOR TRIM",flavor:"One last burn to shape the corridor. Too steep, you burn. Too shallow, you skip into the dark.",req:{CON:6,THR:4},fail:{course:1,damageRandom:1},win:{course:-1}},
+ {id:"power-shunt",cat:"ELECTRICAL",title:"FINAL POWER SHUNT",flavor:"Route the remaining power to the re-entry bus while cooling its overloaded conductors.",req:{POW:5,CLG:3},fail:{damageRandom:2,heat:1},win:{}},
+ {id:"fatigue",cat:"MEDICAL",title:"CREW FATIGUE",flavor:"Nobody has slept properly in days. Stabilise the recovery environment and coordinate rest and checklists with ground control.",req:{LFS:5,SIG:3},fail:{injure:2},win:{}},
+ {id:"interface",cat:"ENVIRONMENT",title:"ATMOSPHERIC INTERFACE",flavor:"The first whisper of air becomes a howl. Heat soaks the hull.",req:{CLG:5,PRO:4},fail:{heat:3},win:{}},
+ {id:"chute",cat:"ENGINEERING",title:"CHUTE & RECOVERY DEPLOY",flavor:"Drogues, mains, flotation. Rig the mechanisms and verify the deployment command link.",req:{ENG:5,SIG:3},fail:{destroyRandom:1},win:{}},
+ {id:"gnc",cat:"NAVIGATION",title:"GNC FINAL ALIGNMENT",flavor:"Guidance, navigation and control must agree on where the ground is. Verify telemetry with ground control, recalculate and align.",req:{SIG:5,NAV:4,CON:3},fail:{course:1,damageSystem:"navcomp"},win:{}},
+ {id:"beacon",cat:"ELECTRICAL",title:"RECOVERY BEACON",flavor:"If the recovery fleet cannot find the capsule, landing is only the start of dying.",req:{SIG:4,DET:4},fail:{noShip:1},win:{}},
+ // --- minor variants ---
+ {id:"e-hail",cat:"ELECTRICAL",title:"DISTANT HAIL",flavor:"A carrier brushes the antenna. Decode it directly or track the transmitter until a clear relay window opens.",req:{SIG:3},alt:{DET:3},fail:{forecastHidden:1},win:{}},
+ {id:"e-starsight",cat:"NAVIGATION",title:"STAR SIGHTING",flavor:"Take a star fix locally or request a tracking-station fix over the command link.",req:{NAV:3},alt:{SIG:4},fail:{course:1},win:{course:-1}},
+ {id:"e-hotspot",cat:"ENGINEERING",title:"SHIELD HOTSPOT",flavor:"One shield panel reads hot. Shelter it directly or cool the panel while planning a shaded trajectory.",req:{PRO:3},alt:{CLG:3,NAV:2},fail:{heat:1},win:{}},
+ {id:"e-trimburn",cat:"NAVIGATION",title:"COARSE TRIM BURN",flavor:"A small correction is due. Burn now or recalculate the trajectory to combine it with the next scheduled manoeuvre.",req:{THR:3},alt:{NAV:4},fail:{course:1},win:{}},
+ {id:"e-loadshed",cat:"ELECTRICAL",title:"BUS LOAD SHED",flavor:"Shed non-essential load electrically or coordinate commands with a low-demand flight profile.",req:{POW:5},alt:{SIG:3,NAV:2},fail:{damageRandom:1},win:{}},
+ {id:"e-sleep",cat:"MEDICAL",title:"SLEEP DEFICIT",flavor:"The crew run on caffeine and obligation. Provide a quiet recovery environment or coordinate protected rest windows with ground control.",req:{LFS:3},alt:{SIG:3},fail:{injure:1},win:{}},
+ {id:"e-turbulence",cat:"ENVIRONMENT",title:"FIRST TURBULENCE",flavor:"The hull begins to mutter. The interface is still a rumour, but a loud one.",req:{PRO:3},alt:{THR:3},fail:{heat:1},win:{}},
+ {id:"e-beacontest",cat:"ELECTRICAL",title:"BEACON SELF-TEST",flavor:"Test the recovery beacon through its command link or verify its carrier on the independent tracking array.",req:{SIG:2},alt:{DET:3},fail:{components:-1},win:{}},
+]};
+// Curated phase placement. Definitions above retain their thematic groupings; these
+// moves determine the actual pools, before any destination-phase failure scaling.
+const CRISIS_PHASE_MOVES={
+  1:["e-watch","e-ephemeris","e-dust","e-saturation","e-charge","e-cold","e-flarewarn","e-chatter","e-recycler","e-warmbus","e-static","e-rattle","e-spool","e-adaptation","e-sparse","e-hail","e-starsight","e-sleep","e-beacontest"],
+  2:["coolant","reactor-trip","puncture","short","pressure","reboot","e-hotspot","e-loadshed"],
+  3:["radstorm","navdrift","co2acc","lscontam","thermal-over","debris"]
+};
+for(const [destination,ids] of Object.entries(CRISIS_PHASE_MOVES))for(const id of ids){
+  const source=Object.values(CRISES).find(cards=>cards.some(c=>c.id===id));
+  if(!source)throw new Error("Unknown crisis in phase placement: "+id);
+  const [card]=source.splice(source.findIndex(c=>c.id===id),1);
+  CRISES[destination].push(card);
+}
+const REENTRY={id:"reentry",cat:"NAVIGATION",title:"RE-ENTRY",terminal:true,
+ flavor:"There is no more ship to spend. Only fire, foam, and the long fall. Bring her home.",
+ req:{CON:6,NAV:5,PRO:4},fail:{injure:2,destroyRandom:2},win:{}};
+// Survival balance: historically calibrated before subsequent mechanics/phase changes.
+// Add these consequences to the individual cards' existing failure effects.
+// This failure scaling does not alter requirements, success effects, route burns or final RE-ENTRY.
+const DIFFICULTIES={
+  easy:{label:"Easy",injuriesByPhase:{1:{major:0,minor:0},2:{major:0,minor:0},3:{major:0,minor:0}}},
+  normal:{label:"Normal",injuriesByPhase:{1:{major:1,minor:0},2:{major:0,minor:0},3:{major:1,minor:0}}},
+  hard:{label:"Hard",injuriesByPhase:{1:{major:1,minor:0},2:{major:1,minor:0},3:{major:2,minor:1}}}
+};
+const requestedDifficulty=new URLSearchParams(location.search).get("difficulty");
+const DIFFICULTY=Object.hasOwn(DIFFICULTIES,requestedDifficulty)?requestedDifficulty:"normal";
+const FAILURE_BALANCE={
+  injuriesByPhase:DIFFICULTIES[DIFFICULTY].injuriesByPhase,
+  extraMajorDamage:1,
+  ongoingInitialDrainByPhase:{1:0,2:1,3:1},
+  environmentOxygen:3,extraCourseError:1,
+  trackCapsByPhase:{1:{heat:2,oxygen:2,course:1},2:{heat:3,oxygen:3,course:1},3:{heat:3,oxygen:3,course:2}}
+};
+// Keep the original effects for reproducible historical/baseline simulations.
+const BASE_FAILURES=Object.fromEntries(Object.values(CRISES).flat().map(c=>[c.id,{...c.fail}]));
+function capFailureTracks(fail,phase){
+  const caps=FAILURE_BALANCE.trackCapsByPhase[phase],capped={...fail};
+  if(capped.heat>caps.heat)capped.heat=caps.heat;
+  if(capped.oxygen < -caps.oxygen)capped.oxygen=-caps.oxygen;
+  if(capped.course>caps.course)capped.course=caps.course;
+  return capped;
+}
+for(const [phase,cards] of Object.entries(CRISES))for(const c of cards){
+  const injuries=FAILURE_BALANCE.injuriesByPhase[phase];
+  const tier=c.failureTier||(c.alt?"minor":"major");
+  c.fail={...c.fail,injure:(c.fail.injure||0)+injuries[tier]};
+  if(c.fail.injure===0)delete c.fail.injure;
+  if(tier==="major")c.fail.damageRandom=(c.fail.damageRandom||0)+FAILURE_BALANCE.extraMajorDamage;
+  if(c.fail.ongoing&&FAILURE_BALANCE.ongoingInitialDrainByPhase[phase])c.fail.ongoing={...c.fail.ongoing,initialDrain:FAILURE_BALANCE.ongoingInitialDrainByPhase[phase]};
+  if(c.cat==="ENVIRONMENT")c.fail.oxygen=(c.fail.oxygen||0)-FAILURE_BALANCE.environmentOxygen;
+  if(c.fail.course)c.fail.course+=FAILURE_BALANCE.extraCourseError;
+  c.fail=capFailureTracks(c.fail,phase);
+}
+const ROUTES={
+ 2:{title:"INNER SYSTEM SLINGSHOT",cat:"NAVIGATION",req:{THR:8},
+    flavor:"A tight, fast transfer shaves crises off the transit — if the engines can deliver the burn, right now.",
+    safe:"GENTLE TRANSFER — add 2 journey cards. No immediate requirement.",
+    direct:"SLINGSHOT BURN — remove 2 journey cards, but immediately meet THRUST 8. Failure damages an engine system and removes only 1."},
+ 3:{title:"DIRECT RETURN",cat:"NAVIGATION",req:{THR:7,CON:4},
+    flavor:"Commit to a direct corridor home. Fewer crises, less air spent — but the burn must be precise and immediate.",
+    safe:"SAFE TRAJECTORY — add 2 journey cards. Low, slow, survivable.",
+    direct:"DIRECT RETURN — remove 2 journey cards, but immediately meet THRUST 7 + CONTROL 4. Failure damages an engine system and removes only 1."},
+};
+const BASE_DECK={1:5,2:16,3:4};
+
+// ---------- Game state ----------
+let G=null;
+let debugFitness=false; // UI preference, deliberately outside seeded gameplay state.
+const FITNESS_CONFIG={
+  weights:{systems:0.55,crew:0.35,components:0.10},
+  damagedSystem:0.4,injuredCrew:0.4,backupWeight:0.25,componentsPerType:4,
+  systems:{reactor:1.5,aux:1,batteries:1.2,fuelcells:0.8,engine:2,thrusters:2.5,
+    navcomp:2.5,comms:2,lifesupport:3.5,thermal:2,sensors:1.5,
+    fabricator:2.5,shielding:2,service:1,cargo:0.5,habitat:0.5},
+  crew:{doc:2,cmdr:1.3,syseng:1.3,spec:1.2},
+  components:{Electronics:1.2,Wiring:1.4,"Power Cell":0.8}
+};
+function fitnessClamp(n){return Math.max(0,Math.min(1,n))}
+function handFitnessBreakdown(state=G){
+  // Only these three asset collections are read. No draws, commitments, temporary
+  // bonuses, tracks, phase, distance, game flags, RNG or crisis definitions.
+  const systems=state?.systems||[],crew=state?.crew||[],components=state?.components||{};
+  let systemSum=0,systemWeight=0;
+  for(const def of SYSTEM_DEFS){
+    const weight=FITNESS_CONFIG.systems[def.id]||1;
+    const health=systems.filter(s=>s.def.id===def.id).map(s=>s.state==="op"?1:s.state==="damaged"?FITNESS_CONFIG.damagedSystem:0).sort((a,b)=>b-a);
+    const modular=MULTI_SYSTEMS.includes(def.id),target=modular?1+FITNESS_CONFIG.backupWeight:1;
+    const effective=(health[0]||0)+(modular?FITNESS_CONFIG.backupWeight*(health[1]||0):0);
+    systemSum+=weight*fitnessClamp(effective/target);systemWeight+=weight;
+  }
+  let crewSum=0,crewWeight=0;
+  for(const c of crew){
+    const weight=FITNESS_CONFIG.crew[c.id]||1;
+    crewSum+=weight*(c.state==="ok"?1:c.state==="injured"?FITNESS_CONFIG.injuredCrew:0);crewWeight+=weight;
+  }
+  let componentSum=0,componentWeight=0;
+  for(const type of COMP_TYPES){
+    const weight=FITNESS_CONFIG.components[type];
+    const quantity=Math.max(0,Number(components[type])||0);
+    componentSum+=weight*fitnessClamp(quantity/FITNESS_CONFIG.componentsPerType);componentWeight+=weight;
+  }
+  const parts={systems:systemWeight?systemSum/systemWeight:0,crew:crewWeight?crewSum/crewWeight:0,components:componentWeight?componentSum/componentWeight:0};
+  const viable=systems.some(s=>s.state==="op"||s.state==="damaged")&&crew.some(c=>c.state==="ok"||c.state==="injured");
+  const value=viable?fitnessClamp(Object.entries(FITNESS_CONFIG.weights).reduce((sum,[key,weight])=>sum+weight*parts[key],0)):0;
+  return {...parts,viable,value};
+}
+function handFitness(state=G){return handFitnessBreakdown(state).value}
+function sys(id){return G.systems.find(s=>s.id===id)}
+function systemsOfType(type){return G.systems.filter(s=>s.def.id===type)}
+function systemOfType(type){const all=systemsOfType(type);return all.find(s=>s.state==="op")||all.find(s=>s.state==="damaged")||all[0]}
+function systemName(s){return s.def.name+(s.id===s.def.id?"":" #"+s.id.split("#")[1])}
+function makeSystem(def,id=def.id){return {id,def,state:"op",patched:false,mode:null,seBoost:false,fabricated:null,specialists:[]}}
+function crew(id){return G.crew.find(c=>c.id===id)}
+
+function newGame(){
+  rng=mulberry32(SEED);
+  const mission=pick(MISSION_SPECIALISTS);
+  const roster=[...CREW_DEFS.map(c=>c.id==="spec"?mission:c),...shuffle(SYSTEM_SPECIALISTS).slice(0,2)];
+  G={difficulty:DIFFICULTY,turn:0,phase:1,step:"respond",
+     systems:SYSTEM_DEFS.map(d=>makeSystem(d)),
+     crew:roster.map(d=>({...d,state:"ok",used:false})),
+     pools:{1:shuffle(CRISES[1]),2:shuffle(CRISES[2]),3:shuffle(CRISES[3])},
+     deck:[],crisis:null,drawn:[],
+     heat:0,oxygen:6,course:0,
+     components:{Electronics:2,Wiring:2,"Power Cell":2},
+     ongoing:[],crewBonus:{},pendingCmdr:false,pendingSE:false,pendingSpecialist:null,missionKeep:[],
+     flags:{noRedline:false,forecastHidden:0,dataLost:false,noShip:false,specUsed:false,exactForecast:false,revealedNext:null,fabricatedThisResponse:false,shelter:0},
+     over:null,log:[]};
+  G.deck=G.pools[1].slice(0,BASE_DECK[1]);
+  log("Difficulty: "+DIFFICULTIES[G.difficulty].label+". Only added crisis injury hits vary.","sys");
+  log("Mission Specialist: "+mission.name+" — "+mission.field+". "+mission.ability+".","sys");
+  log("System specialists for this run: "+roster.filter(c=>c.cap).map(c=>c.role+" (+2 "+CAPS[c.cap]+")").join(" and ")+".","sys");
+  log("Catastrophic accident in deep space. The ship will not fully recover. Bring them home.","sys");
+  log("Phase I — ACCIDENT. Distance home ≈ "+distanceEstimate()+" crises.","sys");
+  beginCrisis(false);
+}
+
+// ---------- Logging ----------
+function log(msg,cls){G.log.unshift({t:G.turn,msg,cls:cls||""});if(G.log.length>80)G.log.pop()}
+
+// ---------- Track helpers ----------
+function addHeat(n){
+  if(n===0)return;
+  G.heat=Math.max(0,G.heat+n);
+  if(n>0)log("Heat "+(n>0?"+":"")+n+" → "+G.heat+(G.heat>=5?" — CRITICAL":""),n>0?"bad":"good");
+  else log("Heat "+n+" → "+G.heat,"good");
+  if(G.heat>=5)scram();
+}
+function scram(){
+  log("THERMAL LIMIT EXCEEDED — reactor SCRAM!","bad");
+  let target=null;
+  for(const id of POWER_SYSTEMS){const s=systemOfType(id);if(s.state!=="destroyed"){target=s;break}}
+  if(target){damageStep(target,"reactor SCRAM / thermal overload");log(systemName(target)+" is "+(target.state==="destroyed"?"DESTROYED":"damaged")+" in the scram.","bad")}
+  G.heat=3;G.flags.noRedline=true;
+  log("Heat falls to 3. Power systems cannot be redlined next crisis.","bad");
+}
+function addOxygen(n){G.oxygen=Math.max(0,Math.min(6,G.oxygen+n));log("Oxygen "+(n>0?"+":"")+n+" → "+G.oxygen,n>0?"good":"bad")}
+function addCourse(n){G.course=Math.max(0,G.course+n);log("Course error "+(n>0?"+":"")+n+" → "+G.course,n>0?"bad":"good");if(G.course>=3)gameOver(false,"CONTACT LOST — TRAJECTORY MISSED","The ship slides past the corridor home. The signal fades. Nothing answers.")}
+
+// ---------- Crew state ----------
+// Fictional reconstructions, not additional mechanics or medical measurements.
+const DEATH_DESCRIPTIONS={
+ "fire":"Died of smoke inhalation after burning insulation filled the avionics bay with toxic fumes.",
+ "coolant":"Suffered fatal scalding and respiratory injury when a ruptured coolant main sprayed superheated fluid into the compartment.",
+ "reactor-trip":"Was electrocuted by a live return circuit while attempting to restore the reactor bus after the trip.",
+ "puncture":"Died of acute hypoxia when the crew-deck puncture vented the compartment faster than it could be sealed.",
+ "short":"Suffered a fatal electrical shock as the arcing junction box flashed over during emergency isolation.",
+ "co2":"Died of hypercapnic respiratory failure after saturated scrubbers allowed carbon dioxide to accumulate in the cabin.",
+ "gyro":"Suffered fatal head and chest injuries when uncontrolled rotation threw them against a compartment bulkhead.",
+ "battery-surge":"Died from thermal burns and toxic battery fumes when the unstable cell entered thermal runaway.",
+ "pressure":"Died from decompression-related hypoxia after the failing aft seal allowed cabin pressure to collapse.",
+ "fuelline":"Was overcome by fuel vapour leaking from the blocked feed line during an unsuccessful attempt to clear it.",
+ "reboot":"Died of respiratory failure when the reboot loop interrupted automated cabin ventilation during manual recovery.",
+ "e-smoke":"Was overcome by toxic insulation smoke while searching behind the live wiring panel for the smouldering fault.",
+ "e-seep":"Suffered fatal respiratory injury after leaking coolant formed an aerosol in the confined service compartment.",
+ "e-brownout":"Suffered a fatal electrical shock while bypassing a breaker as the unstable bus unexpectedly re-energised.",
+ "e-seal":"Died of oxygen starvation after the degraded hatch seal opened into a sustained cabin leak.",
+ "e-flicker":"Was electrocuted when the loose bus bar arced across the tools used to secure it.",
+ "e-overdrive":"Died from CO₂ poisoning when the overdriven scrubber beds failed to keep the cabin air breathable.",
+ "e-wheel":"Suffered fatal impact injuries when the rough-running reaction wheel abruptly changed the ship's attitude.",
+ "e-glint":"Suffered fatal impact injuries during an evasive manoeuvre prompted by the misleading sensor returns.",
+ "e-imbalance":"Died from burns and smoke inhalation when the unbalanced battery bank overheated under load.",
+ "e-hiss":"Died of hypoxia when the aft hatch leak widened before the seal could be secured.",
+ "e-filter":"Died after inhaling concentrated fuel vapour released while backflushing the clogged feed filter.",
+ "e-firmware":"Was fatally injured when an unchecked firmware restart interrupted attitude control during maintenance.",
+ "sensor-alarm":"Suffered fatal blunt-force injuries during an emergency course correction based on false sensor readings.",
+ "radstorm":"Died from acute radiation injury after the proton storm reached an inadequately shielded compartment.",
+ "navdrift":"Suffered fatal internal injuries when a belated correction of the navigation drift produced an uncontrolled attitude change.",
+ "micro":"Suffered fatal penetrating injuries when a micrometeoroid strike drove hull fragments through the crew compartment.",
+ "co2acc":"Died from CO₂-induced respiratory failure as the damaged scrubbers allowed another toxic accumulation in the cabin.",
+ "battery-deg":"Died from smoke inhalation when degraded cells overheated during an attempted power transfer.",
+ "illness":"Died of septic shock when the spreading onboard infection progressed beyond the available medical support.",
+ "flare":"Died from acute radiation injury when the solar flare reached them before adequate shelter could be established.",
+ "misfire":"Suffered fatal head injuries when the out-of-sequence vernier firing threw them into the compartment wall.",
+ "lscontam":"Died from septic shock after contaminated recycler water caused an infection that could not be stabilised.",
+ "thermal-over":"Died of heatstroke when the overloaded radiators could no longer keep the occupied compartment cool.",
+ "signal-int":"Suffered a fatal electrical shock while attempting to clear interference from the powered communications assembly.",
+ "scrubber":"Died of respiratory failure after the failed scrubber assembly left the cabin air unbreathable.",
+ "fabjam":"Suffered fatal crush injuries when the jammed fabricator feed mechanism released during manual clearing.",
+ "zerog":"Died after aspirating vomit during an uncontrolled bout of adaptation sickness, with medical support unable to restore breathing.",
+ "debris":"Suffered fatal crush injuries when debris impacts buckled the compartment around their work station.",
+ "e-watch":"Died from radiation injury after the shelter rotation left them exposed on the sunward side.",
+ "e-ephemeris":"Suffered fatal impact injuries when incorrect orbital elements led to a violent corrective manoeuvre.",
+ "e-dust":"Died from internal bleeding after a dust strike sent a fragment of damaged hull into the occupied compartment.",
+ "e-saturation":"Died from CO₂ poisoning when exhausted scrubber cartridges were not replaced in time.",
+ "e-charge":"Died from burns and smoke inhalation when manual rebalancing of the faulty charge controller triggered a cell fire.",
+ "e-cold":"Died of respiratory failure after the unchecked shipboard infection developed into severe pneumonia.",
+ "e-flarewarn":"Died from radiation injury when the incomplete shelter drill left them outside the protected area.",
+ "e-chatter":"Suffered fatal impact injuries when the chattering vernier valve produced an unexpected attitude kick.",
+ "e-recycler":"Died from septic shock after drinking contaminated recycler water before the fault was isolated.",
+ "e-warmbus":"Died of heatstroke when the uncorrected sun-side attitude overheated the service compartment.",
+ "e-static":"Was electrocuted while working on the powered antenna feed in an unsuccessful attempt to clear the static.",
+ "e-rattle":"Died from CO₂ poisoning after the failing scrubber fan stopped circulating air through the absorber beds.",
+ "e-spool":"Suffered fatal crush injuries when the snagged feed spool pulled their emergency clearing tool into the drive assembly.",
+ "e-adaptation":"Died after aspirating vomit during severe space-adaptation sickness, compounded by their existing injuries.",
+ "e-sparse":"Suffered fatal internal injuries when a debris fragment breached the compartment during the missed avoidance manoeuvre.",
+ "comms-acq":"Suffered a fatal electrical shock while trying to restore the high-power antenna feed for Earth acquisition.",
+ "precision-nav":"Suffered fatal internal injuries during a violent late correction of the misaligned return corridor.",
+ "heatshield":"Died from burns and respiratory injury when a stressed shield panel allowed heat into the occupied compartment.",
+ "vector-trim":"Suffered fatal impact injuries when the failed vector-trim burn sent the ship into an uncontrolled attitude change.",
+ "power-shunt":"Was electrocuted when the overloaded re-entry bus flashed over during the final power transfer.",
+ "fatigue":"Suffered fatal head injuries in an exhaustion-related maintenance accident, with no remaining medical reserve to stabilise them.",
+ "interface":"Died from heatstroke and respiratory injury as atmospheric heating overwhelmed the compartment's thermal protection.",
+ "chute":"Suffered fatal chest injuries when a recovery-line deployment failed and its loaded mechanism struck their station.",
+ "gnc":"Suffered fatal internal injuries during an abrupt attitude correction commanded by the misaligned guidance system.",
+ "beacon":"Suffered a fatal electrical shock while attempting to bring the damaged recovery-beacon transmitter online.",
+ "e-hail":"Was electrocuted while manually switching the powered antenna feed to catch the passing carrier signal.",
+ "e-starsight":"Suffered fatal impact injuries when the missed manual star fix led to an abrupt correction of the ship's attitude.",
+ "e-hotspot":"Died from burns and respiratory injury when the unchecked shield hotspot spread heat into their compartment.",
+ "e-trimburn":"Suffered fatal head and chest injuries when the poorly controlled trim burn threw them against their station.",
+ "e-loadshed":"Was electrocuted by an overloaded bus connection while disconnecting non-essential equipment.",
+ "e-sleep":"Suffered fatal crush injuries after an exhaustion-related error left them in the path of a moving maintenance assembly.",
+ "e-turbulence":"Suffered fatal impact injuries when the first atmospheric buffeting threw them against an unsecured compartment fitting.",
+ "e-beacontest":"Suffered a fatal electrical shock from the beacon's power circuit during the unsuccessful self-test.",
+ "reentry":"Died from fatal chest and spinal injuries when the poorly controlled re-entry subjected their station to violent deceleration."
+};
+function deathDescription(c,cause){
+  if(cause==="suffocation"){
+    const ls=systemOfType("lifesupport"),penalties=G.ongoing;
+    const mechanism=penalties.some(o=>o.key==="co2")?"Died from combined CO₂ poisoning and oxygen starvation as the cabin air became unbreathable.":"Died of hypoxic respiratory failure when the cabin's remaining oxygen was exhausted.";
+    const support=ls.state==="destroyed"?" Every Life Support unit had been destroyed.":ls.state==="damaged"?" The surviving Life Support equipment was damaged and could not maintain the air supply.":"";
+    const ongoing=penalties.length?" Active air-system failures: "+penalties.map(o=>o.text).join("; ")+".":"";
+    return mechanism+support+ongoing;
+  }
+  if(cause!=="crisis consequence")return "Died from "+cause+" while already weakened by an unhealed injury.";
+  const C=G.crisis,key=C?.id||Object.values(CRISES).flat().concat(REENTRY).find(x=>x.title===C?.title)?.id;
+  let text=DEATH_DESCRIPTIONS[key];
+  if(!text){
+    const f=C?.fail||{};
+    text=f.heat>0?"Died from heatstroke as the failed response allowed the compartment temperature to rise beyond survivable limits.":f.oxygen<0||f.ongoing?"Died from respiratory failure when the failed response left the cabin air unbreathable.":f.damageRandom||f.destroyRandom?"Died from traumatic internal injuries when damaged equipment broke loose during the failed response.":f.course>0?"Died from impact injuries during an uncontrolled attitude correction after the failed navigation response.":"Died from complications of further injuries sustained during the unsuccessful emergency response.";
+  }
+  return text+(c.injury?" Their earlier, unhealed injuries left them unable to survive the additional trauma.":"");
+}
+function incident(cause){return {cause,turn:G.turn,phase:G.phase,crisis:cause==="suffocation"?null:G.crisis?.title||null}}
+function injureCrew(n,cause){
+  for(let i=0;i<n;i++){
+    if(G.flags.shelter>0){G.flags.shelter--;log("Emergency protection absorbs the harm ("+cause+").","sys");continue}
+    const alive=G.crew.filter(c=>c.state!=="dead");if(!alive.length)break;
+    const healthy=alive.filter(c=>c.state==="ok");
+    const c=pick(healthy.length?healthy:alive);
+    if(c.state==="ok"){c.state="injured";c.injury=incident(cause);log(c.name+" ("+c.role+") is injured — "+cause+". Ability lost.","bad")}
+    else{c.state="dead";c.death={...incident(cause),description:deathDescription(c,cause),priorInjury:c.injury||null};log(c.name+" ("+c.role+") is dead — "+cause+".","bad")}
+  }
+  if(G.crew.every(c=>c.state==="dead"))gameOver(false,"CONTACT LOST — CREW LOST","The ship flies on, automated and empty. No one is left to bring home.");
+}
+function healCrew(n){
+  for(let i=0;i<n;i++){const c=G.crew.find(x=>x.state==="injured");if(!c)return;c.state="ok";c.injury=null;log(c.name+" ("+c.role+") is patched up and back on duty.","good")}
+}
+
+// ---------- System state ----------
+function damageStep(s,cause="crisis damage"){
+  if(s.state==="op"){s.state="damaged";s.damage=incident(cause)}
+  else if(s.state==="damaged")destroySys(s,cause);
+}
+function destroySys(s,cause="crisis destruction"){
+  if(s.state==="destroyed")return;
+  s.destruction=incident(cause);
+  s.state="destroyed";s.mode=null;s.patched=false;G.drawn=G.drawn.filter(x=>x!==s.id);
+  if(s.def.id==="cargo"&&!G.flags.dataLost){G.flags.dataLost=true;log("Mission data lost with "+systemName(s)+". A replacement cannot recover it.","bad")}
+  if(G.systems.every(x=>x.state==="destroyed"))gameOver(false,"SHIP REDUCED TO A HULK","Every system is gone. The hull drifts, dark and silent.");
+}
+function damageRandomSystems(n){
+  for(let i=0;i<n;i++){const pool=G.systems.filter(s=>s.state!=="destroyed");if(!pool.length)return;const s=pick(pool);damageStep(s,"random system damage");log(systemName(s)+" is "+(s.state==="destroyed"?"DESTROYED":"damaged")+".","bad")}
+}
+function destroyRandomSystems(n){
+  for(let i=0;i<n;i++){const pool=G.systems.filter(s=>s.state!=="destroyed");if(!pool.length)return;const s=pick(pool);destroySys(s,"random system destruction");log(systemName(s)+" is DESTROYED.","bad")}
+}
+function damageEngine(){
+  const pool=G.systems.filter(s=>ENGINE_SYSTEMS.includes(s.def.id)&&s.state!=="destroyed");
+  if(pool.length){const s=pick(pool);damageStep(s,"failed trajectory burn");log(systemName(s)+" is "+(s.state==="destroyed"?"DESTROYED":"damaged")+" in the failed burn.","bad")}
+  else damageRandomSystems(1);
+}
+
+// ---------- Components ----------
+function gainComponents(spec){ // spec: array of types
+  for(const t of spec)G.components[t]++;
+}
+function gainRandomComponents(n){for(let i=0;i<n;i++)G.components[pick(COMP_TYPES)]++}
+function loseComponents(n){
+  for(let i=0;i<n;i++){const avail=COMP_TYPES.filter(t=>G.components[t]>0);if(!avail.length)return;G.components[pick(avail)]--}
+}
+function totalComponents(){return COMP_TYPES.reduce((a,t)=>a+G.components[t],0)}
+
+// ---------- Effect interpreter ----------
+function applyEffects(e,when){
+  if(!e)return;
+  if(e.heat)addHeat(e.heat);
+  if(e.oxygen)addOxygen(e.oxygen);
+  if(e.course)addCourse(e.course);
+  if(e.injure)injureCrew(e.injure,"crisis consequence");
+  if(e.heal)healCrew(e.heal);
+  if(e.damageRandom)damageRandomSystems(e.damageRandom);
+  if(e.destroyRandom)destroyRandomSystems(e.destroyRandom);
+  if(e.damageSystem){const s=systemOfType(e.damageSystem);if(s.state!=="destroyed"){damageStep(s,"named system damage");log(systemName(s)+" is "+(s.state==="destroyed"?"DESTROYED":"damaged")+".","bad")}}
+  if(e.damageSystem2){const s=systemOfType(e.damageSystem2);if(s.state!=="destroyed"){damageStep(s,"named system damage");log(systemName(s)+" is "+(s.state==="destroyed"?"DESTROYED":"damaged")+".","bad")}}
+  if(e.components>0){gainRandomComponents(e.components);log("Recovered "+e.components+" component(s).","good")}
+  if(e.components<0){loseComponents(-e.components);log("Burned through "+(-e.components)+" component(s).","bad")}
+  if(e.ongoing){G.ongoing.push({...e.ongoing});log("Ongoing penalty: "+e.ongoing.text,"bad")}
+  if(e.clearOngoing&&G.ongoing.length){G.ongoing=[];log("All ongoing penalties cleared.","good")}
+  if(e.forecastHidden){G.flags.forecastHidden+=e.forecastHidden;log("Sensors degraded — crisis forecast lost for "+e.forecastHidden+" turns.","bad")}
+  if(e.repairSystem){const s=systemsOfType(e.repairSystem).find(s=>s.state==="damaged");if(s&&s.state==="damaged"){s.state="op";s.damage=null;log(systemName(s)+" patched back to operational.","good")}}
+  if(e.dataLost){G.flags.dataLost=true;log("Mission data uplink failed — the science is lost.","bad")}
+  if(e.noShip){G.flags.noShip=true;log("Recovery beacon silent — the ship will not be recovered intact.","bad")}
+  if(e.shelter){G.flags.shelter+=e.shelter;log("Habitat converted to emergency shelter: the next "+e.shelter+" injuries are absorbed.","good")}
+}
+
+// ---------- Turn flow ----------
+function consume(){
+  G.turn++;
+  let drain=0;
+  const ls=systemOfType("lifesupport");
+  if(ls.state==="destroyed")drain=2;else if(ls.state==="damaged")drain=1;
+  for(const o of G.ongoing){drain+=(-o.oxygen||0)+(o.initialDrain||0);o.initialDrain=0;}
+  if(drain>0){G.oxygen=Math.max(0,G.oxygen-drain);log("Consume: −"+drain+" O₂ → "+G.oxygen+(ls.state!=="op"?" (Life Support "+ls.state+")":""),"bad")}
+  else log("Consume: Life Support holds the air at "+G.oxygen+".","sys");
+  if(G.oxygen===0){log("THE AIR IS GONE.","bad");injureCrew(1,"suffocation")}
+  for(const o of G.ongoing){o.turns--}
+  const expired=G.ongoing.filter(o=>o.turns<=0);
+  for(const o of expired)log("Penalty expired: "+o.text,"sys");
+  G.ongoing=G.ongoing.filter(o=>o.turns>0);
+}
+
+function drawFive(){
+  const alive=shuffle(G.systems.filter(s=>s.state!=="destroyed"));
+  G.drawn=alive.slice(0,5).map(s=>s.id);
+  for(const s of G.systems){s.mode=null;s.patched=false;s.seBoost=false;s.fabricated=null;s.specialists=[]}
+  G.crewBonus={};G.pendingCmdr=false;G.pendingSE=false;G.pendingSpecialist=null;G.missionKeep=[];G.flags.fabricatedThisResponse=false;
+  for(const c of G.crew)c.used=false;
+}
+
+function beginCrisis(doConsume=true){
+  if(G.over)return;
+  if(!G.deck.length){
+    if(G.phase<3){G.step="route";G.crisis=null;render();return}
+    G.crisis=REENTRY;
+    if(doConsume)consume();if(G.over)return;
+    drawFive();G.step="respond";
+    log("▶ FINAL CRISIS: RE-ENTRY. Everything ends here.","sys");render();return;
+  }
+  if(doConsume)consume();if(G.over)return;
+  G.crisis=G.deck.shift();
+  if(G.flags.revealedNext===G.crisis.id)G.flags.revealedNext=null;
+  drawFive();G.step="respond";
+  log("▶ Crisis: "+G.crisis.title+" ["+G.crisis.cat+"]","sys");
+  render();
+}
+
+// ---------- Player actions ----------
+function setMode(id,mode){
+  if(G.step!=="respond"||!G.crisis)return;
+  const s=sys(id);if(!s||!G.drawn.includes(id)||s.state==="destroyed"||s.mode==="b")return;
+  if(!["n","r","s"].includes(mode))return;
+  if(mode==="r"){
+    if(s.state!=="op")return;
+    if(G.flags.noRedline&&POWER_SYSTEMS.includes(s.def.id)){log("Scram lockout: power systems cannot be redlined this crisis.","bad");return}
+  }
+  if(mode==="s"&&s.def.s==null)return;
+  if(mode==="n"&&s.def.r==null&&Object.keys(s.def.n).length===0)return;
+  s.mode=(s.mode===mode)?null:mode;
+  // A mode button is also a target click: finish a pending matching specialist
+  // assignment after committing, without requiring a second click on the card body.
+  if(specialistCanTarget(crew(G.pendingSpecialist),s)){cardClick(id);return;}
+  render();
+}
+function fabricationReason(builderId,type){
+  if(G.over||G.step!=="respond"||!G.crisis)return "Fabrication is only available during a crisis response.";
+  const builder=sys(builderId),def=SYSTEM_DEFS.find(d=>d.id===type);
+  if(!builder||builder.def.id!=="fabricator"||!G.drawn.includes(builder.id))return "Draw the Fabricator to fabricate.";
+  if(builder.state!=="op")return "Repair the Fabricator to fabricate; a patch is not enough.";
+  if(builder.mode)return "The Fabricator is already committed this crisis.";
+  if(!def)return "Unknown system blueprint.";
+  if(!MULTI_SYSTEMS.includes(type)&&systemsOfType(type).some(s=>s.state!=="destroyed"))return "Only one surviving "+def.name+" is allowed; destroy the existing one before building a replacement.";
+  if(G.components[def.comp]<FABRICATION_COST)return "Needs "+FABRICATION_COST+"× "+def.comp+" (you have "+G.components[def.comp]+").";
+  return "";
+}
+function fabricate(builderId,type){
+  const reason=fabricationReason(builderId,type);
+  if(reason){log(reason,"bad");return false;}
+  const builder=sys(builderId),def=SYSTEM_DEFS.find(d=>d.id===type);
+  const serial=systemsOfType(type).length+1;
+  const created=makeSystem(def,type+"#"+serial);
+  G.components[def.comp]-=FABRICATION_COST;
+  G.systems.push(created);
+  builder.mode="b";builder.fabricated=created.id;G.flags.fabricatedThisResponse=true;
+  log("Fabricated "+systemName(created)+" (−"+FABRICATION_COST+" "+def.comp+"). Operational; enters future system draws. "+systemName(builder)+" produces no capabilities this crisis.","good");
+  closeModal();render();return created;
+}
+function cannibaliseGains(s){
+  const gains=s.def.yield3?[s.def.comp,s.def.comp,s.def.comp]:[s.def.comp,s.def.comp,"Wiring"];
+  if(crew("eng")?.state==="ok")gains.push(s.def.comp);
+  return gains;
+}
+function cannibalise(id){
+  if(G.step!=="respond"||G.over)return false;
+  const s=sys(id);if(!s||s.state!=="op")return false;
+  destroySys(s,"cannibalised for components");
+  const gains=cannibaliseGains(s);
+  gainComponents(gains);
+  log("Cannibalised "+systemName(s)+" → "+gains.join(", ")+". It will never fly again.","bad");
+  render();
+}
+function repair(id){
+  if(G.step!=="respond")return;
+  const s=sys(id);if(s.state!=="damaged")return;
+  if(G.components[s.def.comp]<2){log("Repair needs 2× "+s.def.comp+".","bad");return}
+  G.components[s.def.comp]-=2;s.state="op";s.damage=null;s.patched=false;
+  log("Repaired "+systemName(s)+" to operational (−2 "+s.def.comp+").","good");render();
+}
+function patch(id){
+  if(G.step!=="respond")return;
+  const s=sys(id);if(s.state!=="damaged"||s.patched)return;
+  const t=COMP_TYPES.find(t=>G.components[t]>0);
+  if(!t){log("Patch needs 1 component of any type.","bad");return}
+  G.components[t]--;s.patched=true;
+  log("Patched "+systemName(s)+" (−1 "+t+") — full Normal value for this crisis.","good");render();
+}
+function missionReason(){
+  if(!G||G.over||G.step!=="respond"||!G.crisis)return "Mission abilities require a crisis response.";
+  const c=crew("spec");if(!c||c.state!=="ok")return "The Mission Specialist must be healthy.";
+  if(G.flags.specUsed||c.used)return "This Mission ability has already been spent.";
+  if(c.mission==="kim"&&(G.flags.fabricatedThisResponse||G.systems.some(s=>s.mode)))return "Redraw before committing systems or fabricating.";
+  if(c.mission==="adeyemi"&&!G.crew.some(x=>x.state==="injured"))return "No injured crew to heal.";
+  if(c.mission==="voss"&&!G.ongoing.length&&G.oxygen===6)return "No ongoing penalty and Oxygen is already full.";
+  if(c.mission==="nasser"&&G.course===0&&!G.deck.length)return "No Course Error or queued crisis to reveal.";
+  if(c.mission==="chen"&&G.phase===3&&!G.deck.length)return "No unknown future crisis forecasts remain.";
+  return "";
+}
+function redrawMissionSystems(keep){
+  if(!Array.isArray(keep)||keep.length>2||new Set(keep).size!==keep.length||keep.some(id=>!G.drawn.includes(id)||sys(id)?.state==="destroyed"))return false;
+  const old=G.drawn.slice(),alive=G.systems.filter(s=>s.state!=="destroyed"),size=Math.min(5,alive.length),need=size-keep.length;
+  const fresh=shuffle(alive.filter(s=>!old.includes(s.id))).map(s=>s.id);
+  const fallback=shuffle(alive.filter(s=>old.includes(s.id)&&!keep.includes(s.id))).map(s=>s.id);
+  G.drawn=keep.concat(fresh.slice(0,need),fallback.slice(0,Math.max(0,need-fresh.length)));
+  return true; // Do NOT reset crew uses, bonuses, health, patches, boosts or construction flags.
+}
+function useMission(choice){
+  const reason=missionReason();if(reason){log(reason,"bad");return false;}
+  const c=crew("spec");
+  switch(c.mission){
+    case"chen":G.flags.exactForecast=true;log("Dr. Chen plots the threat board — future forecasts are exact when sensors are available.","good");break;
+    case"rahman":
+      if(!COMP_TYPES.includes(choice))return false;
+      gainComponents([choice,choice]);log("Dr. Rahman recovers +2 "+choice+" components.","good");break;
+    case"ortega":G.flags.shelter+=2;log("Dr. Ortega establishes emergency procedures: the next 2 injury hits are absorbed.","good");break;
+    case"nasser":
+      if(G.course>0)addCourse(-1);
+      G.flags.revealedNext=G.deck[0]?.id||null;
+      log("Dr. Nasser corrects the flight plan"+(G.deck[0]?" and reveals "+G.deck[0].title:" (no queued crisis to reveal)")+".","good");break;
+    case"kim":
+      if(!redrawMissionSystems(choice))return false;
+      log("Dr. Kim redraws the systems, keeping "+choice.length+". Crew uses and bonuses remain unchanged.","good");break;
+    case"voss":
+      if(G.ongoing.length){
+        const i=Number(choice);if(choice===undefined||choice===null||choice===""||!Number.isInteger(i)||i<0||i>=G.ongoing.length)return false;
+        const removed=G.ongoing.splice(i,1)[0];log("Dr. Voss clears: "+removed.text+".","good");
+      }
+      addOxygen(1);break;
+    case"adeyemi":healCrew(2);log("Dr. Adeyemi stabilises up to two injured crew. No resurrection.","good");break;
+    default:return false;
+  }
+  c.used=true;G.flags.specUsed=true;closeModal();render();return true;
+}
+function showMissionRedraw(){
+  const rows=G.drawn.map(id=>{
+    const s=sys(id),kept=G.missionKeep.includes(id),disabled=!kept&&G.missionKeep.length>=2;
+    return '<div class="blueprint"><button data-act="mission-keep" data-id="'+id+'" '+(disabled?"disabled":"")+(kept?' class="on"':"")+' title="Choose up to two current cards to keep">'+(kept?"Kept":"Keep")+'</button><b>'+systemName(s)+'</b><div class="details">'+s.state.toUpperCase()+' · Normal: '+fmtCaps(systemOutput(s,"n"))+'</div></div>';
+  }).join("");
+  showModal('<h2>DR. KIM — REDRAW SYSTEMS</h2><p>Keep up to two cards; redraw the rest. Fresh surviving cards are preferred. Crew uses, bonuses, patches and health are not reset.</p><p>Keeping '+G.missionKeep.length+'/2 cards.</p>'+rows+'<div style="text-align:center;margin-top:14px"><button data-act="mission-redraw">Confirm redraw</button> <button data-act="closemodal">Cancel</button></div>');
+}
+function toggleMissionKeep(id){
+  if(crew("spec")?.mission!=="kim"||missionReason()||!G.drawn.includes(id))return;
+  if(G.missionKeep.includes(id))G.missionKeep=G.missionKeep.filter(x=>x!==id);
+  else if(G.missionKeep.length<2)G.missionKeep.push(id);
+  showMissionRedraw();
+}
+function showMissionAction(){
+  const reason=missionReason();if(reason){log(reason,"bad");return;}
+  const c=crew("spec");
+  if(c.mission==="kim"){G.missionKeep=[];showMissionRedraw();return;}
+  if(c.mission==="rahman"){
+    showModal('<h2>DR. RAHMAN — RECOVER PARTS</h2><p>Choose one component type to gain two. This spends the once-per-game ability.</p>'+COMP_TYPES.map(t=>'<div class="blueprint"><button data-act="mission-effect" data-choice="'+t+'">Gain 2</button><b>'+t+'</b> · currently '+G.components[t]+'</div>').join("")+'<button data-act="closemodal">Cancel</button>');return;
+  }
+  if(c.mission==="voss"&&G.ongoing.length){
+    showModal('<h2>DR. VOSS — STABILISE ENVIRONMENT</h2><p>Choose one ongoing penalty to clear, then restore 1 Oxygen.</p>'+G.ongoing.map((o,i)=>'<div class="blueprint"><button data-act="mission-effect" data-choice="'+i+'">Clear</button>'+o.text+' · '+o.turns+' turns left</div>').join("")+'<button data-act="closemodal">Cancel</button>');return;
+  }
+  useMission();
+}
+function crewClick(id){
+  if(G.step!=="respond"||!G.crisis)return;
+  // Armed Commander / Systems Engineer abilities can be stood down before targeting.
+  if(G.pendingCmdr&&id==="cmdr"){G.pendingCmdr=false;crew("cmdr").used=false;render();return}
+  if(G.pendingSE&&id==="syseng"){G.pendingSE=false;crew("syseng").used=false;render();return}
+  const c=crew(id);if(!c||c.state!=="ok"||c.used)return;
+  if(c.cap){G.pendingSE=false;G.pendingSpecialist=G.pendingSpecialist===id?null:id;render();return;}
+  switch(id){
+    case"cmdr":c.used=true;G.pendingCmdr=true;break;
+    case"syseng":c.used=true;G.pendingSpecialist=null;G.pendingSE=true;break;
+    case"doc":c.used=true;{
+      const inj=G.crew.find(x=>x.state==="injured"&&x.id!=="doc");
+      if(inj){inj.state="ok";inj.injury=null;log("Doctor stabilises "+inj.name+".","good")}
+      else{G.crewBonus.LFS=(G.crewBonus.LFS||0)+2;log("Doctor: +2 Life Support.","sys")}
+    }break;
+    case"spec":showMissionAction();return;
+  }
+  render();
+}
+function reqClick(cap){
+  if(!G.pendingCmdr)return;
+  G.crewBonus[cap]=(G.crewBonus[cap]||0)+1;G.pendingCmdr=false;
+  log("Commander: +1 "+CAPS[cap]+".","sys");render();
+}
+function specialistCanTarget(c,s,mode=s?.mode){
+  return !!(G.step==="respond"&&!G.over&&c&&c.cap&&c.state==="ok"&&!c.used&&s&&s.state!=="destroyed"&&G.drawn.includes(s.id)&&["n","r","s"].includes(mode)&&(s.def[mode]?.[c.cap]||0)>0);
+}
+function cardClick(id){
+  if(G.step!=="respond"||!G.crisis||G.over)return;
+  const s=sys(id);
+  if(G.pendingSpecialist){
+    const c=crew(G.pendingSpecialist);
+    if(!specialistCanTarget(c,s))return;
+    s.specialists.push(c.id);c.used=true;G.pendingSpecialist=null;
+    log(c.role+": +2 "+CAPS[c.cap]+" on "+systemName(s)+" this crisis.","sys");render();return;
+  }
+  if(!G.pendingSE||!s||!G.drawn.includes(id)||s.state!=="damaged")return;
+  s.seBoost=true;G.pendingSE=false;
+  log("Systems Engineer coaxes "+systemName(s)+" to full Normal output.","sys");render();
+}
+
+// ---------- Totals ----------
+function half(obj){const o={};for(const k in obj)o[k]=Math.floor(obj[k]/2);return o}
+function addInto(t,obj){for(const k in obj)t[k]=(t[k]||0)+obj[k]}
+function systemOutput(s,mode=s.mode,fullNormal=false){
+  if(s.state==="destroyed"||!["n","r","s"].includes(mode))return {};
+  const raw=s.def[mode];if(!raw)return {};
+  const eff=mode==="n"&&s.state==="damaged"&&!s.patched&&!s.seBoost&&!fullNormal?half(raw):{...raw};
+  for(const id of s.specialists){const c=crew(id);if(c?.state==="ok"&&(raw[c.cap]||0)>0)eff[c.cap]=(eff[c.cap]||0)+2;}
+  return eff;
+}
+function computeTotals(){
+  const t={};
+  for(const id of G.drawn)addInto(t,systemOutput(sys(id)));
+  addInto(t,G.crewBonus);
+  return t;
+}
+function computeHeat(){
+  let h=0;
+  for(const id of G.drawn){const s=sys(id);if(!s.mode)continue;
+    h+=s.mode==="n"?(s.def.nh||0):s.mode==="r"?(s.def.rh||0):s.mode==="s"?(s.def.sh||0):0}
+  return h;
+}
+
+// ---------- Resolution ----------
+function crisisRequirementsMet(c,totals){
+  return [c.req,...(c.alt?[c.alt]:[])].some(req=>Object.entries(req).every(([k,v])=>(totals[k]||0)>=v));
+}
+// Pay the requirements of one satisfied arm. All remaining output in capabilities
+// mentioned by either arm earns rewards, including partial alternatives; shared caps count once.
+function crisisSuccessComponents(c,totals){
+  if(!c?.req)return 0;
+  const arms=[c.req,...(c.alt?[c.alt]:[])];
+  const satisfied=arms.filter(req=>Object.entries(req).every(([k,v])=>(totals[k]||0)>=v));
+  if(!satisfied.length)return 0;
+  const caps=[...new Set(arms.flatMap(req=>Object.keys(req)))];
+  return Math.max(...satisfied.map(req=>caps.reduce((n,k)=>n+(totals[k]||0)-(req[k]||0),0)));
+}
+function awardSurplusComponents(c,totals){
+  const n=crisisSuccessComponents(c,totals);
+  if(n){gainRandomComponents(n);log("Surplus response: gained "+n+" random Component"+(n===1?"":"s")+" from excess required output.","good")}
+  return n;
+}
+// Redline damage and Sacrifice destruction follow every committed crisis response,
+// including Direct-route burns and the final Re-entry — a burn is not a free escalation.
+function applyModeConsequences(){
+  for(const id of G.drawn.slice()){
+    const s=sys(id);
+    if(s.mode==="r"){const already=s.state==="damaged";damageStep(s,"redlining");log(systemName(s)+" is "+(s.state==="destroyed"?"DESTROYED":"damaged")+" by redlining"+(already&&s.state==="destroyed"?" (already damaged by the crisis)":"")+".","bad")}
+    else if(s.mode==="s"){destroySys(s,"sacrificed for crisis output");log(systemName(s)+" is sacrificed — gone for good.","bad")}
+    s.patched=false;s.mode=null;s.seBoost=false;
+  }
+}
+function resolveCrisis(){
+  if(G.step!=="respond"||!G.crisis)return;
+  const C=G.crisis;
+  G.flags.noRedline=false; // scram lockout only lasts one crisis
+  G.pendingCmdr=false;G.pendingSE=false;G.pendingSpecialist=null;
+  const totals=computeTotals();
+  const arms=[C.req];if(C.alt)arms.push(C.alt);
+  const success=crisisRequirementsMet(C,totals);
+  // heat: generated minus surplus cooling (surplus measured against the cheapest arm)
+  const clgMin=Math.min(...arms.map(a=>a.CLG||0));
+  const surplus=Math.max(0,(totals.CLG||0)-clgMin);
+  const heatNet=computeHeat()-surplus;
+  if(heatNet!==0)addHeat(heatNet);
+  if(surplus>0)log("Surplus cooling bleeds off "+surplus+" heat.","good");
+  // sacrifice side-effects
+  for(const id of G.drawn.slice()){
+    const s=sys(id);
+    if(s.mode==="s"&&s.def.sfx)applyEffects(s.def.sfx);
+  }
+  // surplus Navigation corrects drift: nav capability spent beyond the requirement pays down course error
+  const navMin=Math.min(...arms.map(a=>a.NAV||0));
+  const surplusNav=Math.max(0,(totals.NAV||0)-navMin);
+  if(!C.route&&surplusNav>=3&&G.course>0){addCourse(-1);log("Surplus navigation capacity trims the course error.","good")}
+  // Success Components use the committed output captured before resolution effects.
+  // This includes Direct-route burns and final Re-entry, with zero RNG draws for zero surplus.
+  if(success)awardSurplusComponents(C,totals);
+  // outcome
+  if(C.route){
+    const target=C.target;
+    if(success){log("Burn nominal — the short route holds. Two journey cards fall away.","good");buildDeck(target,BASE_DECK[target]-2)}
+    else{log("The burn falls short. The engines pay for it.","bad");damageEngine();buildDeck(target,BASE_DECK[target]-1)}
+    applyModeConsequences();
+    if(G.over){render();return;}
+    G.phase=target;
+    log("Phase "+["","I — ACCIDENT","II — TRANSIT","III — RETURN"][target]+". Distance home ≈ "+distanceEstimate()+" crises.","sys");
+    G.crisis=null;beginCrisis(true);return;
+  }
+  // Sensor-blinding ticks as the hidden crisis resolves: a penalty applied by this
+  // resolution starts counting from the next crisis, and route burns (which show no
+  // forecast) returned above without ticking.
+  if(G.flags.forecastHidden>0)G.flags.forecastHidden--;
+  if(success){
+    log("RESOLVED: "+C.title+". The ship limps onward.","good");
+    applyEffects(C.win);
+  }else{
+    const missing=arms.map(req=>Object.entries(req).filter(([k,v])=>(totals[k]||0)<v).map(([k,v])=>CAPS[k]+" "+(totals[k]||0)+"/"+v).join(", ")).join("  — or —  ");
+    log("FAILED: "+C.title+" ("+missing+").","bad");
+    applyEffects(C.fail);
+  }
+  if(G.over){render();return;}
+  applyModeConsequences();
+  if(G.over)return;
+  if(C.terminal){endGame(success);return}
+  G.crisis=null;
+  beginCrisis(true);
+}
+
+function buildDeck(phase,count){
+  const n=Math.max(2,Math.min(count,G.pools[phase].length));
+  G.deck=G.pools[phase].slice(0,n);
+}
+
+function distanceEstimate(){
+  let d=G.deck.length+(G.crisis&&!G.crisis.route?1:0);
+  if(G.phase<2)d+=BASE_DECK[2];
+  if(G.phase<3)d+=BASE_DECK[3];
+  if(!(G.crisis&&G.crisis.terminal))d+=1; // re-entry
+  return d;
+}
+
+// ---------- Routes ----------
+function routeSafe(){
+  const target=G.phase<3?G.phase+1:3;
+  log("Route decision: gentle profile. The journey stretches by two crises.","sys");
+  buildDeck(target,BASE_DECK[target]+2);
+  G.phase=target;
+  log("Phase "+["","I — ACCIDENT","II — TRANSIT","III — RETURN"][target]+". Distance home ≈ "+distanceEstimate()+" crises.","sys");
+  closeModal();beginCrisis(true);
+}
+function routeDirect(){
+  const target=G.phase+1;
+  const R=ROUTES[target];
+  G.crisis={id:"route"+target,route:true,target,cat:R.cat,title:R.title,flavor:R.flavor,req:R.req,fail:{},win:{}};
+  drawFive();G.step="respond";
+  log("Route decision: committed to the burn. Meet the requirement or the engines pay.","sys");
+  closeModal();render();
+}
+
+// ---------- Endgame ----------
+function endGame(reentrySuccess){
+  if(reentrySuccess)log("RE-ENTRY NOMINAL. The horizon stops falling. Blue sky.","good");
+  else log("HARD RE-ENTRY. The capsule comes in ugly and screaming — but it comes down.","bad");
+  if(G.over)return;
+  const alive=G.crew.filter(c=>c.state!=="dead").length;
+  const allAlive=alive===G.crew.length;
+  const opSystems=G.systems.filter(s=>s.state==="op").length;
+  const dataOk=!G.flags.dataLost&&systemOfType("cargo").state!=="destroyed";
+  const shipOk=reentrySuccess&&!G.flags.noShip&&G.systems.some(s=>ENGINE_SYSTEMS.includes(s.def.id)&&s.state==="op");
+  const lines=[
+    ["Reached Earth","+10",10],
+    ["Crew alive × "+alive,"+3 each",3*alive],
+    ["Operational systems × "+opSystems,"+1 each",opSystems],
+    ["Unused components × "+totalComponents(),"+1 each",totalComponents()],
+    [dataOk?"Mission data recovered":"Mission data LOST",dataOk?"+5":"+0",dataOk?5:0],
+    [shipOk?"Spacecraft recovered":"Spacecraft NOT recovered",shipOk?"+5":"+0",shipOk?5:0],
+  ];
+  const score=lines.reduce((a,l)=>a+l[2],0);
+  const title=(allAlive&&shipOk)?"ODYSSEY RETURNED":"EMERGENCY RE-ENTRY";
+  const flavor=allAlive&&shipOk
+    ?"Every crew member walks down the gantry. The ship behind them is a museum of scorch marks and jury-rigs — and it is still, technically, a ship."
+    :"The recovery crews count the survivors, then the wreckage. Both numbers could have been worse. Both were bought with something.";
+  gameOver(true,title,flavor,lines,score);
+}
+function gameOver(win,title,flavor,lines,score){
+  if(G.over)return;
+  G.over={win,title,flavor,lines:lines||[],score:score||0};
+  G.step="over";
+  log("═══ "+title+" ═══",win?"good":"bad");
+  render();
+}
+
+// ---------- Rendering ----------
+const $=id=>document.getElementById(id);
+function segTrack(label,val,max,warnAt,critAt,tip){
+  let segs="";
+  for(let i=1;i<=max;i++){const f=i<=val;const cls=f?(critAt&&val>=critAt?"f crit":(warnAt&&val>=warnAt?"f warn":"f")):"";segs+='<span class="seg '+cls+'"></span>'}
+  return '<span class="track" title="'+tip+'"><span class="label">'+label+'</span>'+segs+'<span class="val">'+val+(critAt&&val>=critAt?" CRITICAL":"")+"</span></span>";
+}
+function fmtCaps(obj){return Object.entries(obj).map(([k,v])=>CAPS[k]+" "+v).join(" + ")||"—"}
+function fxText(e){
+  if(!e||!Object.keys(e).length)return"—";
+  const names={heat:"Heat",oxygen:"Oxygen",course:"Course error",injure:"Crew injuries",heal:"Heal crew",damageRandom:"random systems damaged",destroyRandom:"random systems destroyed",damageSystem:"system damaged",components:"components",ongoing:"ongoing penalty",clearOngoing:"clear ongoing penalties",forecastHidden:"forecast lost",repairSystem:"repair",dataLost:"mission data lost",noShip:"recovery at risk",shelter:"shelter"};
+  return Object.entries(e).map(([k,v])=>{
+    if(k==="ongoing")return v.text+" for "+v.turns+" turn"+(v.turns===1?"":"s")+(v.initialDrain?"; extra −"+v.initialDrain+" Oxygen on the first Consume":"");
+    if(k==="forecastHidden")return "forecast lost for "+v+" turn"+(v===1?"":"s");
+    if(k==="components")return v>0?("+"+v+" components gained"):("−"+Math.abs(v)+" components spent");
+    if(k==="damageSystem")return sys(v).def.name+" damaged";
+    if(k==="damageSystem2")return sys(v).def.name+" damaged";
+    if(k==="repairSystem")return sys(v).def.name+" repaired";
+    if(k==="clearOngoing")return names[k];
+    const num=typeof v==="number"?((v>0?"+":"−")+Math.abs(v)+" "):"";
+    return num+(names[k]||k);
+  }).join("; ");
+}
+function renderFitness(){
+  const button=$("debugBtn"),display=$("fitnessDebug");
+  button.ariaPressed=String(debugFitness);
+  if(debugFitness)button.classList.add("on");else button.classList.remove("on");
+  display.hidden=!debugFitness;
+  if(!debugFitness){display.textContent="";return;}
+  const f=handFitnessBreakdown();
+  display.textContent="FITNESS "+f.value.toFixed(4);
+  display.title="ASSET FITNESS — heuristic, not win probability. Systems (55%): "+f.systems.toFixed(4)+"; crew (35%): "+f.crew.toFixed(4)+"; components (10%): "+f.components.toFixed(4)+". Uses the entire pool, actual roster and typed spares. Ignores draws, commitments, temporary bonuses/uses, tracks, phase, distance and flags."+(f.viable?"":" No living crew or surviving systems: fitness is zero.");
+}
+function render(){
+  renderFitness();
+  $("difficultySelect").value=G.difficulty;
+  $("seedBox").textContent="SEED "+SEED;
+  $("seedBox").title="Replay/share this seed and difficulty: index.html"+runQuery(SEED);
+  $("reportBtn").disabled=!G.over;
+  // tracks
+  $("tracks").innerHTML=
+    segTrack("HEAT",G.heat,5,3,5,"HEAT 0–5. Power systems add HEAT when used; COOLING spent beyond a crisis's requirement bleeds it off. At 5 the reactor SCRAMs: a power system is damaged and power systems cannot redline next crisis.")+
+    segTrack("OXYGEN",G.oxygen,6,2,0,"OXYGEN 0–6. Holds steady while any Life Support is OPERATIONAL; −1 per turn if none are operational but one is damaged, −2 if all are destroyed. At 0, crew start dying — if all crew die, the mission is lost.")+
+    segTrack("COURSE ERROR",G.course,3,2,3,"COURSE ERROR 0–3. Raised by failed navigation crises; paid down by spending NAVIGATION ≥3 beyond a crisis's requirement. At 3 the ship misses home and is lost.")+
+    '<span class="track" title="Estimated crises remaining until Earth — route decisions between phases change it. Reach 0 and survive RE-ENTRY to win."><span class="label">DISTANCE HOME</span><span class="val">≈ '+distanceEstimate()+' crises</span></span>'+
+    '<span class="track" title="The journey has three escalating crisis decks: I ACCIDENT, II TRANSIT, III RETURN. Between phases you choose a route."><span class="label">PHASE</span><span class="val">'+["","I · ACCIDENT","II · TRANSIT","III · RETURN"][G.phase]+"</span></span>";
+  renderCrisis();renderDrawn();renderCrew();renderComponents();renderLog();renderTableau();
+  if(G.step==="route")showRouteModal();
+  if(G.over)showGameOverModal();
+}
+function renderCrisis(){
+  const c=G.crisis;
+  if(!c){
+    $("crisis").innerHTML='<div class="title">'+(G.over?"MISSION OVER":G.step==="route"?"TRAJECTORY DECISION":"…")+"</div>"+
+      '<div class="flavor">'+(G.step==="route"?"Choose how hard to push the ship on the next leg.":"")+"</div>";
+    $("forecast").textContent="";return;
+  }
+  const totals=computeTotals();
+  const chip=(k,v,alt)=>{
+    const have=totals[k]||0;
+    return '<span class="reqchip '+(have>=v?"met":"unmet")+(G.pendingCmdr?" pickable":"")+'" data-act="req" data-id="'+k+'" title="'+(alt?"ALTERNATIVE requirement — meeting EITHER arm resolves the crisis. ":"")+'This arm requires '+CAPS[k]+' '+v+'; committed systems and crew are currently producing '+have+'.'+(G.pendingCmdr?" Click to apply the Commander's +1 here.":"")+'">'+CAPS[k]+" "+have+"/"+v+"</span>";
+  };
+  const arm=(req,alt)=>'<span class="reqarm">'+Object.entries(req).map(([k,v])=>chip(k,v,alt)).join('<span class="orsep">— AND —</span>')+'</span>';
+  let chips=arm(c.req,false);
+  if(c.alt)chips+='<span class="orsep">— OR —</span>'+arm(c.alt,true);
+  const ready=crisisRequirementsMet(c,totals),reward=crisisSuccessComponents(c,totals);
+  const rewardText=reward?reward+' random Component'+(reward===1?'':'s'):'no Components';
+  const readiness=G.step==="respond"&&!G.over?'<div class="reqstatus '+(ready?"met":"unmet")+'" title="'+(c.alt?"Every requirement in either complete arm suffices. Rewards pay one satisfied arm, then count unused output toward either arm, including partial alternatives.":"Every listed requirement must be met together.")+' Only excess in required capabilities earns Components; unrelated output does not. This predicts crisis success, not heat, system-use consequences or next-turn Oxygen drain.">'+(ready?'✓ Requirements met — resolving succeeds · surplus reward: '+rewardText:'✗ Requirements unmet — resolving fails · no surplus reward')+'</div>':"";
+  const otherBenefits=fxText(c.win),successText=(otherBenefits==='—'?'':otherBenefits+'; ')+'1 random Component per unused point in listed capabilities (including partial OR alternatives)';
+  $("crisis").innerHTML=
+    '<div class="cat">'+c.cat+(c.terminal?" · FINAL CRISIS":c.route?" · TRAJECTORY BURN":"")+"</div>"+
+    '<div class="title">'+c.title+"</div>"+
+    '<div class="flavor">'+c.flavor+"</div>"+
+    "<div>"+chips+"</div>"+readiness+
+    (c.route?'<div class="fx"><span class="fail">✗ Failure: an engine system is damaged and only 1 journey card is removed.</span><br><span class="win">✓ Success: 2 journey cards are removed. '+successText+"</span></div>":'<div class="fx"><span class="fail">✗ Failure: '+fxText(c.fail)+'</span><br><span class="win">✓ Success: '+successText+"</span></div>");
+  // forecast
+  let fc="";
+  if(!c.route&&!c.terminal){
+    const n=G.deck[0],oneReveal=n&&G.flags.revealedNext===n.id;
+    if(G.flags.forecastHidden>0&&!oneReveal)fc="NEXT CRISIS: ▓▓ SENSORS BLIND ▓▓";
+    else if(!n)fc=G.phase<3?"AHEAD: TRAJECTORY DECISION":"AHEAD: RE-ENTRY";
+    else fc="NEXT CRISIS: "+(G.flags.exactForecast||oneReveal?n.title+" — "+fmtCaps(n.req)+(n.alt?" or "+fmtCaps(n.alt):""):"category "+n.cat);
+  }
+  $("forecast").textContent=fc;
+  $("forecast").title="PARTIAL FORECAST — only the category of the next crisis is known, so sacrifices are informed gambles. Chen can reveal all future forecasts; Nasser reveals only the next queued crisis. Other Mission Specialists have different once-per-game abilities.";
+}
+function fmtGains(gains){
+  const counts={};for(const t of gains)counts[t]=(counts[t]||0)+1;
+  return Object.entries(counts).map(([t,n])=>n+"× "+t).join(" + ");
+}
+function sfxWords(fx){
+  const p=[];
+  if(fx.oxygen)p.push("restores "+fx.oxygen+" Oxygen");
+  if(fx.heal)p.push("heals "+fx.heal+" injured crew member"+(fx.heal>1?"s":""));
+  if(fx.components)p.push("yields "+fx.components+" components");
+  if(fx.shelter)p.push("absorbs the next "+fx.shelter+" crew injuries");
+  return p.join(" and ");
+}
+function cardTooltip(s){
+  const d=s.def;const L=[d.desc,""];
+  const halfNote=s.state==="damaged"?" (currently DAMAGED: halved to "+fmtCaps(half(d.n))+")":"";
+  if(Object.keys(d.n).length)L.push("NORMAL — "+fmtCaps(d.n)+(d.nh?", and adds "+d.nh+" HEAT":"")+". The system stays operational."+halfNote);
+  if(d.r)L.push("REDLINE — "+fmtCaps(d.r)+(d.rh?", and adds "+d.rh+" HEAT":"")+". Afterwards this system is DAMAGED: half Normal output and no redlining until repaired.");
+  if(d.s&&(Object.keys(d.s).length||d.sfx))L.push("SACRIFICE — "+(Object.keys(d.s).length?fmtCaps(d.s):"no capability output")+(d.sfx?", and "+sfxWords(d.sfx):"")+". Afterwards this system is DESTROYED forever.");
+  if(d.passive)L.push("PASSIVE — "+d.passive+".");
+  L.push("");
+  L.push("Cannibalise (operational only): destroy for "+fmtGains(cannibaliseGains(s))+" (no crisis effect)."+(s.state==="damaged"?" Unavailable until permanently repaired; patches and crew boosts do not qualify.":""));
+  L.push("Repair (damaged → operational, permanent): 2× "+d.comp+". Patch (full Normal for one crisis): 1× any component.");
+  L.push("Fabricate a new instance: "+FABRICATION_COST+"× "+d.comp+". "+(MULTI_SYSTEMS.includes(d.id)?"Multiple surviving copies allowed.":"Only one surviving copy; a destroyed instance may be replaced."));
+  if(s.specialists.length)L.push("Specialist assignments: "+s.specialists.map(id=>crew(id).role+" +2 "+CAPS[crew(id).cap]).join(", ")+". These add to the selected mode only while it produces the matching capability; cancelling does not refund crew use.");
+  if(d.id==="fabricator")L.push("FABRICATE — while drawn, operational and uncommitted, build one system instead of producing capabilities. The new card joins future draws, not this hand. Repair first if damaged; a patch is insufficient.");
+  return L.join("\n");
+}
+function cardValsText(s){
+  const d=s.def,lines=[];
+  const halfNote=s.state==="damaged"&&!s.patched&&!s.seBoost;
+  if(Object.keys(d.n).length)lines.push("N  "+fmtCaps(halfNote?half(d.n):d.n)+(d.nh?"  +"+d.nh+" HEAT":"")+(halfNote?"  (damaged: halved)":""));
+  if(d.r)lines.push("R  "+fmtCaps(d.r)+(d.rh?"  +"+d.rh+" HEAT":"")+"  → damaged");
+  if(d.s&&(Object.keys(d.s).length||d.sfx))lines.push("S  "+fmtCaps(d.s)+(d.sfx?" + "+sfxText(d.sfx):"")+"  → destroyed");
+  if(d.passive)lines.push("◦ "+d.passive);
+  lines.push("⚙ cannibalise → "+fmtGains(cannibaliseGains(s))+(s.state==="damaged"?" (repair first)":""));
+  lines.push("repair: 2× "+d.comp);
+  lines.push("patch: 1× any component");
+  lines.push("fabricate: "+FABRICATION_COST+"× "+d.comp+" · "+(MULTI_SYSTEMS.includes(d.id)?"multiple copies":"one surviving copy"));
+  return lines.join("\n");
+}
+function sfxText(fx){
+  const parts=[];
+  if(fx.oxygen)parts.push("O₂+"+fx.oxygen);
+  if(fx.heal)parts.push("heal "+fx.heal);
+  if(fx.components)parts.push("+"+fx.components+" components");
+  if(fx.shelter)parts.push("shelter "+fx.shelter);
+  return parts.join(", ");
+}
+function contribText(s){
+  if(!s.mode)return"";
+  if(s.mode==="b")return "→ Fabricated "+systemName(sys(s.fabricated))+" · no capability output";
+  const eff=systemOutput(s);
+  const heat=s.mode==="n"?(s.def.nh||0):s.mode==="r"?(s.def.rh||0):(s.def.sh||0);
+  return "→ "+fmtCaps(eff)+(heat?"  +"+heat+" HEAT":"");
+}
+function renderDrawn(){
+  const el=$("drawn");
+  if(G.step==="route"){el.innerHTML='<span style="color:var(--dim)">No crisis in progress.</span>';$("totals").textContent="";$("hint").textContent="";$("resolveBtn").disabled=true;return}
+  if(!G.drawn.length){el.innerHTML='<span style="color:var(--red)">NO SYSTEMS REMAIN.</span>';$("totals").textContent="";return}
+  el.innerHTML=G.drawn.map(id=>{
+    const s=sys(id);
+    const canN=Object.keys(s.def.n).length>0&&s.mode!=="b";
+    const canR=!!s.def.r&&s.state==="op"&&s.mode!=="b"&&!(G.flags.noRedline&&POWER_SYSTEMS.includes(s.def.id));
+    const canS=s.def.s!=null&&s.mode!=="b";
+    const selected=crew(G.pendingSpecialist);
+    const targetable=G.pendingSE&&s.state==="damaged"||specialistCanTarget(selected,s)||!s.mode&&((canN&&specialistCanTarget(selected,s,"n"))||(canR&&specialistCanTarget(selected,s,"r"))||(canS&&specialistCanTarget(selected,s,"s")));
+    const cls=["card",s.state,s.patched?"patched":"",targetable?"searmed":""].join(" ");
+    return '<div class="'+cls+'" data-act="card" data-id="'+id+'" title="'+cardTooltip(s)+'">'+
+      '<div class="name">'+systemName(s)+"</div>"+
+      '<div class="vals">'+cardValsText(s)+"</div>"+
+      '<div class="contrib">'+contribText(s)+"</div>"+
+      '<div class="modes">'+
+        '<button data-act="mode" data-id="'+id+'" data-mode="n" '+(canN?"":"disabled")+(s.mode==="n"?' class="on"':"")+' title="NORMAL — modest effect; the system stays operational">Normal</button>'+
+        '<button data-act="mode" data-id="'+id+'" data-mode="r" '+(canR?"":"disabled")+(s.mode==="r"?' class="on danger"':"")+(canR?"":' class="danger"')+' title="REDLINE — powerful effect; the system becomes DAMAGED after the crisis (damaged systems give half Normal and cannot redline)">Redline</button>'+
+        '<button data-act="mode" data-id="'+id+'" data-mode="s" '+(canS?"":"disabled")+(s.mode==="s"?' class="on sac"':"")+(canS?"":' class="sac"')+' title="SACRIFICE — exceptional one-off effect; the system is DESTROYED permanently">Sacrifice</button>'+
+      "</div>"+
+      '<div class="xactions">'+
+        '<button data-act="cann" data-id="'+id+'" '+(s.state==="op"?"":"disabled")+' title="CANNIBALISE — operational systems only; permanently repair damaged systems first. Destroy this system now to gain components: '+fmtGains(cannibaliseGains(s))+'. No crisis effect, and the system is gone for good">⚙ Cannibalise</button>'+
+        (s.state==="damaged"?'<button data-act="repair" data-id="'+id+'" title="REPAIR — spend 2× '+s.def.comp+' to restore this damaged system to OPERATIONAL, permanently">Repair</button>'+
+          (s.patched?"":'<button data-act="patch" data-id="'+id+'" title="PATCH — spend 1 component of any type: this damaged system acts at full Normal value for this crisis only">Patch</button>'):"")+
+      "</div>"+
+      (s.def.id==="fabricator"?'<button class="buildbtn" data-act="fabrication" data-id="'+id+'" '+(s.state==="op"&&!s.mode?"":"disabled")+' title="FABRICATE — spend 4 matching components to build one new system instead of producing capabilities. Operational and uncommitted Fabricator required; the new card enters future draws.">'+(s.mode==="b"?"Fabricated this crisis":"Fabricate a system…")+'</button>':"")+"</div>";
+  }).join("");
+  // totals line
+  const t=computeTotals();const heat=computeHeat();
+  const C=G.crisis;const arms=C?[C.req,...(C.alt?[C.alt]:[])]:[];const surplus=C?Math.max(0,(t.CLG||0)-Math.min(...arms.map(a=>a.CLG||0))):0;
+  $("totals").innerHTML='<span title="Total capability output of all committed systems and crew this crisis, plus the HEAT those commitments will add when you Resolve">'+"Output: <b>"+(fmtCaps(t)||"nothing")+"</b>"+(heat?(' · <b style="color:var(--amb)">+'+heat+" HEAT</b>"+(surplus?" · COOLING −"+surplus+" HEAT":"")):(surplus?' · COOLING −'+surplus+" HEAT":""))+"</span>";
+  $("hint").textContent=G.pendingSpecialist?crew(G.pendingSpecialist).role+" selected — choose a matching system's output mode, or click its card if already committed, for +2 "+CAPS[crew(G.pendingSpecialist).cap]+".":G.pendingCmdr?"Commander committed — click a requirement chip above to add +1.":
+                        G.pendingSE?"Systems Engineer committed — click a DAMAGED system card to restore full Normal value.":"";
+  $("resolveBtn").disabled=G.step!=="respond";
+}
+function renderCrew(){
+  $("crew").innerHTML=G.crew.map(c=>{
+    const cls="crewmember "+(c.state==="ok"?"":c.state);
+    const badge=c.state==="ok"?'<span class="badge b-ok">HEALTHY</span>':c.state==="injured"?'<span class="badge b-injured">INJURED</span>':'<span class="badge b-dead">DEAD</span>';
+    const missionBlock=c.id==="spec"?missionReason():"";
+    const canUse=G.step==="respond"&&G.crisis&&c.state==="ok"&&!c.used&&!missionBlock;
+    const label=(G.pendingSpecialist===c.id||(G.pendingCmdr&&c.id==="cmdr")||(G.pendingSE&&c.id==="syseng"))?"Cancel targeting":c.cap?"Assign +2":c.id==="spec"?(G.flags.specUsed?"Spent":c.action):c.id==="doc"?"Heal / +2 Med":"Use";
+    return '<div class="'+cls+'" title="CREW — Healthy crew may use ordinary abilities once per crisis, or their Mission ability once per game. INJURED crew lose their ability until healed by the Doctor or a crisis effect; a second injury kills. If all crew die, the mission is lost.\n\nAbility: '+c.tip+'"><span class="cname">'+c.name+"</span>"+badge+
+      '<div class="crole">'+c.role+(c.field?" — "+c.field:"")+'</div><div class="cability">'+c.ability+"</div>"+
+      '<button data-act="crew" data-id="'+c.id+'" '+(canUse?"":"disabled")+(missionBlock?' title="'+missionBlock+'"':"")+(c.used||G.pendingSpecialist===c.id?' class="on"':"")+">"+(c.id==="spec"&&G.flags.specUsed?"Spent":c.used?"Committed":label)+"</button></div>";
+  }).join("");
+}
+function renderComponents(){
+  $("components").innerHTML=COMP_TYPES.map(t=>'<span class="comp" title="COMPONENTS — spare parts, gained mainly by cannibalising systems. REPAIR a damaged system: 2× matching type. PATCH for one crisis: 1× any type. FABRICATE a new system: 4× matching type, using the operational drawn Fabricator. Unused components score +1 each at the end.">'+t+" <b>"+G.components[t]+"</b></span>").join("")+
+    '<div style="font-size:10px;color:var(--dim)">Repair: 2× matching type · Patch: 1× any · Cannibalise an operational system to gain parts'+(G.flags.shelter?'<br>Emergency shelter: absorbs next '+G.flags.shelter+" injuries":"")+(G.flags.noRedline?'<br><span style="color:var(--amb)">SCRAM LOCKOUT — no power redlines this crisis</span>':"")+"</div>";
+  const fabricator=G.systems.find(s=>s.def.id==="fabricator"&&G.drawn.includes(s.id)&&s.state==="op"&&!s.mode)||G.systems.find(s=>s.def.id==="fabricator"&&G.drawn.includes(s.id))||systemOfType("fabricator");
+  $("components").innerHTML+='<div style="margin-top:8px"><button data-act="fabrication" data-id="'+fabricator.id+'" '+(G.step==="respond"?"":"disabled")+' title="View every system blueprint, its 4-component fabrication cost, copy limit and current availability">Fabrication catalog</button><div style="font-size:10px;color:var(--dim)">Operational drawn Fabricator required · replaces its output this crisis</div></div>';
+  $("ongoingList").innerHTML=G.ongoing.map(o=>'<span title="ONGOING PENALTY — a persistent consequence of a failed crisis. It applies every Consume step until its turns run out (or a success effect clears it).">'+"⚠ "+o.text+" ("+o.turns+" turns left)</span>").join("<br>");
+}
+function renderLog(){
+  $("log").innerHTML=G.log.map(l=>'<div class="'+l.cls+'"><span class="t">'+(l.t?"T"+String(l.t).padStart(2,"0"):"··")+"</span> "+l.msg+"</div>").join("");
+}
+function renderTableau(){
+  $("tableau").innerHTML=G.systems.map(s=>{
+    const st=s.state==="op"?"OPERATIONAL":s.state==="damaged"?"DAMAGED":"DESTROYED";
+    const drawn=G.drawn.includes(s.id)?" · IN PLAY":"";
+    let btns="";
+    if(G.step==="respond"&&s.state!=="destroyed"){
+      btns='<div class="sbtns"><button data-act="cann" data-id="'+s.id+'" '+(s.state==="op"?"":"disabled")+' title="CANNIBALISE — operational systems only; permanently repair damaged systems first. Destroy this instance to gain components: '+fmtGains(cannibaliseGains(s))+'. Gone for good">⚙ Cannibalise</button>'+
+        (s.state==="damaged"?'<button data-act="repair" data-id="'+s.id+'" title="REPAIR — spend 2× '+s.def.comp+' to restore this system to OPERATIONAL, permanently">Repair (2× '+s.def.comp+")</button>":"")+"</div>";
+    }
+    const stateTip=s.state==="op"?"OPERATIONAL — all modes available.":s.state==="damaged"?"DAMAGED — half Normal value, cannot redline or be cannibalised. Repair (2× "+s.def.comp+") or Patch (1 any component) to restore it.":"DESTROYED — this instance stays as wreckage. The Fabricator can build a separate replacement.";
+    const buildTip=" Fabrication: "+FABRICATION_COST+"× "+s.def.comp+"; "+(MULTI_SYSTEMS.includes(s.def.id)?"multiple surviving copies allowed.":"one surviving copy allowed.");
+    return '<div class="sys '+s.state+'" title="'+s.def.desc+' '+stateTip+buildTip+'"><div class="sname">'+systemName(s)+'</div><div class="sstate">'+st+drawn+'</div><div style="color:var(--dim)">Build: '+FABRICATION_COST+'× '+s.def.comp+'</div>'+btns+"</div>";
+  }).join("");
+}
+
+// ---------- Modals ----------
+function showModal(html){$("modal").innerHTML=html;$("modalOverlay").classList.add("show")}
+function closeModal(){$("modalOverlay").classList.remove("show");if(G)G.missionKeep=[]}
+// User-facing Close/Cancel: unlike internal closeModal callers (route choices, mission
+// effects), dismissing a dialog that was opened over a blocking state must restore it.
+function dismissModal(){
+  closeModal();
+  if(G&&G.step==="route"&&!G.over)showRouteModal();
+}
+function showFabrication(builderId){
+  if(G.step!=="respond"||G.over)return;
+  const rows=SYSTEM_DEFS.map(d=>{
+    const reason=fabricationReason(builderId,d.id),copies=systemsOfType(d.id).filter(s=>s.state!=="destroyed").length;
+    const rule=MULTI_SYSTEMS.includes(d.id)?"Multiple copies allowed":"One surviving copy only";
+    return '<div class="blueprint" title="'+d.desc+'"><button data-act="fabricate" data-id="'+builderId+'" data-type="'+d.id+'" '+(reason?"disabled":"")+' title="'+(reason||"Spend 4 matching components; the new operational card joins future draws, not this hand")+'">Build</button><b>'+d.name+'</b> · '+FABRICATION_COST+'× '+d.comp+'<div class="details">'+rule+' · '+copies+' surviving · Normal: '+fmtCaps(d.n)+'</div>'+(reason?'<div class="details">'+reason+'</div>':"")+'</div>';
+  }).join("");
+  showModal('<h2>FABRICATE A SYSTEM</h2><p>Build one operational system for <b>4× its component type</b>. This replaces the Fabricator\'s capability output this crisis. The new card enters future draws, not the current hand.</p>'+rows+'<div style="text-align:center;margin-top:14px"><button data-act="closemodal">Cancel</button></div>');
+}
+function showRouteModal(){
+  const R=ROUTES[G.phase+1];
+  showModal('<h2>TRAJECTORY DECISION — '+R.title+"</h2><p style='color:var(--dim);font-style:italic'>"+R.flavor+"</p>"+
+    '<div class="opts"><div class="opt" data-act="route-safe"><h3>SAFE PROFILE</h3><p>'+R.safe+"</p></div>"+
+    '<div class="opt" data-act="route-direct"><h3 style="color:var(--amb)">PUSH YOUR LUCK</h3><p>'+R.direct+"</p></div></div>");
+}
+function postMortem(){
+  const repairs=Object.fromEntries(COMP_TYPES.map(t=>[t,0])),replacements={...repairs};
+  const systems=G.systems.map(s=>{
+    const cost=s.state==="damaged"?2:s.state==="destroyed"?FABRICATION_COST:0;
+    if(s.state==="damaged")repairs[s.def.comp]+=cost;
+    if(s.state==="destroyed")replacements[s.def.comp]+=cost;
+    return {id:s.id,name:systemName(s),state:s.state,type:s.def.comp,cost,incident:s.state==="damaged"?s.damage:s.state==="destroyed"?s.destruction:null};
+  });
+  const gross=Object.fromEntries(COMP_TYPES.map(t=>[t,repairs[t]+replacements[t]]));
+  const deficit=Object.fromEntries(COMP_TYPES.map(t=>[t,Math.max(0,gross[t]-G.components[t])]));
+  return {systems,repairs,replacements,gross,spares:{...G.components},deficit,crew:G.crew.map(c=>({name:c.name,role:c.role,field:c.field,state:c.state,injury:c.injury||null,death:c.death||null}))};
+}
+function reportEscape(value){return String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function incidentText(i){
+  if(!i)return "Cause not recorded";
+  const cause=i.cause==="suffocation"?"Suffocation — Oxygen depleted during Consume":i.cause;
+  return cause+(i.crisis?" — "+i.crisis:"")+" · turn "+i.turn+", Phase "+["","I","II","III"][i.phase];
+}
+function reportComponents(counts){return COMP_TYPES.filter(t=>counts[t]>0).map(t=>counts[t]+"× "+t).join(" + ")||"None"}
+function postMortemHtml(){
+  const p=postMortem(),counts=state=>p.systems.filter(s=>s.state===state).length;
+  const ship=p.systems.map(s=>'<tr><td>'+reportEscape(s.name)+'</td><td class="'+s.state+'">'+(s.state==="op"?"OPERATIONAL":s.state.toUpperCase())+(s.state!=="op"?'<br><small>'+reportEscape(incidentText(s.incident))+'</small>':"")+'</td><td>'+(s.cost?(s.state==="damaged"?"Repair: ":"Replace: ")+s.cost+'× '+s.type:"—")+'</td></tr>').join("");
+  const crewRows=p.crew.map(c=>{
+    let detail=c.state==="dead"?(c.death?.description?"Cause of death: "+c.death.description+" ":"")+"Fatal hit: "+incidentText(c.death):c.state==="injured"?"Injury: "+incidentText(c.injury):"No outstanding injury.";
+    if(c.death?.priorInjury)detail+=" Injured before the fatal hit: "+incidentText(c.death.priorInjury)+".";
+    const status=c.state==="dead"?"DEAD":(c.state==="ok"?"HEALTHY":"INJURED")+(G.over.win?" — survived":" — alive at last contact");
+    return '<tr><td>'+reportEscape(c.name)+'<br><small>'+reportEscape(c.role+(c.field?" — "+c.field:""))+'</small></td><td class="'+c.state+'">'+status+'<br><small>'+reportEscape(detail)+'</small></td></tr>';
+  }).join("");
+  return '<section class="postmortem"><h3>POST-MORTEM — '+(G.over.win?"MISSION SURVIVED":"MISSION LOST")+'</h3><p>Run seed '+SEED+' · Difficulty '+DIFFICULTIES[G.difficulty].label+' · '+G.turn+' turns · Phase '+["","I","II","III"][G.phase]+'. Final tracks: Heat '+G.heat+', Oxygen '+G.oxygen+', Course Error '+G.course+'.</p><h3>SHIP DAMAGE BILL</h3><p>'+counts("op")+' operational · '+counts("damaged")+' damaged · '+counts("destroyed")+' destroyed instances.</p><table><thead><tr><th>System instance</th><th>Final condition / cause</th><th>Component estimate</th></tr></thead><tbody>'+ship+'</tbody></table><p><b>Repairs:</b> '+reportComponents(p.repairs)+'<br><b>Replacement value:</b> '+reportComponents(p.replacements)+'<br><b>Gross damage bill:</b> '+reportComponents(p.gross)+'<br><b>Spares on hand:</b> '+reportComponents(p.spares)+'<br><b>Additional components needed:</b> '+reportComponents(p.deficit)+'</p><p>Estimate: 2 matching components per repair; '+FABRICATION_COST+' per destroyed instance. Includes cannibalised and sacrificed systems, even if a later copy was built. This values every listed loss, not a guaranteed fabrication plan: recovery, Fabricator availability and copy limits still apply. No components or score are deducted.</p><h3>CREW OUTCOMES</h3><p>Descriptive causes of death are fictional reconstructions based on the recorded crisis and failure, not additional simulated events.</p><table><thead><tr><th>Crew member</th><th>Final condition / cause of death</th></tr></thead><tbody>'+crewRows+'</tbody></table></section>';
+}
+function showGameOverModal(){
+  const o=G.over;if(!o)return;
+  const lines=o.lines.map(l=>'<div class="scoreline"><span>'+l[0]+'</span><span>'+l[1]+'</span><span>'+(l[2]?"+"+l[2]:"0")+"</span></div>").join("");
+  showModal('<h2 class="'+(o.win?"won":"lost")+'">'+o.title+"</h2><p style='color:var(--dim);font-style:italic'>"+o.flavor+"</p>"+
+    (o.win?lines+'<div class="final">FINAL SCORE: '+o.score+"</div>":"")+postMortemHtml()+
+    '<div style="text-align:center;margin-top:18px"><button data-act="newgame" style="font-size:13px;padding:8px 22px">New Game</button> <button data-act="restartgame" title="Start over with the current seed">Restart Game</button> <button data-act="closemodal">View the wreckage</button></div>');
+}
+function showHelp(){
+  showModal(`<h2>HOW TO PLAY</h2>
+  <div style="font-size:12.5px;color:var(--txt)">
+  <p><b>Goal.</b> Bring the crew home. Each turn a crisis demands capabilities; spend your ship to meet them.
+  <i>Every problem is solvable. You just might need the solution later.</i></p>
+  <p><b>Crew selection.</b> Each run has six crew: Commander, Systems Engineer, Doctor, one Mission Specialist randomly chosen from seven, plus two different system specialists drawn from the ten-capability pool using the run seed. This roster stays for the whole run; injured or dead specialists are not replaced. Each healthy specialist adds +2 to one drawn, committed system producing their capability: click Assign +2, then choose a matching card's output mode (Normal, Redline or Sacrifice), or click its body if already committed. The bonus is added after damage halving, and works at Normal, Redline or Sacrifice without removing their consequences. Cancelling or changing to a nonmatching mode removes the output bonus but does not refund the crew use. The Doctor heals an injured crewmate or adds +2 Life Support when nobody is injured; the Engineer retains the healthy extra cannibalisation component bonus.</p>
+  <p><b>Mission Specialists — once per game while healthy.</b> Chen: exact future forecasts. Rahman: 2 components of one chosen type. Ortega: absorb the next 2 injury hits. Nasser: −1 Course Error and reveal the next queued crisis. Kim: redraw systems while keeping up to 2, before commitments/fabrication; does not reset crew uses or bonuses. Voss: clear one chosen ongoing penalty and restore 1 Oxygen. Adeyemi: heal up to two injured crew in roster order, including the Doctor; no resurrection. The mission role stays for the entire run, and restarting the seed selects the same character.</p>
+  <p><b>Difficulty — ${DIFFICULTIES[G.difficulty].label}.</b> Easy / Normal / Hard change only added crisis injury hits. Normal keeps the previous injury preset. Major/minor additions by Phase I, II, III: Easy 0/0 · 0/0 · 0/0; Normal 1/0 · 0/0 · 1/0; Hard 1/0 · 1/0 · 2/1. Authored injury hits, suffocation and final Re-entry are unchanged. The header selector asks before starting a new run with the same seed; Restart Game and New Game preserve difficulty. Share via ?seed=N&amp;difficulty=easy|normal|hard.</p>
+  <p><b>Crisis progression.</b> Phase I is mostly flexible either/or problems. Phase II is mostly single-capability checks or multiple requirements that must all be met. Phase III keeps late-return scenarios and adds tougher strict checks. Nominal journey lengths are 5 / 16 / 4 crises: the long transit gives wear time to accumulate. A successful direct burn removes 2 cards, a failed burn removes 1, and a safe route adds 2; final Re-entry is additional. Pools are still shuffled by the run seed; moved cards receive their destination phase's injury pressure and track caps.</p>
+  <p><b>Capability mix.</b> There are ten capabilities and sixteen initial systems. Every capability has at least two Normal system sources. Protection is split between Radiation Shielding and Habitat; Control between Thrusters and Batteries; Engineering Sacrifice between Fabricator and Service Module. This redistributes, rather than increases, the original fleet's output at each commitment level. Computing checks use Engineering, Signal, Detection or Navigation; crew-support checks use Life Support, sometimes alongside Engineering or Signal. Medical is a crisis forecast category, not a capability. Life Support Sacrifice also heals one injured crewmate; Cargo Bay holds Mission Data. Signal, Detection, Cooling and Navigation are needed throughout the journey, not just on return. Each has a primary producer and two smaller backup sources. A committed mode produces all its listed capabilities together; specialists may boost a matching secondary output too. Damage halves each output separately. Surplus Cooling still offsets heat, and three surplus Navigation still corrects one Course Error on non-route responses.</p>
+  <p><b>Debug fitness.</b> DEBUG beside Restart Game toggles a live asset-only score in [0,1]: 55% systems, 35% crew, 10% typed component reserves. It evaluates the entire system pool, not the drawn hand; it ignores crises, commitments, temporary boosts, tracks and journey state. Hover the value for a breakdown. This is a heuristic asset measure, not win probability.</p>
+  <p><b>Turn.</b> Consume (oxygen) → crisis revealed → 5 random surviving systems become available → respond → resolve.</p>
+  <p><b>Each available system can be used once, at one commitment level:</b><br>
+  <b>NORMAL</b> — modest effect, system stays operational.<br>
+  <b>REDLINE</b> — powerful effect, system becomes DAMAGED afterwards.<br>
+  <b>SACRIFICE</b> — exceptional effect, system is DESTROYED.</p>
+  <p><b>Damaged systems</b> give half Normal value and cannot redline. <b>Repair</b> costs 2 matching components; <b>Patch</b> costs 1 of any type and restores full Normal for one crisis. <b>Cannibalise</b> destroys an operational system for components. Damaged systems must be permanently repaired first; patches and crew boosts do not make them eligible.</p>
+  <p><b>Fabrication.</b> An operational, drawn, uncommitted Fabricator may build one new system instead of producing capabilities this crisis. Every blueprint costs 4 matching components. New systems are operational and join the future five-card draw pool, not the current hand. Damaged Fabricators must be repaired; a patch is not enough. Modular systems allow multiple surviving copies; large integrated installations allow one, with replacements possible after destruction. The catalog lists each limit. Each copy has independent damage, modes and repair costs. Destroyed instances remain wreckage; replacement Cargo Bays cannot restore lost mission data.</p>
+  <p><b>Heat.</b> Power systems add HEAT when used. Surplus Cooling beyond the requirement bleeds heat off. At Heat 5 the reactor SCRAMs: a power system is damaged and power systems cannot redline next crisis.</p>
+  <p><b>Oxygen.</b> While any Life Support is operational the air holds. If none are operational but one is damaged: −1/turn. If all are destroyed: −2/turn. At 0, crew start dying. Crew: Healthy → Injured (ability lost) → Dead.</p>
+  <p><b>Course Error 3</b> = lost forever. Only the <i>category</i> of the next crisis is forecast — sacrifices are informed gambles.</p>
+  <p><b>Failure escalates.</b> Additional major/minor crew injury hits: Phase I adds ${FAILURE_BALANCE.injuriesByPhase[1].major}/${FAILURE_BALANCE.injuriesByPhase[1].minor}, Phase II adds ${FAILURE_BALANCE.injuriesByPhase[2].major}/${FAILURE_BALANCE.injuriesByPhase[2].minor}, Phase III adds ${FAILURE_BALANCE.injuriesByPhase[3].major}/${FAILURE_BALANCE.injuriesByPhase[3].minor}. Original card injury hits still apply. Every normal major failure also adds 1 random system damage hit, on top of authored damage; OR cards are minor unless explicitly marked major (Fuel Line Blockage). Softer late crew penalties keep a progressively worn ship playable. Route burns and final Re-entry retain their original consequences. Environmental failures add 3 Oxygen loss, and existing course-error penalties add 1, before track caps. The complete immediate failure penalty is capped: Phase I +2 Heat / −2 Oxygen / +1 Course Error; Phase II +3 Heat / −3 Oxygen / +1 Course Error; Phase III +3 Heat / −3 Oxygen / +2 Course Error. System-use heat and ongoing oxygen drain are separate. Later major air failures (Oxygen Scrubber Failure and CO₂ Accumulation) lose 1 extra Oxygen on their first Consume only; recurring drain rates and original three-turn durations are unchanged. Early air penalties are unchanged. The crisis card shows the final capped totals. Injury hits first injure healthy crew, then kill injured crew once everyone is injured. Shelter absorbs individual hits.</p>
+  <p><b>Routes.</b> Between phases: add journey cards (safe) or remove them with an immediate burn check (push your luck).</p>
+  <p><b>Success Components.</b> Success alone gives no Components. Each unused point in listed capabilities earns 1 independently random Electronics, Wiring or Power Cell Component. For OR checks, pay the requirements of one complete satisfied arm, then count leftover output toward either arm, including partially fulfilled alternatives. Count shared capabilities once, exclude unrelated outputs, and choose the satisfied arm leaving the most output. POWER 2 + DETECTION 2 against POWER 3 OR DETECTION 2 earns 2 Components. No leftover output or a failed check earns zero. Crew bonuses and damaged/boosted system output count. This applies to ordinary crises, successful Direct-route burns and final Re-entry; Safe routes have no check and no reward. Other success benefits, Sacrifice yields and cannibalisation remain unchanged. Surplus Cooling and Navigation still have their usual effects.</p>
+  <p><b>Scoring.</b> +10 reach Earth · +3 per living crew · +1 per operational system · +1 per component · +5 mission data (keep Cargo Bay intact, acquire comms) · +5 ship recovered (clean re-entry, an engine working, beacon found).</p>
+  </div><div style="text-align:center;margin-top:14px"><button data-act="closemodal">Close</button></div>`);
+}
+
+// ---------- Input delegation ----------
+document.addEventListener("click",e=>{
+  const b=e.target.closest("[data-act]");if(!b)return;
+  const act=b.dataset.act,id=b.dataset.id;
+  switch(act){
+    case"mode":setMode(id,b.dataset.mode);break;
+    case"cann":cannibalise(id);break;
+    case"repair":repair(id);break;
+    case"patch":patch(id);break;
+    case"crew":crewClick(id);break;
+    case"req":reqClick(id);break;
+    case"card":cardClick(id);break;
+    case"resolve":resolveCrisis();break;
+    case"route-safe":routeSafe();break;
+    case"route-direct":routeDirect();break;
+    case"help":showHelp();break;
+    case"postmortem":showGameOverModal();break;
+    case"fabrication":showFabrication(id);break;
+    case"fabricate":fabricate(id,b.dataset.type);break;
+    case"mission-effect":useMission(b.dataset.choice);break;
+    case"mission-keep":toggleMissionKeep(id);break;
+    case"mission-redraw":useMission(G.missionKeep.slice());break;
+    case"closemodal":dismissModal();break;
+    case"difficulty-start":if(Object.hasOwn(DIFFICULTIES,b.dataset.level))location.search=runQuery(SEED,b.dataset.level);break;
+    case"newgame":{const s=(Math.random()*1e9)|0;location.search=runQuery(s);break}
+    case"restartgame":closeModal();newGame();break;
+    case"debug":debugFitness=!debugFitness;renderFitness();break;
+  }
+});
+
+function runQuery(seed,level=G?.difficulty||DIFFICULTY){return "?seed="+seed+"&difficulty="+level}
+function requestDifficulty(level){
+  $("difficultySelect").value=G.difficulty; // No live rule changes, even while confirmation is open.
+  if(!Object.hasOwn(DIFFICULTIES,level)||level===G.difficulty)return;
+  const d=DIFFICULTIES[level];
+  showModal('<h2>START A '+d.label.toUpperCase()+' RUN?</h2><p>This abandons the current run and starts seed '+SEED+' on '+d.label+'. Only added crisis injury hits change; all other rules stay the same.</p><button data-act="difficulty-start" data-level="'+level+'">Start '+d.label+' — same seed</button> <button data-act="closemodal">Cancel</button>');
+}
+document.addEventListener("change",e=>{if(e.target?.id==="difficultySelect")requestDifficulty(e.target.value)});
+
+// ---------- Boot ----------
+newGame();render();
+</script>
+</body>
+</html>

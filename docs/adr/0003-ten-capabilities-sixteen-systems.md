@@ -1,0 +1,5 @@
+# Ten capabilities and sixteen systems
+
+Remove Compute and Medical as separate capabilities, together with Main Computer and Medical Bay, to reduce vocabulary and blueprint complexity without removing propulsion's Direct-route choices. Computing checks move to Engineering, Signal, Detection and Navigation; crew-support checks move to Life Support, with Engineering/Signal partners where compound checks would otherwise collapse. Capabilities remain a flat set, distinct from tracks and forecast categories (Medical remains a forecast category).
+
+Preserve secondary Signal output on Fabricator and Normal Control on Navigation Computer; add modest Life Support output to Service Module without granting the oxygen passive. The Doctor retains healing and substitutes +2 Life Support for +2 Medical; Life Support Sacrifice inherits the Medical Bay's one-person healing effect, and Cargo Bay alone holds Mission Data. The six-person roster remains, but its specialist pool has ten roles. This supersedes ADR 0001's twelve-member vocabulary; prior seeds and historical balance measurements are not promised to reproduce the old rules.

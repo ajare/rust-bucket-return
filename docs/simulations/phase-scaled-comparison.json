@@ -1,0 +1,797 @@
+{
+  "beforeEngineSha256": "a1c05eb07dba658cba9740f4e7fb0b928a5431205fe7fa559c5fbb5f60156fec",
+  "afterEngineSha256": "266eb07abfd5c8c01acff050b911b9092eda374d1e4de518a558b548e63a25c6",
+  "games": 10000,
+  "seedStart": 2000000,
+  "recoveryGames": 300,
+  "rolloutsPerCheckpoint": 128,
+  "before": {
+    "winRate": 0.2465,
+    "duration": {
+      "unit": "journey stages reached: engine consume counter + 1 for the opening crisis; route burns add responses but not journey stages",
+      "all": {
+        "n": 10000,
+        "mean": 11.035,
+        "standardDeviation": 2.394989561563894,
+        "min": 3,
+        "p10": 8,
+        "p25": 9,
+        "median": 11,
+        "p75": 13,
+        "p90": 14,
+        "max": 14,
+        "histogram": {
+          "3": 1,
+          "4": 17,
+          "5": 87,
+          "6": 263,
+          "7": 589,
+          "8": 814,
+          "9": 997,
+          "10": 1180,
+          "11": 1227,
+          "12": 1185,
+          "13": 1819,
+          "14": 1821
+        }
+      },
+      "wins": {
+        "n": 2465,
+        "mean": 13.498985801217039,
+        "standardDeviation": 0.5968978169294892,
+        "min": 12,
+        "p10": 13,
+        "p25": 13,
+        "median": 14,
+        "p75": 14,
+        "p90": 14,
+        "max": 14,
+        "histogram": {
+          "12": 131,
+          "13": 973,
+          "14": 1361
+        }
+      },
+      "losses": {
+        "n": 7535,
+        "mean": 10.228931652289317,
+        "standardDeviation": 2.20454055478786,
+        "min": 3,
+        "p10": 7,
+        "p25": 9,
+        "median": 10,
+        "p75": 12,
+        "p90": 13,
+        "max": 14,
+        "histogram": {
+          "3": 1,
+          "4": 17,
+          "5": 87,
+          "6": 263,
+          "7": 589,
+          "8": 814,
+          "9": 997,
+          "10": 1180,
+          "11": 1227,
+          "12": 1054,
+          "13": 846,
+          "14": 460
+        }
+      },
+      "responses": {
+        "n": 10000,
+        "mean": 12.5217,
+        "standardDeviation": 2.9078392510591224,
+        "min": 3,
+        "p10": 8,
+        "p25": 10,
+        "median": 13,
+        "p75": 15,
+        "p90": 16,
+        "max": 16,
+        "histogram": {
+          "3": 3,
+          "4": 45,
+          "5": 57,
+          "6": 30,
+          "7": 342,
+          "8": 643,
+          "9": 840,
+          "10": 998,
+          "11": 677,
+          "12": 553,
+          "13": 1173,
+          "14": 1157,
+          "15": 1757,
+          "16": 1725
+        }
+      },
+      "winningResponses": {
+        "n": 2465,
+        "mean": 15.498985801217039,
+        "standardDeviation": 0.5968978169294892,
+        "min": 14,
+        "p10": 15,
+        "p25": 15,
+        "median": 16,
+        "p75": 16,
+        "p90": 16,
+        "max": 16,
+        "histogram": {
+          "14": 131,
+          "15": 973,
+          "16": 1361
+        }
+      },
+      "losingResponses": {
+        "n": 7535,
+        "mean": 11.547710683477106,
+        "standardDeviation": 2.6938105963061494,
+        "min": 3,
+        "p10": 8,
+        "p25": 9,
+        "median": 12,
+        "p75": 14,
+        "p90": 15,
+        "max": 16,
+        "histogram": {
+          "3": 3,
+          "4": 45,
+          "5": 57,
+          "6": 30,
+          "7": 342,
+          "8": 643,
+          "9": 840,
+          "10": 998,
+          "11": 677,
+          "12": 553,
+          "13": 1173,
+          "14": 1026,
+          "15": 784,
+          "16": 364
+        }
+      },
+      "lossPhases": {
+        "1": 105,
+        "2": 3470,
+        "3": 3960
+      },
+      "lossByCause": {
+        "CONTACT LOST \u2014 TRAJECTORY MISSED": {
+          "n": 1309,
+          "mean": 10.08479755538579,
+          "standardDeviation": 1.9500225207514654,
+          "min": 4,
+          "p10": 7,
+          "p25": 9,
+          "median": 10,
+          "p75": 12,
+          "p90": 12,
+          "max": 13,
+          "histogram": {
+            "4": 1,
+            "5": 1,
+            "6": 68,
+            "7": 103,
+            "8": 131,
+            "9": 145,
+            "10": 206,
+            "11": 308,
+            "12": 236,
+            "13": 110
+          }
+        },
+        "CONTACT LOST \u2014 CREW LOST": {
+          "n": 6226,
+          "mean": 10.25923546418246,
+          "standardDeviation": 2.2532267600321068,
+          "min": 3,
+          "p10": 7,
+          "p25": 9,
+          "median": 10,
+          "p75": 12,
+          "p90": 13,
+          "max": 14,
+          "histogram": {
+            "3": 1,
+            "4": 16,
+            "5": 86,
+            "6": 195,
+            "7": 486,
+            "8": 683,
+            "9": 852,
+            "10": 974,
+            "11": 919,
+            "12": 818,
+            "13": 736,
+            "14": 460
+          }
+        }
+      },
+      "failedByStage3": 1,
+      "failedByStage5": 105
+    },
+    "recovery": {
+      "sampledGames": 300,
+      "sampledLosses": 225,
+      "rolloutsPerCheckpoint": 128,
+      "probeCount": 417152,
+      "definition": "Low-hope episodes have <=5% estimated wins at two consecutive checkpoints with >=2 stages remaining. Sustained summaries require every later checkpoint to stay below the threshold. These estimate policy recovery, not mathematical inevitability.",
+      "recoveryBins": {
+        "5\u201325%": 805,
+        "25\u201350%": 1066,
+        "0\u20135%": 275,
+        "zero": 475,
+        "over 50%": 638
+      },
+      "conditions": {
+        "oxygenZero": {
+          "checkpoints": 377,
+          "meanRecoveryRate": 0.11509449602122016,
+          "actualWins": 43
+        },
+        "doctorUnavailable": {
+          "checkpoints": 1377,
+          "meanRecoveryRate": 0.19599900145243282,
+          "actualWins": 269
+        },
+        "noHealthyCrew": {
+          "checkpoints": 584,
+          "meanRecoveryRate": 0.1431533604452055,
+          "actualWins": 88
+        },
+        "oneOrTwoLivingCrew": {
+          "checkpoints": 164,
+          "meanRecoveryRate": 0.0071932164634146345,
+          "actualWins": 1
+        },
+        "courseTwo": {
+          "checkpoints": 326,
+          "meanRecoveryRate": 0.30250671012269936,
+          "actualWins": 100
+        }
+      },
+      "sustainedLowHope": {
+        "games": 131,
+        "onsetStage": {
+          "n": 131,
+          "mean": 6.33587786259542,
+          "standardDeviation": 2.6547111716587524,
+          "min": 1,
+          "p10": 2,
+          "p25": 4.5,
+          "median": 7,
+          "p75": 8,
+          "p90": 10,
+          "max": 12,
+          "histogram": {
+            "1": 7,
+            "2": 7,
+            "3": 9,
+            "4": 10,
+            "5": 6,
+            "6": 26,
+            "7": 24,
+            "8": 15,
+            "9": 11,
+            "10": 9,
+            "11": 5,
+            "12": 2
+          }
+        },
+        "delay": {
+          "n": 131,
+          "mean": 3.2977099236641223,
+          "standardDeviation": 1.4233315208150894,
+          "min": 2,
+          "p10": 2,
+          "p25": 2,
+          "median": 3,
+          "p75": 4,
+          "p90": 5,
+          "max": 9,
+          "histogram": {
+            "2": 43,
+            "3": 46,
+            "4": 22,
+            "5": 10,
+            "6": 5,
+            "7": 1,
+            "8": 3,
+            "9": 1
+          }
+        },
+        "onsetByEndOfPhaseI": 39,
+        "doctorUnavailableAtOnset": 89,
+        "oxygenZeroAtOnset": 21
+      },
+      "sustainedZeroRecovery": {
+        "games": 77,
+        "onsetStage": {
+          "n": 77,
+          "mean": 7.558441558441558,
+          "standardDeviation": 2.1652120048173957,
+          "min": 3,
+          "p10": 4.6000000000000005,
+          "p25": 6,
+          "median": 8,
+          "p75": 9,
+          "p90": 10.400000000000006,
+          "max": 12,
+          "histogram": {
+            "3": 1,
+            "4": 7,
+            "5": 7,
+            "6": 8,
+            "7": 14,
+            "8": 16,
+            "9": 9,
+            "10": 7,
+            "11": 5,
+            "12": 3
+          }
+        },
+        "delay": {
+          "n": 77,
+          "mean": 2.5714285714285716,
+          "standardDeviation": 0.9177693373534931,
+          "min": 2,
+          "p10": 2,
+          "p25": 2,
+          "median": 2,
+          "p75": 3,
+          "p90": 4,
+          "max": 6,
+          "histogram": {
+            "2": 48,
+            "3": 20,
+            "4": 5,
+            "5": 2,
+            "6": 2
+          }
+        },
+        "onsetByEndOfPhaseI": 15,
+        "doctorUnavailableAtOnset": 67,
+        "oxygenZeroAtOnset": 27
+      },
+      "actualWinningGamesWithLowHopeCheckpoint": 3,
+      "actualWinningGamesWithZeroRecoveryCheckpoint": 0,
+      "lowHopeEpisodeGames": 143,
+      "lowHopeEpisodeOnsetStage": {
+        "n": 143,
+        "mean": 6.111888111888112,
+        "standardDeviation": 2.6367624116429385,
+        "min": 1,
+        "p10": 2.200000000000001,
+        "p25": 4,
+        "median": 6,
+        "p75": 8,
+        "p90": 9.799999999999997,
+        "max": 12,
+        "histogram": {
+          "1": 8,
+          "2": 7,
+          "3": 14,
+          "4": 11,
+          "5": 10,
+          "6": 26,
+          "7": 25,
+          "8": 16,
+          "9": 11,
+          "10": 9,
+          "11": 4,
+          "12": 2
+        }
+      },
+      "lowHopeEpisodeDelay": {
+        "n": 143,
+        "mean": 3.6013986013986012,
+        "standardDeviation": 1.8478483429274117,
+        "min": 2,
+        "p10": 2,
+        "p25": 2,
+        "median": 3,
+        "p75": 4,
+        "p90": 6,
+        "max": 11,
+        "histogram": {
+          "2": 43,
+          "3": 47,
+          "4": 24,
+          "5": 11,
+          "6": 7,
+          "7": 1,
+          "8": 6,
+          "9": 2,
+          "11": 2
+        }
+      }
+    }
+  },
+  "after": {
+    "winRate": 0.2416,
+    "duration": {
+      "unit": "journey stages reached: engine consume counter + 1 for the opening crisis; route burns add responses but not journey stages",
+      "all": {
+        "n": 10000,
+        "mean": 11.7041,
+        "standardDeviation": 1.7674680166837013,
+        "min": 6,
+        "p10": 9,
+        "p25": 11,
+        "median": 12,
+        "p75": 13,
+        "p90": 14,
+        "max": 14,
+        "histogram": {
+          "6": 62,
+          "7": 114,
+          "8": 315,
+          "9": 675,
+          "10": 1206,
+          "11": 1956,
+          "12": 1787,
+          "13": 2134,
+          "14": 1751
+        }
+      },
+      "wins": {
+        "n": 2416,
+        "mean": 13.488824503311259,
+        "standardDeviation": 0.6027318676660814,
+        "min": 12,
+        "p10": 13,
+        "p25": 13,
+        "median": 14,
+        "p75": 14,
+        "p90": 14,
+        "max": 14,
+        "histogram": {
+          "12": 137,
+          "13": 961,
+          "14": 1318
+        }
+      },
+      "losses": {
+        "n": 7584,
+        "mean": 11.13554852320675,
+        "standardDeviation": 1.6326158809512146,
+        "min": 6,
+        "p10": 9,
+        "p25": 10,
+        "median": 11,
+        "p75": 12,
+        "p90": 13,
+        "max": 14,
+        "histogram": {
+          "6": 62,
+          "7": 114,
+          "8": 315,
+          "9": 675,
+          "10": 1206,
+          "11": 1956,
+          "12": 1650,
+          "13": 1173,
+          "14": 433
+        }
+      },
+      "responses": {
+        "n": 10000,
+        "mean": 13.4045,
+        "standardDeviation": 2.1160056119963553,
+        "min": 7,
+        "p10": 10,
+        "p25": 12,
+        "median": 14,
+        "p75": 15,
+        "p90": 16,
+        "max": 16,
+        "histogram": {
+          "7": 62,
+          "8": 130,
+          "9": 418,
+          "10": 696,
+          "11": 600,
+          "12": 741,
+          "13": 1945,
+          "14": 1722,
+          "15": 2012,
+          "16": 1674
+        }
+      },
+      "winningResponses": {
+        "n": 2416,
+        "mean": 15.488824503311259,
+        "standardDeviation": 0.6027318676660814,
+        "min": 14,
+        "p10": 15,
+        "p25": 15,
+        "median": 16,
+        "p75": 16,
+        "p90": 16,
+        "max": 16,
+        "histogram": {
+          "14": 137,
+          "15": 961,
+          "16": 1318
+        }
+      },
+      "losingResponses": {
+        "n": 7584,
+        "mean": 12.740506329113924,
+        "standardDeviation": 1.9907922423169992,
+        "min": 7,
+        "p10": 10,
+        "p25": 11,
+        "median": 13,
+        "p75": 14,
+        "p90": 15,
+        "max": 16,
+        "histogram": {
+          "7": 62,
+          "8": 130,
+          "9": 418,
+          "10": 696,
+          "11": 600,
+          "12": 741,
+          "13": 1945,
+          "14": 1585,
+          "15": 1051,
+          "16": 356
+        }
+      },
+      "lossPhases": {
+        "2": 1862,
+        "3": 5722
+      },
+      "lossByCause": {
+        "CONTACT LOST \u2014 TRAJECTORY MISSED": {
+          "n": 1495,
+          "mean": 10.233444816053511,
+          "standardDeviation": 1.8360069656889733,
+          "min": 6,
+          "p10": 7.400000000000006,
+          "p25": 9,
+          "median": 11,
+          "p75": 12,
+          "p90": 12,
+          "max": 13,
+          "histogram": {
+            "6": 61,
+            "7": 89,
+            "8": 143,
+            "9": 154,
+            "10": 270,
+            "11": 393,
+            "12": 248,
+            "13": 137
+          }
+        },
+        "CONTACT LOST \u2014 CREW LOST": {
+          "n": 6089,
+          "mean": 11.357037280341599,
+          "standardDeviation": 1.4977840396684778,
+          "min": 6,
+          "p10": 9,
+          "p25": 10,
+          "median": 11,
+          "p75": 12,
+          "p90": 13,
+          "max": 14,
+          "histogram": {
+            "6": 1,
+            "7": 25,
+            "8": 172,
+            "9": 521,
+            "10": 936,
+            "11": 1563,
+            "12": 1402,
+            "13": 1036,
+            "14": 433
+          }
+        }
+      },
+      "failedByStage3": 0,
+      "failedByStage5": 0
+    },
+    "recovery": {
+      "sampledGames": 300,
+      "sampledLosses": 223,
+      "rolloutsPerCheckpoint": 128,
+      "probeCount": 448512,
+      "definition": "Low-hope episodes have <=5% estimated wins at two consecutive checkpoints with >=2 stages remaining. Sustained summaries require every later checkpoint to stay below the threshold. These estimate policy recovery, not mathematical inevitability.",
+      "lowHopeEpisodeGames": 104,
+      "lowHopeEpisodeOnsetStage": {
+        "n": 104,
+        "mean": 7.615384615384615,
+        "standardDeviation": 2.1541895330677616,
+        "min": 2,
+        "p10": 5,
+        "p25": 6,
+        "median": 8,
+        "p75": 9,
+        "p90": 10.700000000000003,
+        "max": 12,
+        "histogram": {
+          "2": 3,
+          "3": 1,
+          "4": 3,
+          "5": 5,
+          "6": 21,
+          "7": 17,
+          "8": 17,
+          "9": 20,
+          "10": 6,
+          "11": 7,
+          "12": 4
+        }
+      },
+      "lowHopeEpisodeDelay": {
+        "n": 104,
+        "mean": 3.3076923076923075,
+        "standardDeviation": 1.5632616486847373,
+        "min": 2,
+        "p10": 2,
+        "p25": 2,
+        "median": 3,
+        "p75": 4,
+        "p90": 5.700000000000003,
+        "max": 11,
+        "histogram": {
+          "2": 40,
+          "3": 28,
+          "4": 20,
+          "5": 5,
+          "6": 7,
+          "7": 2,
+          "8": 1,
+          "11": 1
+        }
+      },
+      "recoveryBins": {
+        "5\u201325%": 1111,
+        "25\u201350%": 1309,
+        "zero": 402,
+        "over 50%": 488,
+        "0\u20135%": 194
+      },
+      "conditions": {
+        "oxygenZero": {
+          "checkpoints": 501,
+          "meanRecoveryRate": 0.09301709081836328,
+          "actualWins": 42
+        },
+        "doctorUnavailable": {
+          "checkpoints": 953,
+          "meanRecoveryRate": 0.2133476521511018,
+          "actualWins": 197
+        },
+        "noHealthyCrew": {
+          "checkpoints": 410,
+          "meanRecoveryRate": 0.1287157012195122,
+          "actualWins": 52
+        },
+        "oneOrTwoLivingCrew": {
+          "checkpoints": 145,
+          "meanRecoveryRate": 0.060991379310344825,
+          "actualWins": 10
+        },
+        "courseTwo": {
+          "checkpoints": 374,
+          "meanRecoveryRate": 0.25094000668449196,
+          "actualWins": 93
+        }
+      },
+      "sustainedLowHope": {
+        "games": 100,
+        "onsetStage": {
+          "n": 100,
+          "mean": 7.74,
+          "standardDeviation": 2.1148049555455466,
+          "min": 2,
+          "p10": 6,
+          "p25": 6,
+          "median": 8,
+          "p75": 9,
+          "p90": 11,
+          "max": 12,
+          "histogram": {
+            "2": 3,
+            "4": 3,
+            "5": 3,
+            "6": 21,
+            "7": 15,
+            "8": 17,
+            "9": 21,
+            "10": 6,
+            "11": 7,
+            "12": 4
+          }
+        },
+        "delay": {
+          "n": 100,
+          "mean": 3.16,
+          "standardDeviation": 1.4813507349712955,
+          "min": 2,
+          "p10": 2,
+          "p25": 2,
+          "median": 3,
+          "p75": 4,
+          "p90": 5,
+          "max": 11,
+          "histogram": {
+            "2": 41,
+            "3": 29,
+            "4": 19,
+            "5": 3,
+            "6": 5,
+            "7": 1,
+            "8": 1,
+            "11": 1
+          }
+        },
+        "onsetByEndOfPhaseI": 9,
+        "doctorUnavailableAtOnset": 55,
+        "oxygenZeroAtOnset": 38
+      },
+      "sustainedZeroRecovery": {
+        "games": 61,
+        "onsetStage": {
+          "n": 61,
+          "mean": 8.655737704918034,
+          "standardDeviation": 1.556427665759727,
+          "min": 5,
+          "p10": 7,
+          "p25": 8,
+          "median": 9,
+          "p75": 10,
+          "p90": 11,
+          "max": 12,
+          "histogram": {
+            "5": 1,
+            "6": 3,
+            "7": 10,
+            "8": 16,
+            "9": 14,
+            "10": 9,
+            "11": 5,
+            "12": 3
+          }
+        },
+        "delay": {
+          "n": 61,
+          "mean": 2.3278688524590163,
+          "standardDeviation": 0.6199236197111159,
+          "min": 2,
+          "p10": 2,
+          "p25": 2,
+          "median": 2,
+          "p75": 3,
+          "p90": 3,
+          "max": 5,
+          "histogram": {
+            "2": 45,
+            "3": 13,
+            "4": 2,
+            "5": 1
+          }
+        },
+        "onsetByEndOfPhaseI": 1,
+        "doctorUnavailableAtOnset": 51,
+        "oxygenZeroAtOnset": 37
+      },
+      "actualWinningGamesWithLowHopeCheckpoint": 3,
+      "actualWinningGamesWithZeroRecoveryCheckpoint": 1
+    }
+  },
+  "pairedLowHopeEpisodes": {
+    "avoided": 60,
+    "introduced": 29,
+    "both": 71,
+    "netDifferencePerSampledGame": -0.10333333333333333,
+    "approximate95Interval": [
+      -0.16384930685976562,
+      -0.04281735980690105
+    ]
+  }
+}
