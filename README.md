@@ -1,4 +1,4 @@
-# Rust Bucket Return — LAST VECTOR
+# Rust Bucket Return
 
 A solo survival card game in a single HTML file. Your ship is dying far from home; spend it,
 system by system, to bring the crew back alive.
