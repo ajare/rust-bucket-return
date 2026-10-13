@@ -5,6 +5,12 @@ system by system, to bring the crew back alive.
 
 **Play:** open `index.html` in any browser. No build, no dependencies.
 
+**GitHub Pages:** in the repository's **Settings → Pages → Build and deployment**, set
+**Source** to **GitHub Actions**. Push to `main` (or run **Deploy GitHub Pages** manually
+from the **Actions** tab) to publish the game at
+https://ajare.github.io/rust-bucket-return/.
+The workflow publishes only `index.html`; no build step is needed.
+
 - Every crisis can be solved at Normal, **Redline** (damages the system), or **Sacrifice**
   (destroys it) commitment levels — plus cannibalisation, patching, repair, and crew abilities.
 - Crisis progression: Phase I is mostly **either/or**; Phase II mostly **AND/single requirements**;
